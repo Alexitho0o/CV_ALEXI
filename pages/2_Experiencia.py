@@ -403,14 +403,14 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     docencia_years = len([y for y in sorted_years 
-                         if any(EXPERIENCIA[idx]['tipo'] == 'educacion' 
-                               for idx in years_dict[y]['indices'])])
+                         if any(item['tipo'] == 'educacion' 
+                               for item in years_dict[y]['items'])])
     st.metric("Años en Educación", f"{docencia_years}+")
     
 with col2:
     logistica_years = len([y for y in sorted_years 
-                          if any(EXPERIENCIA[idx]['tipo'] == 'logistica' 
-                                for idx in years_dict[y]['indices'])])
+                          if any(item['tipo'] == 'logistica' 
+                                for item in years_dict[y]['items'])])
     st.metric("Años en Logística", f"{logistica_years}+")
     
 with col3:
