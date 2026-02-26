@@ -284,7 +284,7 @@ def construir_dashboard_habilidades(
     alto_px: int = 600,
     ancho_px: int = 900,
     dpi: int = 150,
-) -> plt.Figure:
+) -> 'Any':
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
