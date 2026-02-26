@@ -1,6 +1,13 @@
 # pages/5_Contacto.py
 # -*- coding: utf-8 -*-
 import streamlit as st
+import sys
+from pathlib import Path
+
+# Agregar el directorio raíz al path para importar utils
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from utils.email_sender import send_contact_email
 
 st.set_page_config(page_title="Contacto - Alexi Burgos CV", page_icon="📧", layout="wide")
 
@@ -214,15 +221,20 @@ with st.form("contact_form"):
     
     if submitted:
         if nombre and email and mensaje:
-            st.success(f"""
-            ✅ **Mensaje registrado**
+            # Intentar enviar el correo
+            exito, respuesta = send_contact_email(nombre, email, asunto, mensaje)
             
-            Gracias {nombre}, he recibido tu mensaje.
-            
-            📧 Pronto me pondré en contacto a: {email}
-            
-            **(Nota: Este es un formulario de demostración)**
-            """)
+            if exito:
+                st.success(f"""
+                {respuesta}
+                
+                **Detalles del contacto:**
+                - Nombre: {nombre}
+                - Correo: {email}
+                - Asunto: {asunto}
+                """)
+            else:
+                st.warning(respuesta)
         else:
             st.error("❌ Por favor completa todos los campos")
 
