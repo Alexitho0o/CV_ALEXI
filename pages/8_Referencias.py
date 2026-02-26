@@ -142,10 +142,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="hero-header">
+header_gradient = "linear-gradient(135deg, #64748b 0%, #94a3b8 100%)"
+st.markdown(f"""
+<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
     <h1>👥 Referencias Profesionales</h1>
-    <div class="hero-sub">Personas que pueden validar mi experiencia y desempeño</div>
+    <p>Personas que pueden validar mi experiencia y desempeño</p>
 </div>
 """, unsafe_allow_html=True)
 

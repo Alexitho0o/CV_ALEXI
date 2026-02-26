@@ -47,16 +47,62 @@ La aplicación abrirá en `http://localhost:8501`
 - ✅ **Formulario Funcional**: Envío de correos mediante SMTP de Gmail
 - ✅ **Diseño Responsivo**: Bordes, colores, animaciones CSS
 
+## Despliegue en Streamlit Cloud
+
+Para publicar tu CV en internet de forma gratuita:
+
+1. **Crea una cuenta** en https://streamlit.io/cloud (puedes usar tu cuenta de GitHub)
+
+2. **Conecta tu repositorio GitHub**
+   - Autoriza a Streamlit a acceder a tus repositorios
+   - Selecciona `Alexitho0o/gdp-dashboard`
+
+3. **Configura los Secrets** (si usas formulario de contacto)
+   - En tu app Streamlit Cloud, ve a **Settings → Secrets**
+   - Agrega las siguientes líneas:
+   ```toml
+   GMAIL_USER = "tu_email@gmail.com"
+   GMAIL_PASSWORD = "xxxx xxxx xxxx xxxx"
+   ```
+   - (Donde `GMAIL_PASSWORD` es tu contraseña de aplicación de Google)
+
+4. **¡Listo!** Tu app estará disponible en:
+   ```
+   https://alexitho0o-gdp-dashboard.streamlit.app
+   ```
+
+### URL Pública
+Una vez desplegada, comparte este URL con reclutadores y contactos. Streamlit Cloud mantiene la app corriendo 24/7 de forma gratuita.
+
+---
+
 ## Problemas comunes
 
 ### Error: "Configuración de correo no disponible"
-- Verifica que `.env` exista y contenga `GMAIL_USER` y `GMAIL_PASSWORD`
+- Verifica que los secrets estén correctamente configurados en Streamlit Cloud
+- Si trabajas localmente, verifica que `.env` exista y contenga `GMAIL_USER` y `GMAIL_PASSWORD`
 - Verifica que la contraseña de aplicación no tenga espacios en código
 
 ### Error: "Error de autenticación"
 - Verifica que las credenciales sean correctas
 - Asegúrate de haber generado una contraseña de aplicación (no tu contraseña normal)
 - Verifica que 2FA esté activado en tu cuenta de Google
+- En producción (Streamlit Cloud), usa la sección **Settings → Secrets** para agregar credenciales
+
+### La app es lenta al cargar
+- Streamlit Cloud puede ser lento en conexiones de red lentas
+- Los gráficos con Matplotlib se regeneran cada vez que alguien abre la página
+- Esto es normal en la versión gratuita
+
+### Comandos útiles de despliegue
+```bash
+# Ver logs de tu app desplegada
+streamlit logs your-github-username/your-repo-name
+
+# Redeploy manual (si cambios no se reflejan)
+# Simplemente haz push a main y espera 1-2 minutos
+git push origin main
+```
 
 ## Estructura
 

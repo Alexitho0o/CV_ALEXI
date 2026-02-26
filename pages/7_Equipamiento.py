@@ -93,10 +93,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="hero-header">
+header_gradient = "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)"
+st.markdown(f"""
+<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
     <h1>💻 Equipamiento e Intereses</h1>
-    <div class="hero-sub">Recursos y áreas de interés personal</div>
+    <p>Recursos y áreas de interés personal</p>
 </div>
 """, unsafe_allow_html=True)
 

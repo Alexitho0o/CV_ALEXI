@@ -23,26 +23,26 @@ HABILIDADES: List[Tuple[str, List[Tuple[str, int]]]] = [
         ("Bettersoft U+", 70),
         ("Syllabus", 70),
     ]),
-    ("Herramientas Ofimáticas y Colaboración", [
-        ("MS Office 365 (Word, Excel, PowerPoint)", 95),
-        ("GSuite (Gmail, Docs, Sheets, Meet)", 90),
-        ("Kahoot (evaluación gamificada)", 85),
-        ("Mentimeter (encuestas interactivas)", 85),
-    ]),
     ("Sistemas Operativos y Dispositivos", [
         ("MacOS", 95),
         ("Windows", 90),
         ("iOS", 90),
         ("Android (intermedio)", 75),
     ]),
+    ("Herramientas Ofimáticas y Colaboración", [
+        ("MS Office 365 (Word, Excel, PowerPoint)", 95),
+        ("GSuite (Gmail, Docs, Sheets, Meet)", 90),
+        ("Kahoot (evaluación gamificada)", 85),
+        ("Mentimeter (encuestas interactivas)", 85),
+    ]),
+    ("Creatividad", [
+        ("Autor y Compositor", 85),
+        ("Producción Musical", 80),
+        ("Edición Musical", 75),
+    ]),
     ("Idiomas", [
         ("Inglés técnico (lectora/comprensión)", 80),
         ("Español (nativo)", 100),
-    ]),
-    ("Creatividad", [
-        ("Autor y Compositor", 40),
-        ("Producción Musical", 80),
-        ("Edición Musical", 100),
     ]),
 ]
 
@@ -55,15 +55,58 @@ PALETA_GRUPOS = {
     "Creatividad": "#ec4899",
 }
 
+# Diccionario de URLs de logos para herramientas (URLs verificadas y confiables)
+LOGOS_URLS = {
+    "Power BI": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/powerbi.svg",
+    "Excel": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/microsoftexcel.svg",
+    "Python": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/python.svg",
+    "Moodle": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/moodle.svg",
+    "BetterSoft": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/udemy.svg",
+    "Banner": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/files.svg",
+    "Blackboard": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/bookstack.svg",
+    "Syllabus": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/google.svg",
+    "MS Office": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/microsoft.svg",
+    "GSuite": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/google.svg",
+    "Kahoot": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/kahoot.svg",
+    "Mentimeter": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/airtable.svg",
+    "MacOS": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/apple.svg",
+    "Windows": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/windows.svg",
+    "iOS": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/ios.svg",
+    "Android": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons@latest/icons/android.svg",
+}
+
+def render_logo_header(nombre_herramienta: str) -> str:
+    """Genera HTML para mostrar logo uniforme de una herramienta"""
+    # Buscar por coincidencia parcial del nombre
+    logo_url = None
+    for clave, url in LOGOS_URLS.items():
+        if clave.lower() in nombre_herramienta.lower():
+            logo_url = url
+            break
+    
+    if logo_url:
+        # Caja uniforme para cada logo (asegura tamaño, borde y object-fit)
+        return (
+            f'<div class="logo-box" title="{nombre_herramienta}">' 
+            f'<img src="{logo_url}" alt="{nombre_herramienta}" />'
+            f'</div>'
+        )
+    return ""
+
 def grafico_barh_simple(grupo: str, items: List[Tuple[str, int]], color: str, height_px: int = 300) -> Any:
-    """Gráfico horizontal para Data & BI"""
+    """Gráfico horizontal para Data & BI con colores por marca"""
     skills = [s for s, _ in items]
     niveles = [n for _, n in items]
     
     fig, ax = plt.subplots(figsize=(8, height_px/100), dpi=100)
     y_pos = np.arange(len(skills))
     
-    ax.barh(y_pos, niveles, color=color, alpha=0.8, edgecolor='white', linewidth=2)
+    # Colores asociados a cada herramienta (identidad de marca)
+    # Power BI: cyan/azul, Excel: verde, Python: azul oscuro
+    colores_marca = ['#0891b2', '#059669', '#3776ab']  # PowerBI, Excel, Python
+    colores_lista = colores_marca[:len(skills)]
+    
+    ax.barh(y_pos, niveles, color=colores_lista, alpha=0.85, edgecolor='white', linewidth=2)
     ax.set_yticks(y_pos)
     ax.set_yticklabels(skills, fontsize=10, fontweight='500')
     ax.set_xlabel('Nivel %', fontsize=10, fontweight='600', color='#64748b')
@@ -86,13 +129,13 @@ def grafico_barh_simple(grupo: str, items: List[Tuple[str, int]], color: str, he
     return fig
 
 def grafico_donut(grupo: str, items: List[Tuple[str, int]], color: str, height_px: int = 300) -> Any:
-    """Gráfico tipo donut para Plataformas Educativas"""
+    """Gráfico tipo donut para Plataformas Educativas con porcentajes en negro"""
     skills = [s.replace(' (', '\n(') for s, _ in items]
     niveles = [n for _, n in items]
     
     fig, ax = plt.subplots(figsize=(7, height_px/100), dpi=100)
     
-    # cada segmento con color diferente (colormap Paired)
+    # Colores distintos por plataforma (Paired colormap)
     colors_list = plt.cm.Paired(np.linspace(0.2, 0.8, len(niveles)))
     wedges, texts, autotexts = ax.pie(
         niveles, labels=skills, autopct='%1.0f%%',
@@ -105,8 +148,9 @@ def grafico_donut(grupo: str, items: List[Tuple[str, int]], color: str, height_p
     centre_circle = plt.Circle((0, 0), 0.70, fc='white', edgecolor='#e2e8f0', linewidth=2)
     ax.add_artist(centre_circle)
     
+    # Porcentajes en NEGRO (no blanco)
     for autotext in autotexts:
-        autotext.set_color('white')
+        autotext.set_color('#0f172a')
         autotext.set_fontweight('700')
         autotext.set_fontsize(9)
     
@@ -115,31 +159,35 @@ def grafico_donut(grupo: str, items: List[Tuple[str, int]], color: str, height_p
     return fig
 
 def grafico_barras_verticales(grupo: str, items: List[Tuple[str, int]], color: str, height_px: int = 300) -> Any:
-    """Gráfico de barras verticales para Herramientas"""
+    """Presentación horizontal limpia para Herramientas Ofimáticas sin porcentajes"""
     skills = [s.replace(' (', '\n(') for s, _ in items]
-    niveles = [n for _, n in items]
     
     fig, ax = plt.subplots(figsize=(9, height_px/100), dpi=100)
     x_pos = np.arange(len(skills))
     
-    ax.bar(x_pos, niveles, color=color, alpha=0.8, edgecolor='white', linewidth=2, width=0.6)
-    ax.set_xticks(x_pos)
-    ax.set_xticklabels(skills, fontsize=9, fontweight='500', rotation=45, ha='right')
-    ax.set_ylabel('Nivel %', fontsize=10, fontweight='600', color='#64748b')
-    ax.set_ylim(0, 105)
+    # Colores distintos para cada herramienta ofimática
+    herramienta_colores = ['#059669', '#0891b2', '#f59e0b', '#7c3aed']  # Verde, Cyan, Ámbar, Púrpura
+    colores_lista = herramienta_colores[:len(skills)]
     
-    # Etiquetas en las barras
-    for i, v in enumerate(niveles):
-        ax.text(i, v + 2, f'{v}%', ha='center', va='bottom', fontweight='700', fontsize=9, color='#0f172a')
+    # Crear barras simples sin mostrar porcentajes, solo como indicadores visuales
+    ax.barh(x_pos, [1]*len(skills), color=colores_lista, alpha=0.8, edgecolor='white', linewidth=2, height=0.6)
+    ax.set_yticks(x_pos)
+    ax.set_yticklabels(skills, fontsize=10, fontweight='600')
+    ax.set_xlim(0, 1.2)
     
-    ax.grid(axis='y', alpha=0.2, linestyle='--')
+    # Eliminar eje X (no mostramos valores)
+    ax.set_xticks([])
+    
+    # Estilos limpios
+    ax.grid(axis='y', alpha=0, linestyle='-')
     ax.set_axisbelow(True)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_color('#e2e8f0')
-    ax.spines['bottom'].set_color('#e2e8f0')
     
     fig.patch.set_facecolor('white')
+    ax.set_facecolor('white')
     plt.tight_layout()
     return fig
 
@@ -150,7 +198,14 @@ def grafico_circular(grupo: str, items: List[Tuple[str, int]], color: str, heigh
     
     fig, ax = plt.subplots(figsize=(7, height_px/100), dpi=100)
     
-    colors_gradient = plt.cm.Oranges(np.linspace(0.4, 0.9, len(niveles)))
+    sys_colors = {
+        'MacOS': '#111827',
+        'Windows': '#06b6d4',
+        'iOS': '#8b5cf6',
+        'Android (intermedio)': '#10b981',
+        'Android': '#10b981'
+    }
+    colors_gradient = [sys_colors.get(s, '#f59e0b') for s in skills]
     wedges, texts, autotexts = ax.pie(
         niveles, labels=skills, autopct='%1.0f%%',
         colors=colors_gradient, startangle=45,
@@ -168,14 +223,18 @@ def grafico_circular(grupo: str, items: List[Tuple[str, int]], color: str, heigh
     return fig
 
 def grafico_barras_idiomas(grupo: str, items: List[Tuple[str, int]], color: str, height_px: int = 300) -> Any:
-    """Gráfico horizontal para Idiomas"""
+    """Gráfico horizontal para Idiomas con colores distintos por idioma"""
     skills = [s for s, _ in items]
     niveles = [n for _, n in items]
     
     fig, ax = plt.subplots(figsize=(7, height_px/100), dpi=100)
     y_pos = np.arange(len(skills))
     
-    ax.barh(y_pos, niveles, color=color, alpha=0.8, edgecolor='white', linewidth=2)
+    # Colores distintos para cada idioma
+    idioma_colores = ['#06b6d4', '#ef4444']  # Cyan para inglés, rojo para español
+    colores_lista = idioma_colores[:len(skills)]
+    
+    ax.barh(y_pos, niveles, color=colores_lista, alpha=0.85, edgecolor='white', linewidth=2)
     ax.set_yticks(y_pos)
     ax.set_yticklabels(skills, fontsize=10, fontweight='500')
     ax.set_xlabel('Nivel %', fontsize=10, fontweight='600', color='#64748b')
@@ -197,31 +256,82 @@ def grafico_barras_idiomas(grupo: str, items: List[Tuple[str, int]], color: str,
     return fig
 
 def grafico_radar(grupo: str, items: List[Tuple[str, int]], color: str, height_px: int = 300) -> Any:
-    """Gráfico radar para Creatividad"""
+    """Presentación conceptual para Creatividad (sin gráfica numérica)"""
     skills = [s for s, _ in items]
-    niveles = [n for _, n in items]
     
-    # Número de variables
-    num_vars = len(skills)
-    angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
-    niveles += niveles[:1]  # Completar el ciclo
-    angles += angles[:1]
+    # Para Creatividad, crear una presentación visual sin porcentajes
+    fig, ax = plt.subplots(figsize=(8, height_px/100), dpi=100)
     
-    fig, ax = plt.subplots(figsize=(7, height_px/100), dpi=100, subplot_kw=dict(projection='polar'))
+    # Crear texto limpio con los nombres
+    y_positions = np.arange(len(skills))
     
-    ax.plot(angles, niveles, 'o-', linewidth=2, color=color, label='Nivel')
-    ax.fill(angles, niveles, alpha=0.25, color=color)
+    for i, skill in enumerate(skills):
+        # Rectángulo de fondo
+        rect = plt.Rectangle((0, i - 0.35), 1, 0.7, 
+                             facecolor=color, 
+                             edgecolor=color, 
+                             alpha=0.15, 
+                             linewidth=0)
+        ax.add_patch(rect)
+        
+        # Texto del skill
+        ax.text(0.05, i, f"✓ {skill}", 
+               va='center', 
+               ha='left', 
+               fontsize=11, 
+               fontweight='600',
+               color='#0f172a')
     
-    ax.set_xticks(angles[:-1])
-    ax.set_xticklabels(skills, fontsize=9, fontweight='500')
-    ax.set_ylim(0, 100)
-    ax.set_yticks([20, 40, 60, 80, 100])
-    ax.set_yticklabels(['20%', '40%', '60%', '80%', '100%'], fontsize=8, color='#64748b')
-    ax.grid(True, color='#e2e8f0', alpha=0.5)
+    ax.set_xlim(-0.1, 1.1)
+    ax.set_ylim(-0.5, len(skills) - 0.5)
+    ax.set_aspect('auto')
+    
+    # Eliminar ejes
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
     
     fig.patch.set_facecolor('white')
+    ax.set_facecolor('white')
     plt.tight_layout()
     return fig
+
+
+def render_logos_and_checklist(grupo: str, items: List[Tuple[str,int]], color: str, height_px: int = 300) -> Any:
+    """Muestra cobertura de habilidades mediante logos y/o lista.
+
+    Si al menos un logo está disponible, se renderiza la rejilla de tarjetas con
+    icono + nombre. Si ningún logo es reconocible (caso de Creatividad o Idiomas),
+    el diseño cae en una lista de texto con checks para evitar tarjetas vacías.
+    """
+    # first collect logos
+    logos_fragments = []
+    for skill, _ in items:
+        logo_html = render_logo_header(skill)
+        if logo_html:
+            logos_fragments.append(logo_html)
+
+    if logos_fragments:
+        # show logos in a row; each skill still aparece en la lista debajo
+        st.markdown(f'<div class="logo-row">{"".join(logos_fragments)}</div>', unsafe_allow_html=True)
+        # then show checklist smaller
+        lista_html = '<ul style="margin:0; padding-left:1.25rem; color:#334155; font-weight:500; font-size:0.95rem;">'
+        for skill, _ in items:
+            lista_html += f'<li>✓ {skill}</li>'
+        lista_html += '</ul>'
+        st.markdown(lista_html, unsafe_allow_html=True)
+    else:
+        # no logos found, render only checklist with more spacing
+        lista_html = '<ul style="margin:0 0 1rem 0; padding-left:1.25rem; color:#334155; font-weight:500; font-size:0.95rem;">'
+        for skill, _ in items:
+            lista_html += f'<li>✓ {skill}</li>'
+        lista_html += '</ul>'
+        st.markdown(lista_html, unsafe_allow_html=True)
+    return None
+
 
 def construir_dashboard_habilidades(habilidades, alto_px=700, ancho_px=1200, dpi=150):
     filas = []
@@ -330,68 +440,115 @@ st.markdown("""
     font-weight: 700;
     color: #0891b2;
 }
+
+/* Logos */
+.logo-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+.logo-box {
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 8px;
+    padding: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    border: 1px solid #eef2f7;
+}
+
+/* tarjetas uniformes de habilidad */
+.skill-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.skill-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.skill-card-name {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 600;
+}
+.logo-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("# 🎯 Habilidades y Competencias")
-
-st.markdown("*Especialista en análisis de datos, gestión académica y educación*")
-
-# Gráfico principal
-st.markdown("## 📊 Vista General de Competencias")
-fig = construir_dashboard_habilidades(HABILIDADES, alto_px=700, ancho_px=1200, dpi=150)
-st.pyplot(fig, clear_figure=True, width='stretch')
-
-st.divider()
-
-st.divider()
+# header for habilidades
+header_gradient = "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)"
+st.markdown(f"""
+<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+    <h1>🎯 Habilidades y Competencias</h1>
+    <p>*Especialista en análisis de datos, gestión académica y educación*</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Detalles por categoría con gráficos variados
 st.markdown("## 📋 Detalle por Área")
 
 # Mapeo de funciones de gráficos
 graficos_por_grupo = {
-    "Data & Business Intelligence": (grafico_barh_simple, "#0891b2"),
+    "Data & Business Intelligence": (render_logos_and_checklist, "#0891b2"),
     "Plataformas Educativas": (grafico_donut, "#7c3aed"),
-    "Herramientas Ofimáticas y Colaboración": (grafico_barras_verticales, "#059669"),
-    "Sistemas Operativos y Dispositivos": (grafico_circular, "#f59e0b"),
-    "Idiomas": (grafico_barras_idiomas, "#ef4444"),
-    "Creatividad": (grafico_radar, "#ec4899"),
+    "Herramientas Ofimáticas y Colaboración": (render_logos_and_checklist, "#059669"),
+    "Sistemas Operativos y Dispositivos": (render_logos_and_checklist, "#f59e0b"),
+    "Creatividad": (render_logos_and_checklist, "#ec4899"),
+    "Idiomas": (render_logos_and_checklist, "#ef4444"),
 }
 
-# Mostrar cada grupo en filas de 2 columnas
-for i, (grupo, items) in enumerate(HABILIDADES):
-    if i % 2 == 0:  # Nueva fila cada 2 elementos
-        cols = st.columns(2, gap="medium")
-    
-    col_idx = i % 2
-    
-    with cols[col_idx]:
-        color_grupo = PALETA_GRUPOS.get(grupo, "#2E5EAA")
-        
-        # Contenedor del grupo
-        st.markdown(f"""
-        <div style="
-            background: linear-gradient(135deg, #f8fafc 0%, white 100%);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 5px solid {color_grupo};
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        ">
-            <h3 style="margin: 0 0 1rem 0; color: #0f172a; font-size: 1.1rem;">
-                {grupo}
-            </h3>
-        """, unsafe_allow_html=True)
-        
-        # Obtener la función de gráfico para este grupo
-        grafico_func, _ = graficos_por_grupo.get(grupo, (grafico_barh_simple, color_grupo))
-        
-        # Crear y mostrar el gráfico
-        fig = grafico_func(grupo, items, color_grupo, height_px=280)
-        st.pyplot(fig, use_container_width=True)
-        
-        # Cerrar el contenedor
-        st.markdown("</div>", unsafe_allow_html=True)
+# Mostrar cada grupo con enfoque adaptativo (tarjetas o lista)
+for grupo, items in HABILIDADES:
+    color_grupo = PALETA_GRUPOS.get(grupo, "#2E5EAA")
+    # encabezado de categoría
+    st.markdown(f"""
+    <div style="
+        padding: 0.75rem 1rem;
+        border-left: 6px solid {color_grupo};
+        background: #f9fafb;
+        margin-top: 1.5rem;
+    ">
+        <h3 style="margin:0; color:#0f172a; font-size:1.2rem; font-weight:700;">{grupo}</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # comprobar si al menos un logo está disponible
+    any_logo = any(render_logo_header(skill) for skill, _ in items)
+    if any_logo:
+        cols = st.columns(3, gap="small")
+        for idx, (skill, _) in enumerate(items):
+            with cols[idx % 3]:
+                logo_html = render_logo_header(skill)
+                st.markdown(f"""
+                <div class="skill-card">
+                    {logo_html}
+                    <p class="skill-card-name">{skill}</p>
+                </div>
+                """, unsafe_allow_html=True)
+    else:
+        # no logos; usar checklist textual
+        lista_html = '<ul style="margin:0 0 1rem 0; padding-left:1.25rem; color:#334155; font-weight:500; font-size:0.95rem;">'
+        for skill, _ in items:
+            lista_html += f'<li>✓ {skill}</li>'
+        lista_html += '</ul>'
+        st.markdown(lista_html, unsafe_allow_html=True)
+    st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
 
 st.divider()

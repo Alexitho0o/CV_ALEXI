@@ -1,0 +1,19 @@
+[client]
+showErrorDetails = false
+
+[logger]
+level = "info"
+
+[theme]
+primaryColor = "#0891b2"
+backgroundColor = "#f8fafc"
+secondaryBackgroundColor = "#e2e8f0"
+textColor = "#0f172a"
+font = "sans serif"
+
+[browser]
+gatherUsageStats = false
+
+[app]
+# Nombre de la aplicación en el navegador y URL amigable
+title = "Alexi Burgos - CV"

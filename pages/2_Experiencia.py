@@ -6,6 +6,18 @@ from datetime import datetime
 
 st.set_page_config(page_title="Experiencia - Alexi Burgos CV", page_icon="💼", layout="wide")
 
+# header color unique for experiencia
+header_color = "#7c3aed"
+
+# encabezado con nombre y subtítulo y gradient
+header_gradient = "linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)"
+st.markdown(f"""
+<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+    <h1>💼 ALEXI MARCELO BURGOS FLORES</h1>
+    <p>🌟 Experiencia Profesional</p>
+</div>
+""", unsafe_allow_html=True)
+
 EXPERIENCIA = [
     dict(
         cargo="Docente – Educación Continua UC (Freelance)",
@@ -165,17 +177,20 @@ st.markdown("""
 }
 
 .timeline-header {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: transparent;
     color: white;
-    padding: 2rem;
-    border-radius: 12px;
+    padding: 0;
+    border-radius: 0;
     margin-bottom: 2rem;
-    text-align: center;
+    text-align: left;
 }
 
-.timeline-header h2 {
+.timeline-header h1 {
     margin: 0;
     font-size: 1.8rem;
+    font-weight: 900;
+    color: #7c3aed;
+    margin-bottom: 1.5rem;
 }
 
 .timeline-header p {
@@ -187,8 +202,7 @@ st.markdown("""
 
 st.markdown("""
 <div class="timeline-header">
-    <h2>📍 Mi Viaje Profesional</h2>
-    <p>Navega por mis años de experiencia - haz clic en los puntos del camino</p>
+    <h1>📍 Mi Viaje Profesional</h1>
 </div>
 """, unsafe_allow_html=True)
 
@@ -263,7 +277,7 @@ fig.add_trace(go.Scatter(
 
 # Configurar layout
 fig.update_layout(
-    title='<b>Línea de Tiempo: Puntos Clave de Mi Carrera</b>',
+    title='',
     title_x=0.5,
     title_font=dict(size=20, color='#0f172a'),
     xaxis=dict(
@@ -417,9 +431,4 @@ with col3:
     st.metric("Posiciones", f"{len(EXPERIENCIA)}")
 
 st.divider()
-
-# leyenda eliminada (visual redundante)
-
-# el texto de referencias sigue directamente
-st.markdown("**Referencias disponibles a solicitud** 📞")
 

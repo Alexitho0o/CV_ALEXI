@@ -64,9 +64,14 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("# 🎓 Educación y Formación")
-
-st.markdown("*Formación académica en logística, educación y análisis de datos*")
+# header
+header_gradient = "linear-gradient(135deg, #ef4444 0%, #f87171 100%)"
+st.markdown(f"""
+<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+    <h1>🎓 Educación y Formación</h1>
+    <p>*Formación académica en logística, educación y análisis de datos*</p>
+</div>
+""", unsafe_allow_html=True)
 
 st.divider()
 

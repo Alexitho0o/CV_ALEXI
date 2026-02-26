@@ -5,6 +5,11 @@ from typing import Any, Dict, List, Tuple
 
 st.set_page_config(page_title="Alexi Burgos CV", page_icon="📄", layout="wide")
 
+# page-specific header color (text)
+header_color = "#0891b2"
+# gradient for main page header (mirrors section style in other pages)
+header_gradient = "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)"
+
 DATOS_PERSONALES: Dict[str, Any] = {
     "NOMBRE": "ALEXI MARCELO BURGOS FLORES",
     "UBICACION": "Villa Alemana, Valparaíso, Chile",
@@ -275,13 +280,14 @@ COLOR_FONDO_BARRA = "#f1f5f9"
 
 # CSS Global
 def inyectar_css() -> None:
+    # global styles (hero-header now matches primary gradient)
     st.markdown("""
         <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
         
         .hero-header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: """ + header_gradient + """;
             color: white;
             padding: 3rem 2rem;
             border-radius: 16px;
@@ -305,14 +311,15 @@ def inyectar_css() -> None:
         }
         
         .hero-title {
-            color: #0891b2;
-            font-weight: 700;
-            font-size: 1.15rem;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
             margin-top: 1rem;
-            background: rgba(8,145,178,0.1);
-            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem 1.25rem;
             border-radius: 8px;
             display: inline-block;
+            line-height: 1.5;
         }
         
         .section-card {
@@ -507,17 +514,68 @@ def construir_dashboard_habilidades(
     return fig
 
 # Página Principal (Home)
+# header uses the same gradient style as other pages
 st.markdown(f"""
-<div class="hero-header">
+<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
     <h1>🎯 {DATOS_PERSONALES['NOMBRE']}</h1>
-    <div class="hero-sub">📍 {DATOS_PERSONALES['UBICACION']} | 📱 {DATOS_PERSONALES['TELEFONO']}</div>
-    <div class="hero-sub">📧 {DATOS_PERSONALES['CORREO']} | 💼 {DATOS_PERSONALES['LINKEDIN']}</div>
+    <div class="page-sub">📍 {DATOS_PERSONALES['UBICACION']} | 📱 {DATOS_PERSONALES['TELEFONO']}</div>
+    <div class="page-sub">📧 {DATOS_PERSONALES['CORREO']} | 💼 {DATOS_PERSONALES['LINKEDIN']}</div>
     <div class="hero-title">{DATOS_PERSONALES['TITULO']}</div>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("## 📋 Resumen Profesional")
 st.write(DATOS_PERSONALES["RESUMEN"])
+
+st.divider()
+
+st.markdown("## 📌 Destrezas Clave")
+
+skills_html = """
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0;">
+    <div style="background: #0891b2; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">📊 Análisis de Datos</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">Power BI, Excel, Python</p>
+    </div>
+    <div style="background: #7c3aed; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">🏫 Plataformas Educativas</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">Banner, Moodle, Blackboard</p>
+    </div>
+    <div style="background: #059669; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">🔧 Herramientas Ofimáticas</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">Office 365, GSuite, Kahoot</p>
+    </div>
+    <div style="background: #f59e0b; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">💻 Sistemas Operativos</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">MacOS, Windows, iOS, Android</p>
+    </div>
+    <div style="background: #ef4444; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">🌐 Idiomas</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">Inglés Técnico, Español Nativo</p>
+    </div>
+    <div style="background: #8b5cf6; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">🎓 Especialización</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">Logística, Educación, Datos</p>
+    </div>
+</div>
+"""
+
+st.markdown(skills_html, unsafe_allow_html=True)
+
+st.divider()
+
+st.markdown("## 🎯 Especialización")
+
+specialization = """
+Con más de **13 años en logística** y **7 años en educación superior**, soy especialista en:
+
+- **Análisis Institucional**: Construcción de indicadores educativos
+- **Gestión Académica**: Mejora continua, acreditación y calidad
+- **Business Intelligence**: Desarrollo de dashboards y reportes estratégicos
+- **Docencia**: Logística, Compras Estratégicas y Gestión de Operaciones
+"""
+
+st.markdown(specialization)
 
 st.divider()
 # Quick links also on home page
@@ -552,22 +610,20 @@ st.markdown("## 🚀 Explora mis secciones en el menú lateral →")
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.info("**👨‍💼 Perfil**\nMi información personal")
+    st.info("**� Experiencia**\nHistorial laboral completo")
 with col2:
-    st.info("**💼 Experiencia**\nHistorial laboral completo")
-with col3:
     st.info("**🎯 Habilidades**\nCompetencias profesionales")
+with col3:
+    st.info("**🎓 Educación**\nFormación académica")
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.info("**🎓 Educación**\nFormación académica")
-with col2:
     st.info("**🎯 Competencias**\nÁreas de especialización")
-with col3:
+with col2:
     st.info("**💻 Equipamiento**\nRecursos e intereses")
+with col3:
+    st.info("**👥 Referencias**\nContactos profesionales")
 
 col1, col2 = st.columns(2)
 with col1:
-    st.info("**👥 Referencias**\nContactos profesionales")
-with col2:
     st.info("**📧 Contacto**\nCómo ponerse en contacto")
