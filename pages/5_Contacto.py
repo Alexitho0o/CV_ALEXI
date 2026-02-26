@@ -140,28 +140,18 @@ with col2:
     
     availab_html = """
     <div class="contact-card">
-        <div class="contact-label">💼 Modalidades</div>
+        <div class="contact-label">� Modalidad</div>
         <div class="contact-value">
-            ✅ Full-time<br>
-            ✅ Freelance<br>
-            ✅ Part-time<br>
-            ✅ Consultoría
+            ✅ En línea únicamente
         </div>
     </div>
     
     <div class="contact-card">
-        <div class="contact-label">🌐 Ubicaciones</div>
+        <div class="contact-label">🕒 Horario disponible</div>
         <div class="contact-value">
-            ✅ Presencial (Santiago)<br>
-            ✅ Híbrido<br>
-            ✅ Remoto
-        </div>
-    </div>
-    
-    <div class="contact-card">
-        <div class="contact-label">⚡ Respuesta</div>
-        <div class="contact-value">
-            Típicamente: 24-48 horas
+            Mar–Jue 21:30 en adelante<br>
+            Vie 17:30–23:00<br>
+            Sáb 08:00–17:00
         </div>
     </div>
     """

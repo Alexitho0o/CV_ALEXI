@@ -40,9 +40,9 @@ HABILIDADES: List[Tuple[str, List[Tuple[str, int]]]] = [
         ("Español (nativo)", 100),
     ]),
     ("Creatividad", [
-        ("Autor y Compositor", 85),
+        ("Autor y Compositor", 40),
         ("Producción Musical", 80),
-        ("Edición Musical", 75),
+        ("Edición Musical", 100),
     ]),
 ]
 
@@ -92,10 +92,11 @@ def grafico_donut(grupo: str, items: List[Tuple[str, int]], color: str, height_p
     
     fig, ax = plt.subplots(figsize=(7, height_px/100), dpi=100)
     
-    colors_gradient = plt.cm.Blues(np.linspace(0.4, 0.9, len(niveles)))
+    # cada segmento con color diferente (colormap Paired)
+    colors_list = plt.cm.Paired(np.linspace(0.2, 0.8, len(niveles)))
     wedges, texts, autotexts = ax.pie(
         niveles, labels=skills, autopct='%1.0f%%',
-        colors=colors_gradient, startangle=90,
+        colors=colors_list, startangle=90,
         textprops={'fontsize': 9, 'weight': '600', 'color': '#334155'},
         wedgeprops=dict(edgecolor='white', linewidth=2)
     )

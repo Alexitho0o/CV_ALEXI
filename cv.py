@@ -520,6 +520,34 @@ st.markdown("## 📋 Resumen Profesional")
 st.write(DATOS_PERSONALES["RESUMEN"])
 
 st.divider()
+# Quick links also on home page
+st.markdown("## 🔗 Enlaces Rápidos")
+ql1, ql2, ql3 = st.columns(3)
+with ql1:
+    st.markdown(f"""
+    <a href=\"mailto:{DATOS_PERSONALES['CORREO']}\" style=\"text-decoration: none;\">
+        <button style=\"width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;\">
+            📧 Enviar Email
+        </button>
+    </a>
+    """, unsafe_allow_html=True)
+with ql2:
+    st.markdown(f"""
+    <a href=\"https://linkedin.com/in/alexiburgos\" target=\"_blank\" style=\"text-decoration: none;\">
+        <button style=\"width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;\">
+            💼 LinkedIn
+        </button>
+    </a>
+    """, unsafe_allow_html=True)
+with ql3:
+    st.markdown(f"""
+    <a href=\"tel:{DATOS_PERSONALES['TELEFONO']}\" style=\"text-decoration: none;\">
+        <button style=\"width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;\">
+            📞 Llamar
+        </button>
+    </a>
+    """, unsafe_allow_html=True)
+
 st.markdown("## 🚀 Explora mis secciones en el menú lateral →")
 
 col1, col2, col3 = st.columns(3)
@@ -532,14 +560,14 @@ with col3:
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.success("**🎓 Educación**\nFormación académica")
+    st.info("**🎓 Educación**\nFormación académica")
 with col2:
-    st.warning("**🎯 Competencias**\nÁreas de especialización")
+    st.info("**🎯 Competencias**\nÁreas de especialización")
 with col3:
-    st.error("**💻 Equipamiento**\nRecursos e intereses")
+    st.info("**💻 Equipamiento**\nRecursos e intereses")
 
 col1, col2 = st.columns(2)
 with col1:
     st.info("**👥 Referencias**\nContactos profesionales")
 with col2:
-    st.warning("**📧 Contacto**\nCómo ponerse en contacto")
+    st.info("**📧 Contacto**\nCómo ponerse en contacto")

@@ -418,30 +418,8 @@ with col3:
 
 st.divider()
 
-st.markdown("### 🔍 Leyenda")
+# leyenda eliminada (visual redundante)
 
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.markdown("""
-    <div style="background: #0891b2; color: white; padding: 0.75rem; border-radius: 8px; text-align: center; font-weight: 600;">
-    🎓 Educación Superior
-    </div>
-    """, unsafe_allow_html=True)
-
-with col2:
-    st.markdown("""
-    <div style="background: #059669; color: white; padding: 0.75rem; border-radius: 8px; text-align: center; font-weight: 600;">
-    📊 Análisis de Datos
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    st.markdown("""
-    <div style="background: #7c3aed; color: white; padding: 0.75rem; border-radius: 8px; text-align: center; font-weight: 600;">
-    📦 Logística
-    </div>
-    """, unsafe_allow_html=True)
-
+# el texto de referencias sigue directamente
 st.markdown("**Referencias disponibles a solicitud** 📞")
 
