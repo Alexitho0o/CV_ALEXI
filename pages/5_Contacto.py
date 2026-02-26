@@ -6,7 +6,7 @@ st.set_page_config(page_title="Contacto - Alexi Burgos CV", page_icon="📧", la
 
 DATOS_PERSONALES = {
     "NOMBRE": "ALEXI MARCELO BURGOS FLORES",
-    "UBICACION": "Santiago, Chile",
+    "UBICACION": "Villa Alemana, Valparaíso, Chile",
     "TELEFONO": "+56 9 4513 0486",
     "CORREO": "alexi.fs341@gmail.com",
     "LINKEDIN": "linkedin.com/in/alexiburgos",

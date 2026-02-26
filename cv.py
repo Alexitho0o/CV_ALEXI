@@ -7,11 +7,11 @@ st.set_page_config(page_title="Alexi Burgos CV", page_icon="📄", layout="wide"
 
 DATOS_PERSONALES: Dict[str, Any] = {
     "NOMBRE": "ALEXI MARCELO BURGOS FLORES",
-    "UBICACION": "Santiago, Chile",
+    "UBICACION": "Villa Alemana, Valparaíso, Chile",
     "TELEFONO": "+56 9 4513 0486",
     "CORREO": "alexi.fs341@gmail.com",
     "LINKEDIN": "linkedin.com/in/alexiburgos",
-    "TITULO": "Docente UC | Ingeniero y Técnico en Gestión de Operaciones Logísticas",
+    "TITULO": "Analista de Datos Institucionales | Docente Logística en Capacitación y Desarrollo UC | Diplomado en Evaluación de Aprendizajes PUC | Analista de Inventario y Costos | Coordinador Académico IP-CFT",
     "RESUMEN": (
         "Soy un profesional con 13 años de experiencia en logística y 7 en gestión educativa, especializado en coordinación académica "
         "y administración de procesos educativos. Me destaco por mi capacidad para optimizar operaciones académicas, mejorar la calidad "
@@ -50,6 +50,11 @@ HABILIDADES: List[Tuple[str, List[Tuple[str, int]]]] = [
     ("Idiomas", [
         ("Inglés técnico (lectora/comprensión auditiva)", 80),
         ("Español (nativo)", 100),
+    ]),
+    ("Creatividad", [
+        ("Autor y Compositor", 85),
+        ("Producción Musical", 80),
+        ("Edición Musical", 75),
     ]),
 ]
 
@@ -262,6 +267,7 @@ PALETA_GRUPOS = {
     "Herramientas Ofimáticas y Colaboración": "#059669",
     "Sistemas Operativos y Dispositivos": "#f59e0b",
     "Idiomas": "#ef4444",
+    "Creatividad": "#ec4899",
 }
 COLOR_PRINCIPAL = "#0f172a"
 COLOR_TEXTO_SUAVE = "#475569"

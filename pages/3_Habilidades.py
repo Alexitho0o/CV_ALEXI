@@ -38,6 +38,11 @@ HABILIDADES: List[Tuple[str, List[Tuple[str, int]]]] = [
         ("Inglés técnico (lectora/comprensión)", 80),
         ("Español (nativo)", 100),
     ]),
+    ("Creatividad", [
+        ("Autor y Compositor", 85),
+        ("Producción Musical", 80),
+        ("Edición Musical", 75),
+    ]),
 ]
 
 PALETA_GRUPOS = {
@@ -46,6 +51,7 @@ PALETA_GRUPOS = {
     "Herramientas Ofimáticas y Colaboración": "#059669",
     "Sistemas Operativos y Dispositivos": "#f59e0b",
     "Idiomas": "#ef4444",
+    "Creatividad": "#ec4899",
 }
 
 def construir_dashboard_habilidades(habilidades, alto_px=700, ancho_px=1200, dpi=150):

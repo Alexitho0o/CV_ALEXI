@@ -6,11 +6,11 @@ st.set_page_config(page_title="Perfil - Alexi Burgos CV", page_icon="👨‍💼
 
 DATOS_PERSONALES = {
     "NOMBRE": "ALEXI MARCELO BURGOS FLORES",
-    "UBICACION": "Santiago, Chile",
+    "UBICACION": "Villa Alemana, Valparaíso, Chile",
     "TELEFONO": "+56 9 4513 0486",
     "CORREO": "alexi.fs341@gmail.com",
     "LINKEDIN": "linkedin.com/in/alexiburgos",
-    "TITULO": "Docente UC | Ingeniero y Técnico en Gestión de Operaciones Logísticas",
+    "TITULO": "Analista de Datos Institucionales | Docente Logística en Capacitación y Desarrollo UC | Diplomado en Evaluación de Aprendizajes PUC | Analista de Inventario y Costos | Coordinador Académico IP-CFT",
 }
 
 # CSS

@@ -192,34 +192,28 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Crear datos para el timeline
-timeline_data = []
+# Crear datos para el timeline - SOLO AÑOS CLAVE (inicio y fin de cada posición)
+key_years = set()
 for item in EXPERIENCIA:
-    for year in range(item['inicio'], item['fin'] + 1):
-        timeline_data.append({
-            'year': year,
-            'cargos': [item['cargo']],
-            'organismos': [item['organizacion']],
-            'tipo': item['tipo'],
-            'index': EXPERIENCIA.index(item)
-        })
+    key_years.add(item['inicio'])
+    key_years.add(item['fin'])
 
-# Consolidar por año
+sorted_years = sorted(list(key_years))
+
+# Crear información por año
 years_dict = {}
-for data in timeline_data:
-    year = data['year']
-    if year not in years_dict:
-        years_dict[year] = {
-            'cargos': [],
-            'tipos': [],
-            'indices': set()
-        }
-    if data['cargos'][0] not in years_dict[year]['cargos']:
-        years_dict[year]['cargos'].extend(data['cargos'])
-        years_dict[year]['tipos'].append(data['tipo'])
-        years_dict[year]['indices'].add(data['index'])
-
-sorted_years = sorted(years_dict.keys())
+for year in sorted_years:
+    years_dict[year] = {
+        'items': [],
+        'cargos': [],
+        'tipos': set()
+    }
+    
+    for item in EXPERIENCIA:
+        if item['inicio'] <= year <= item['fin']:
+            years_dict[year]['items'].append(item)
+            years_dict[year]['cargos'].append(item['cargo'])
+            years_dict[year]['tipos'].add(item['tipo'])
 
 # Crear visualización con Plotly
 fig = go.Figure()
@@ -231,10 +225,9 @@ color_map = {
     'logistica': '#7c3aed'
 }
 
-# Agregar puntos para cada año
-y_positions = []
-for i, year in enumerate(sorted_years):
-    types = years_dict[year]['tipos']
+# Agregar puntos para cada año CLAVE
+for year in sorted_years:
+    types = list(years_dict[year]['tipos'])
     primary_type = types[0] if types else 'logistica'
     color = color_map.get(primary_type, '#2E5EAA')
     
@@ -270,7 +263,7 @@ fig.add_trace(go.Scatter(
 
 # Configurar layout
 fig.update_layout(
-    title='<b>Línea de Tiempo: 2012 - 2025</b>',
+    title='<b>Línea de Tiempo: Puntos Clave de Mi Carrera</b>',
     title_x=0.5,
     title_font=dict(size=20, color='#0f172a'),
     xaxis=dict(
@@ -303,7 +296,7 @@ st.divider()
 st.markdown("## 📅 Selecciona un Año")
 
 selected_year = st.select_slider(
-    "Navega por el tiempo",
+    "Navega por el tiempo (mostrando años clave)",
     options=sorted_years,
     value=sorted_years[-1],
     label_visibility="collapsed"
@@ -312,33 +305,99 @@ selected_year = st.select_slider(
 # Mostrar experiencias del año seleccionado
 st.markdown(f"### 🎯 Experiencias en {selected_year}")
 
-year_experiences = [EXPERIENCIA[idx] for idx in years_dict[selected_year]['indices']]
+year_items = years_dict[selected_year]['items']
 
-if year_experiences:
-    for item in year_experiences:
-        if item['inicio'] <= selected_year <= item['fin']:
-            exp_html = f"""
-            <div class="experience-item">
-                <div class="cargo">{'🎓 ' if item['tipo'] == 'educacion' else '📦 ' if item['tipo'] == 'logistica' else '📊 '}{item['cargo']}</div>
-                <div class="org">{item['organizacion']}</div>
-                <div class="dates">{item['fechas']}</div>
-            """
-            
-            if "nota" in item and item.get("nota"):
-                exp_html += f'<div class="note">ℹ️ {item["nota"]}</div>'
-            
-            exp_html += '<ul class="bullets">'
-            for viñeta in item["viñetas"]:
-                exp_html += f'<li>{viñeta}</li>'
-            exp_html += '</ul></div>'
-            
-            st.markdown(exp_html, unsafe_allow_html=True)
+if year_items:
+    for item in year_items:
+        exp_html = f"""
+        <div class="experience-item">
+            <div class="cargo">{'🎓 ' if item['tipo'] == 'educacion' else '📦 ' if item['tipo'] == 'logistica' else '📊 '}{item['cargo']}</div>
+            <div class="org">{item['organizacion']}</div>
+            <div class="dates">{item['fechas']}</div>
+        """
+        
+        if "nota" in item and item.get("nota"):
+            exp_html += f'<div class="note">ℹ️ {item["nota"]}</div>'
+        
+        exp_html += '<ul class="bullets">'
+        for viñeta in item["viñetas"]:
+            exp_html += f'<li>{viñeta}</li>'
+        exp_html += '</ul></div>'
+        
+        st.markdown(exp_html, unsafe_allow_html=True)
 else:
     st.info("No hay experiencia registrada para este año")
 
 st.divider()
 
-st.markdown("## 📊 Resumen Completo")
+st.markdown("## 📊 Detalle por Área")
+
+# Organizar experiencias por tipo
+experience_by_type = {
+    'educacion': [],
+    'datos': [],
+    'logistica': []
+}
+
+for item in EXPERIENCIA:
+    if item['tipo'] in experience_by_type:
+        experience_by_type[item['tipo']].append(item)
+
+# Mostrar por área
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.markdown("""
+    <div style="background: #0891b2; color: white; padding: 1.5rem; border-radius: 12px; text-align: center; margin-bottom: 1rem;">
+        <h3 style="margin: 0; font-size: 1.3rem;">🎓 Educación Superior</h3>
+        <p style="margin: 0.5rem 0; font-size: 2rem; font-weight: bold;">""" + str(len(experience_by_type['educacion'])) + """</p>
+        <p style="margin: 0; font-size: 0.9rem;">Posiciones</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    for item in experience_by_type['educacion']:
+        st.markdown(f"""
+        <div style="background: #f0f9ff; padding: 1rem; border-radius: 8px; margin: 0.5rem 0; border-left: 3px solid #0891b2;">
+            <strong>{item['cargo']}</strong><br>
+            <small style="color: #64748b;">{item['fechas']}</small>
+        </div>
+        """, unsafe_allow_html=True)
+
+with col2:
+    st.markdown("""
+    <div style="background: #059669; color: white; padding: 1.5rem; border-radius: 12px; text-align: center; margin-bottom: 1rem;">
+        <h3 style="margin: 0; font-size: 1.3rem;">📊 Análisis de Datos</h3>
+        <p style="margin: 0.5rem 0; font-size: 2rem; font-weight: bold;">""" + str(len(experience_by_type['datos'])) + """</p>
+        <p style="margin: 0; font-size: 0.9rem;">Posiciones</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    for item in experience_by_type['datos']:
+        st.markdown(f"""
+        <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; margin: 0.5rem 0; border-left: 3px solid #059669;">
+            <strong>{item['cargo']}</strong><br>
+            <small style="color: #64748b;">{item['fechas']}</small>
+        </div>
+        """, unsafe_allow_html=True)
+
+with col3:
+    st.markdown("""
+    <div style="background: #7c3aed; color: white; padding: 1.5rem; border-radius: 12px; text-align: center; margin-bottom: 1rem;">
+        <h3 style="margin: 0; font-size: 1.3rem;">📦 Logística y Compras</h3>
+        <p style="margin: 0.5rem 0; font-size: 2rem; font-weight: bold;">""" + str(len(experience_by_type['logistica'])) + """</p>
+        <p style="margin: 0; font-size: 0.9rem;">Posiciones</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    for item in experience_by_type['logistica']:
+        st.markdown(f"""
+        <div style="background: #f3e8ff; padding: 1rem; border-radius: 8px; margin: 0.5rem 0; border-left: 3px solid #7c3aed;">
+            <strong>{item['cargo']}</strong><br>
+            <small style="color: #64748b;">{item['fechas']}</small>
+        </div>
+        """, unsafe_allow_html=True)
+
+st.divider()
 
 col1, col2, col3 = st.columns(3)
 
