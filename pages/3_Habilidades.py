@@ -13,24 +13,39 @@ HABILIDADES: List[Tuple[str, List[Tuple[str, int]]]] = [
     ("Data & Business Intelligence", [
         ("Power BI (dashboards KPI/OKR)", 90),
         ("Excel avanzado (modelamiento/visualización)", 95),
-        ("Python (análisis de datos)", 70),
-    ]),
-    ("Gestión Académica y Calidad", [
-        ("Indicadores académicos (retención/progresión)", 90),
-        ("Acreditación / SIES", 85),
-        ("Mejora continua", 90),
+        ("Python (análisis de datos)", 75),
     ]),
     ("Plataformas Educativas", [
-        ("Banner", 75),
+        ("Banner", 80),
+        ("Blackboard", 75),
         ("Moodle (intermedio)", 75),
-        ("Blackboard", 65),
+        ("Bettersoft U+", 70),
+        ("Syllabus", 70),
+    ]),
+    ("Herramientas Ofimáticas y Colaboración", [
+        ("MS Office 365 (Word, Excel, PowerPoint)", 95),
+        ("GSuite (Gmail, Docs, Sheets, Meet)", 90),
+        ("Kahoot (evaluación gamificada)", 85),
+        ("Mentimeter (encuestas interactivas)", 85),
+    ]),
+    ("Sistemas Operativos y Dispositivos", [
+        ("MacOS", 95),
+        ("Windows", 90),
+        ("iOS", 90),
+        ("Android (intermedio)", 75),
+    ]),
+    ("Idiomas", [
+        ("Inglés técnico (lectora/comprensión)", 80),
+        ("Español (nativo)", 100),
     ]),
 ]
 
 PALETA_GRUPOS = {
     "Data & Business Intelligence": "#0891b2",
-    "Gestión Académica y Calidad": "#059669",
     "Plataformas Educativas": "#7c3aed",
+    "Herramientas Ofimáticas y Colaboración": "#059669",
+    "Sistemas Operativos y Dispositivos": "#f59e0b",
+    "Idiomas": "#ef4444",
 }
 
 def construir_dashboard_habilidades(habilidades, alto_px=700, ancho_px=1200, dpi=150):

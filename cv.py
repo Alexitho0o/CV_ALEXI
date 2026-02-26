@@ -11,12 +11,14 @@ DATOS_PERSONALES: Dict[str, Any] = {
     "TELEFONO": "+56 9 4513 0486",
     "CORREO": "alexi.fs341@gmail.com",
     "LINKEDIN": "linkedin.com/in/alexiburgos",
-    "TITULO": "ANALISTA DE DATOS INSTITUCIONAL | GESTIÓN ACADÉMICA | DOCENTE EN LOGÍSTICA",
+    "TITULO": "Docente UC | Ingeniero y Técnico en Gestión de Operaciones Logísticas",
     "RESUMEN": (
-        "Ingeniero en Gestión de Operaciones Logísticas con 13 años de experiencia en logística y 7 años en educación superior. "
-        "Especializado en análisis institucional, gestión académica y mejora continua. Experiencia en construcción de indicadores "
-        "de retención, titulación y empleabilidad, apoyo a procesos de acreditación y desarrollo de dashboards en Power BI para "
-        "toma de decisiones estratégicas. Docente en Educación Continua UC en logística, compras e inventarios."
+        "Soy un profesional con 13 años de experiencia en logística y 7 en gestión educativa, especializado en coordinación académica "
+        "y administración de procesos educativos. Me destaco por mi capacidad para optimizar operaciones académicas, mejorar la calidad "
+        "educativa y fortalecer la vinculación con el sector laboral. Poseo habilidades en liderazgo, resolución de conflictos, análisis "
+        "de datos y toma de decisiones estratégicas. Puedo crear paneles de KPI y OKR en Power BI, incluyendo paneles de progreso académico, "
+        "seguimiento de desempeño estudiantil y análisis de deserción académica. Además, manejo Python básico-intermedio para el análisis "
+        "de bases de datos y Excel avanzado para la gestión y visualización de información."
     ),
 }
 
@@ -24,106 +26,242 @@ HABILIDADES: List[Tuple[str, List[Tuple[str, int]]]] = [
     ("Data & Business Intelligence", [
         ("Power BI (dashboards KPI/OKR)", 90),
         ("Excel avanzado (modelamiento/visualización)", 95),
-        ("Python (análisis de datos)", 70),
-    ]),
-    ("Gestión Académica y Calidad", [
-        ("Indicadores académicos (retención/progresión)", 90),
-        ("Acreditación / SIES", 85),
-        ("Mejora continua", 90),
+        ("Python (análisis de datos)", 75),
     ]),
     ("Plataformas Educativas", [
-        ("Banner", 75),
+        ("Banner", 80),
+        ("Blackboard", 75),
         ("Moodle (intermedio)", 75),
-        ("Blackboard", 65),
+        ("Bettersoft U+", 70),
+        ("Syllabus", 70),
+    ]),
+    ("Herramientas Ofimáticas y Colaboración", [
+        ("MS Office 365 (Word, Excel, PowerPoint)", 95),
+        ("GSuite (Gmail, Docs, Sheets, Meet)", 90),
+        ("Kahoot (evaluación gamificada)", 85),
+        ("Mentimeter (encuestas interactivas)", 85),
+    ]),
+    ("Sistemas Operativos y Dispositivos", [
+        ("MacOS", 95),
+        ("Windows", 90),
+        ("iOS", 90),
+        ("Android (intermedio)", 75),
+    ]),
+    ("Idiomas", [
+        ("Inglés técnico (lectora/comprensión auditiva)", 80),
+        ("Español (nativo)", 100),
     ]),
 ]
 
 EXPERIENCIA: List[Dict[str, Any]] = [
     dict(
-        cargo="Docente – Educación Continua UC (Freelance)",
+        cargo="Docente UC – Educación Continua",
         organizacion="Pontificia Universidad Católica de Chile (Remoto)",
-        fechas="Jul 2025 – Actualidad",
+        fechas="Julio 2025 – Actualidad",
+        nivel="Senior | Freelance",
         viñetas=[
-            "Diseño e impartición de cursos en Gestión de Bodegas y Compras Estratégicas.",
-            "Integración de KPI, OKR y TCO en casos aplicados.",
-            "Formación orientada a reducción de costos y optimización operativa.",
+            "Imparto los cursos 'Gestión Eficiente de Bodegas y Control de Inventario' y 'Gestión en Compras y Adquisiciones'.",
+            "Diseño y facilito contenidos actualizados sobre almacenamiento, inventarios, compras estratégicas, KPI/OKR, TCO y evaluación de proveedores.",
+            "Integro metodologías activas y casos reales para aplicación inmediata de conocimientos.",
+            "Enfoque orientado a reducción de costos, optimización de procesos y mejora de tiempos de respuesta.",
         ],
     ),
     dict(
-        cargo="Analista de Datos Institucional – Docente (Full time)",
+        cargo="Analista de Datos Institucional – Docente",
         organizacion="Instituto Profesional San Sebastián (Híbrido)",
-        fechas="May 2025 – Actualidad",
+        fechas="Mayo 2025 – Actualidad",
+        nivel="Junior | Full Time",
         viñetas=[
-            "Recopilación, depuración y análisis de datos institucionales para gestión, mejora continua y acreditación.",
-            "Construcción de indicadores: retención, aprobación, titulación, empleabilidad y satisfacción (métricas no reportadas).",
-            "Desarrollo de tableros Power BI y herramientas de consulta para mejorar acceso y oportunidad de información.",
-            "Generación de reportes SIES y apoyo a auditorías, autoevaluaciones y levantamiento documental.",
+            "Recopilación, procesamiento y análisis de datos institucionales para gestión, mejora continua y acreditación.",
+            "Elaboro indicadores clave: retención, aprobación, titulación, empleabilidad y satisfacción estudiantil.",
+            "Coordino procesos de acreditación institucional, auditorías y autoevaluaciones.",
+            "Desarrollo automatizaciones, tableros Power BI y herramientas de consulta para mejorar eficiencia.",
+            "Genero reportes a SIES y estudios académicos de desempeño estudiantil.",
         ],
     ),
     dict(
-        cargo="Asistente Académico – Carreras Virtuales (Full time)",
+        cargo="Asistente Académico – Carreras Virtuales",
         organizacion="CFT PUCV (Viña del Mar)",
-        fechas="Mar 2024 – Ene 2025",
+        fechas="Marzo 2024 – Enero 2025",
+        nivel="Senior | Full Time",
         viñetas=[
-            "Coordinación operativa de programas virtuales (Administración, Contabilidad, Adm. Pública, Logística, Prev. de Riesgos).",
-            "Gestión de acciones de captación y retención (métricas no reportadas).",
-            "Apoyo a selección y evaluación docente, resguardando estándares de calidad y continuidad académica.",
-            "Vinculación con sector público/privado para fortalecer empleabilidad de egresados.",
+            "Supervisé y coordiné programas académicos de Administración, Contabilidad, Adm. Pública, Logística y Prevención de Riesgos.",
+            "Gestioné acciones de captación y retención, aumentando la permanencia académica.",
+            "Seleccioné y evalué personal docente, garantizando estándares de calidad educativa.",
+            "Fomenté vinculación con sector público/privado para fortalecer empleabilidad de egresados.",
         ],
     ),
     dict(
-        cargo="Coordinador de Carrera (Administración/Logística) y Docente",
-        organizacion="IP–CFT Santo Tomás (Santiago)",
-        fechas="Ago 2019 – Mar 2024",
-        nota="Incluye sedes Estación Central y Santiago Centro; modalidad Freelance/Full time según período.",
-        viñetas=[
-            "Planificación académica: carga horaria, asignación docente, inscripciones y registro de calificaciones.",
-            "Supervisión de ejecución académica y cumplimiento de estándares; gestión de requerimientos de estudiantes y docentes.",
-            "Docencia en Logística, Comercio Exterior y Supply Chain (programas técnicos y profesionales).",
-            "Docente guía y participación en comisiones de práctica y titulación (proyectos/portafolios).",
-        ],
-    ),
-    dict(
-        cargo="Docente Online (Freelance, Part-time)",
+        cargo="Docente Online – Comercio Exterior",
         organizacion="Escuela de Comercio de Santiago (Online)",
-        fechas="Mar 2023 – May 2024",
+        fechas="Marzo 2023 – Mayo 2024",
+        nivel="Senior | Freelance | Part Time",
         viñetas=[
-            "Dicta asignaturas: Taller de Aplicación de Comercio Exterior; Tramitación y Valoración Aduanera.",
+            "Docente para asignaturas: Taller de Aplicación de Comercio Exterior y Tramitación y Valoración Aduanera.",
+            "Carreras: Técnico en Comercio Exterior e Ingeniería en Comercio Internacional.",
+            "Desarrollo de contenidos y evaluaciones en modalidad 100% online.",
         ],
     ),
     dict(
-        cargo="Docente (Freelance, Part-time)",
+        cargo="Docente – Técnico en Administración y Logística",
         organizacion="CFT ENAC (Santiago Centro)",
-        fechas="Mar 2022 – Mar 2024",
+        fechas="Marzo 2022 – Marzo 2024",
+        nivel="Senior | Freelance | Part Time",
         viñetas=[
-            "Dicta Gestión de Bodega e Inventario, Gestión de Adquisiciones y Administración de Post-Venta.",
-            "QA de asignatura online de gestión de almacenes.",
+            "Docente en asignaturas: Gestión de Bodega e Inventario, Gestión de Adquisiciones y Administración de Post-Venta.",
+            "Carrera: Técnico en Administración de Empresas.",
+            "QA (Quality Assurance) para asignatura online Gestión de Almacenes.",
         ],
     ),
     dict(
-        cargo="Experiencia previa en logística y control de inventarios",
-        organizacion="Retail / Hotelería / Importación (Santiago–Valparaíso)",
-        fechas="May 2012 – Abr 2019",
+        cargo="Coordinador de Carrera – Administración y Logística & Docente",
+        organizacion="IP-CFT Santo Tomás (Sedes Estación Central y Santiago Centro)",
+        fechas="Ago 2019 – Marzo 2024",
+        nivel="Senior | Freelance/Full Time según período",
         viñetas=[
-            "Control de costos e inventarios multiárea y gestión de facturación/documentación.",
-            "Control de inventarios, garantías y operación de bodega; implementación de control con RFID.",
-            "Recepción, almacenamiento, picking/packing y despachos; etiquetado/censado y control RFID.",
+            "Coordinación académica: planificación, carga horaria, asignación docente, inscripciones y registro de calificaciones.",
+            "Supervisión de procesos académicos, asegurando estándares de calidad y satisfacción estudiantil.",
+            "Docencia en Logística, Comercio Exterior y Supply Chain Management (programas técnicos y profesionales).",
+            "Docente guía y miembro de comisiones de práctica y titulación (proyectos y portafolios de evidencias).",
+        ],
+    ),
+    dict(
+        cargo="Asistente Contable | Analista de Control de Inventario | Responsable de Garantías | Encargado de Bodega",
+        organizacion="Sociedad Importadora y Comercializadora GK (Providencia)",
+        fechas="Julio 2015 – Enero 2018",
+        nivel="Semi Senior | Full Time",
+        viñetas=[
+            "Gestión de cuentas corrientes, facturación y pagos, manteniendo relación directa con Gerencia.",
+            "Control de inventarios periódicos y selectivos, generando reportes de pérdidas y ajustes contables.",
+            "Administración de procesos de garantías con proveedores nacionales e internacionales.",
+            "Liderazgo en recepción, almacenamiento y despacho de productos, implementando control con RFID.",
+        ],
+    ),
+    dict(
+        cargo="Control de Costos | Asistente de Bodega",
+        organizacion="Hotel Plaza San Francisco (Santiago Centro)",
+        fechas="Agosto 2018 – Abril 2019",
+        nivel="Semi Senior | Full Time",
+        viñetas=[
+            "Gestión de facturación e inventario en múltiples áreas: Ama de llaves, recepción, bar, cocina, restaurante.",
+            "Valorización y codificación de productos.",
+            "Control de costos del menú del Restaurante Bristol.",
+        ],
+    ),
+    dict(
+        cargo="Asistente de Bodega",
+        organizacion="Empresas La Polar | Amphora Beauty Shop | Computación Integral S.A (Valparaíso)",
+        fechas="Marzo 2013 – Junio 2015",
+        nivel="Junior | Full Time",
+        viñetas=[
+            "Recepción, almacenamiento y despacho de productos.",
+            "Control mediante RFID de productos recepcionados.",
+            "Labores de valor agregado: censado y etiquetado de productos.",
+            "Preparación y acondicionamiento de pedidos nacionales e internacionales.",
+        ],
+    ),
+    dict(
+        cargo="Encargado de Bodega – Tienda Manuel Montt",
+        organizacion="Casa Ximena (Valparaíso)",
+        fechas="Mayo 2012 – Marzo 2013",
+        nivel="Semi Senior | Full Time",
+        viñetas=[
+            "Supervisión de procesos logísticos: recepción, almacenamiento, reposición y despacho de productos.",
+            "Implementación de conteos cíclicos y criterios merciológicos para optimizar almacenamiento y control de stock.",
+            "Gestión de documentación operativa (boletas, facturas, guías) y orden de bodegas.",
+            "Coordinación con ventas y promotores para mejorar experiencia del cliente.",
         ],
     ),
 ]
 
 EDUCACION: List[Tuple[str, str, str]] = [
     ("Ingeniería en Gestión de Operaciones Logísticas (Titulado)", "Instituto Profesional AIEP (Online)", "2023 – 2025"),
-    ("Diplomado en Medición y Evaluación de Aprendizajes (160 hrs)", "Pontificia Universidad Católica de Chile (Online)", "Oct 2022 – May 2023"),
-    ("Técnico de Nivel Superior en Logística (Titulado)", "CFT PUCV", "2013 – 2015"),
+    ("Diplomado en Medición y Evaluación de Aprendizajes (160 horas pedagógicas)", "Escuela de Psicología - Pontificia Universidad Católica de Santiago de Chile (Online)", "Octubre 2022 – Mayo 2023"),
+    ("Técnico de Nivel Superior en Logística (Titulado)", "CFT PUCV (Valparaíso)", "2013 – 2015"),
+]
+
+COMPETENCIAS: Dict[str, str] = {
+    "Gestión Académica y Tecnológica": (
+        "Integración de TIC, TAC y TEP en la coordinación y gestión de procesos académicos y administrativos. "
+        "Uso de tecnologías avanzadas para la planificación, evaluación y seguimiento de los aprendizajes esperados, "
+        "garantizando calidad y efectividad en su implementación. Colaboración proactiva en equipos interdisciplinarios "
+        "a través de plataformas digitales, asegurando la integración de recursos tecnológicos para potenciar la educación "
+        "y el desarrollo profesional."
+    ),
+    "Metodologías y Evaluación": (
+        "Modelo por competencias, metodologías de enseñanza y evaluación, diseño y validación de instrumentos de levantamiento "
+        "de datos para la toma de decisiones y la mejora continua. Diseño y medición de indicadores clave de desempeño (KPI) "
+        "para evaluar la efectividad de programas y procesos educativos."
+    ),
+    "Conocimientos Específicos": (
+        "Comprensión profunda de la normativa, políticas y procedimientos que rigen los procesos educativos en la Educación "
+        "Superior en Chile."
+    ),
+}
+
+EQUIPAMIENTO: Dict[str, str] = {
+    "Hardware": "MacBook Pro 13\" M1 2020 SSD 512 GB | Monitor Samsung de 24\" A600UCL | iPhone 15 Pro Max 256 GB | AirPods Pro (3.ª generación)",
+    "Conectividad": "Internet fibra óptica VTR 900 Mbps (wifi y cable de red)",
+    "Movilización": "Kia Niro 2023 | Scooter Eléctrico Mantis 8 plus",
+}
+
+INTERESES: List[str] = [
+    "Gestión Educacional",
+    "Producción y Edición Musical",
+    "Viajes",
+    "Fotografía",
+    "Ciencia",
+    "Tecnología",
+    "Ajedrez",
+    "Voleibol",
+]
+
+REFERENCIAS: List[Dict[str, str]] = [
+    {
+        "nombre": "Karla Muñoz Gajardo",
+        "cargo": "Directora de Análisis Institucional y Estudios",
+        "organizacion": "Instituto Profesional San Sebastián",
+        "telefono": "+56 9 7576 9127",
+        "email": "karla.munoz@ipss.cl",
+    },
+    {
+        "nombre": "Roberto Zúñiga Ruminot",
+        "cargo": "Jefe de Carreras Comercio Exterior y Logística",
+        "organizacion": "IP–CFT Santo Tomás Sede Vergara",
+        "telefono": "+56 9 3940 1836",
+        "email": "rzuniga9@santotomas.cl",
+    },
+    {
+        "nombre": "Francisco Gajardo Peñaloza",
+        "cargo": "Jefe de Carreras Administración - Comercio Exterior y Mercados Digitales",
+        "organizacion": "CFT ENAC",
+        "telefono": "+56 9 78312130",
+        "email": "fgajardop@enac.cl",
+    },
+    {
+        "nombre": "Ximena Pinto Soto",
+        "cargo": "Gerente de Administración y Finanzas",
+        "organizacion": "Hotel Plaza San Francisco",
+        "telefono": "+56 9 6496 5540",
+        "email": "xpinto@plazasanfrancisco.cl",
+    },
+    {
+        "nombre": "Tomás Kusianovich",
+        "cargo": "Gerente General",
+        "organizacion": "Importadora y Comercializadora GK",
+        "telefono": "+56 9 5405 1783",
+        "email": "tomas.kusianovich@importadoragk.cl",
+    },
 ]
 
 IDIOMAS = "Inglés técnico"
 
 PALETA_GRUPOS = {
     "Data & Business Intelligence": "#0891b2",
-    "Gestión Académica y Calidad": "#059669",
     "Plataformas Educativas": "#7c3aed",
+    "Herramientas Ofimáticas y Colaboración": "#059669",
+    "Sistemas Operativos y Dispositivos": "#f59e0b",
+    "Idiomas": "#ef4444",
 }
 COLOR_PRINCIPAL = "#0f172a"
 COLOR_TEXTO_SUAVE = "#475569"
@@ -390,6 +528,12 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.success("**🎓 Educación**\nFormación académica")
 with col2:
-    st.warning("**📧 Contacto**\nComo ponerse en contacto")
+    st.warning("**🎯 Competencias**\nÁreas de especialización")
 with col3:
-    st.error("**📥 Descargar**\nCV en PDF (próximamente)")
+    st.error("**💻 Equipamiento**\nRecursos e intereses")
+
+col1, col2 = st.columns(2)
+with col1:
+    st.info("**👥 Referencias**\nContactos profesionales")
+with col2:
+    st.warning("**📧 Contacto**\nCómo ponerse en contacto")

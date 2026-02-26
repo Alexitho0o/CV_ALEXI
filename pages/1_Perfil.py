@@ -10,7 +10,7 @@ DATOS_PERSONALES = {
     "TELEFONO": "+56 9 4513 0486",
     "CORREO": "alexi.fs341@gmail.com",
     "LINKEDIN": "linkedin.com/in/alexiburgos",
-    "TITULO": "ANALISTA DE DATOS INSTITUCIONAL | GESTIÓN ACADÉMICA | DOCENTE EN LOGÍSTICA",
+    "TITULO": "Docente UC | Ingeniero y Técnico en Gestión de Operaciones Logísticas",
 }
 
 # CSS
@@ -107,16 +107,28 @@ st.markdown("## 📌 Destrezas Clave")
 skills_html = """
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0;">
     <div style="background: #0891b2; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
-        <h3 style="margin: 0; font-size: 1rem;">Análisis de Datos</h3>
+        <h3 style="margin: 0; font-size: 1rem;">📊 Análisis de Datos</h3>
         <p style="margin: 0.5rem 0; font-weight: 600;">Power BI, Excel, Python</p>
     </div>
-    <div style="background: #059669; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
-        <h3 style="margin: 0; font-size: 1rem;">Gestión Académica</h3>
-        <p style="margin: 0.5rem 0; font-weight: 600;">Indicadores, Acreditación</p>
-    </div>
     <div style="background: #7c3aed; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
-        <h3 style="margin: 0; font-size: 1rem;">Plataformas Educativas</h3>
+        <h3 style="margin: 0; font-size: 1rem;">🏫 Plataformas Educativas</h3>
         <p style="margin: 0.5rem 0; font-weight: 600;">Banner, Moodle, Blackboard</p>
+    </div>
+    <div style="background: #059669; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">🔧 Herramientas Ofimáticas</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">Office 365, GSuite, Kahoot</p>
+    </div>
+    <div style="background: #f59e0b; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">💻 Sistemas Operativos</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">MacOS, Windows, iOS, Android</p>
+    </div>
+    <div style="background: #ef4444; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">🌐 Idiomas</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">Inglés Técnico, Español Nativo</p>
+    </div>
+    <div style="background: #8b5cf6; color: white; padding: 1.5rem; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0; font-size: 1rem;">🎓 Especialización</h3>
+        <p style="margin: 0.5rem 0; font-weight: 600;">Logística, Educación, Datos</p>
     </div>
 </div>
 """
