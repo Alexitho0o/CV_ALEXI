@@ -61,6 +61,18 @@ st.markdown("""
     font-weight: 600;
     word-break: break-all;
 }
+.contact-value a {
+    color: #0891b2;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+    display: inline-block;
+}
+.contact-value a:hover {
+    color: #0284c7;
+    border-bottom: 2px solid #0891b2;
+}
 .icon {
     font-size: 1.8rem;
     margin-right: 0.5rem;
@@ -95,12 +107,12 @@ with col1:
     contact_html = f"""
     <div class="contact-card">
         <div class="contact-label">📞 Teléfono</div>
-        <div class="contact-value">{DATOS_PERSONALES['TELEFONO']}</div>
+        <div class="contact-value"><a href="tel:+56945130486">{DATOS_PERSONALES['TELEFONO']}</a></div>
     </div>
     
     <div class="contact-card">
         <div class="contact-label">📧 Correo Electrónico</div>
-        <div class="contact-value">{DATOS_PERSONALES['CORREO']}</div>
+        <div class="contact-value"><a href="mailto:{DATOS_PERSONALES['CORREO']}">{DATOS_PERSONALES['CORREO']}</a></div>
     </div>
     
     <div class="contact-card">
@@ -110,7 +122,7 @@ with col1:
     
     <div class="contact-card">
         <div class="contact-label">💼 LinkedIn</div>
-        <div class="contact-value">{DATOS_PERSONALES['LINKEDIN']}</div>
+        <div class="contact-value"><a href="https://www.linkedin.com/in/alexiburgos" target="_blank">linkedin.com/in/alexiburgos ↗</a></div>
     </div>
     """
     

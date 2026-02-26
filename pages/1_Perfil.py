@@ -47,10 +47,30 @@ st.markdown("""
     border-radius: 12px;
     border-left: 4px solid #0891b2;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+.info-box:hover {
+    box-shadow: 0 8px 16px rgba(8,145,178,0.15);
+    transform: translateY(-2px);
 }
 .info-box strong {
     color: #0f172a;
     font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+.info-box a {
+    color: #0891b2;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-block;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+.info-box a:hover {
+    color: #0284c7;
+    border-bottom: 2px solid #0891b2;
 }
 .info-box p {
     color: #64748b;
@@ -74,7 +94,7 @@ with col1:
     st.markdown(f"""
     <div class="info-box">
         <strong>📞 Teléfono</strong>
-        <p>{DATOS_PERSONALES['TELEFONO']}</p>
+        <a href="tel:+56945130486">{DATOS_PERSONALES['TELEFONO']}</a>
     </div>
     """, unsafe_allow_html=True)
     
@@ -89,14 +109,14 @@ with col2:
     st.markdown(f"""
     <div class="info-box">
         <strong>📧 Correo</strong>
-        <p>{DATOS_PERSONALES['CORREO']}</p>
+        <a href="mailto:{DATOS_PERSONALES['CORREO']}">{DATOS_PERSONALES['CORREO']}</a>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown(f"""
     <div class="info-box">
         <strong>💼 LinkedIn</strong>
-        <p>{DATOS_PERSONALES['LINKEDIN']}</p>
+        <a href="https://www.linkedin.com/in/alexiburgos" target="_blank">linkedin.com/in/alexiburgos ↗</a>
     </div>
     """, unsafe_allow_html=True)
 
