@@ -1,18 +1,10 @@
-# cv.py
+# cv.py - Home Page
 # -*- coding: utf-8 -*-
+import streamlit as st
 from typing import Any, Dict, List, Tuple
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import pandas as pd
-import streamlit as st
-
-# Configuración de página
 st.set_page_config(page_title="Alexi Burgos CV", page_icon="📄", layout="wide")
 
-
-### BLOQUE 1 - Datos estáticos del CV (sin carga, sin edición, sin exportación)
 DATOS_PERSONALES: Dict[str, Any] = {
     "NOMBRE": "ALEXI MARCELO BURGOS FLORES",
     "UBICACION": "Santiago, Chile",
@@ -137,39 +129,167 @@ COLOR_PRINCIPAL = "#0f172a"
 COLOR_TEXTO_SUAVE = "#475569"
 COLOR_FONDO_BARRA = "#f1f5f9"
 
-# Estilos CSS
+# CSS Global
 def inyectar_css() -> None:
-    st.markdown(
-        """
+    st.markdown("""
         <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; }
-        .cv-header { padding: 2rem 0; border-bottom: 2px solid #0f172a; margin-bottom: 2rem; }
-        .cv-header h1 { font-size: 2.2rem; font-weight: 900; color: #0f172a; margin-bottom: 0.25rem; letter-spacing: -0.02em; }
-        .cv-sub { color: #475569; font-size: 0.95rem; margin: 0.5rem 0; font-weight: 500; }
-        .cv-title { color: #0891b2; font-weight: 700; font-size: 1.05rem; margin-top: 0.75rem; }
-        .section-title { color: #0f172a; font-weight: 900; letter-spacing: 0.05em; margin-top: 1.5rem; margin-bottom: 1rem; font-size: 1.15rem; text-transform: uppercase; }
-        .muted { color: #64748b; font-size: 0.9rem; }
-        .role { font-weight: 800; margin-bottom: 0.2rem; color: #0f172a; font-size: 1rem; }
-        .org { color: #64748b; margin-top: 0.1rem; margin-bottom: 0.4rem; font-size: 0.9rem; }
-        .note { color: #64748b; font-style: italic; margin-top: 0.2rem; margin-bottom: 0.4rem; font-size: 0.85rem; }
-        .bullets { margin-top: 0.4rem; margin-bottom: 1rem; padding-left: 1.5rem; }
-        .bullets li { margin-bottom: 0.25rem; color: #334155; font-size: 0.9rem; line-height: 1.4; }
-        .card { background: white; border: 1px solid #e2e8f0; padding: 2rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+        
+        .hero-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .hero-header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-sub {
+            color: #cbd5e1;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+            font-weight: 500;
+        }
+        
+        .hero-title {
+            color: #0891b2;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-top: 1rem;
+            background: rgba(8,145,178,0.1);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .section-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin: 2rem 0;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #0891b2;
+        }
+        
+        .card-header h2 {
+            font-size: 1.8rem;
+            color: #0f172a;
+            font-weight: 900;
+            margin: 0;
+        }
+        
+        .experience-item {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-left: 4px solid #0891b2;
+            border-radius: 8px;
+        }
+        
+        .role {
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .org {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dates {
+            color: #0891b2;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .bullets {
+            margin-top: 0.8rem;
+            padding-left: 1.5rem;
+        }
+        
+        .bullets li {
+            margin-bottom: 0.5rem;
+            color: #334155;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #0891b2;
+        }
+        
+        .skill-category.data { border-left-color: #0891b2; }
+        .skill-category.academic { border-left-color: #059669; }
+        .skill-category.platforms { border-left-color: #7c3aed; }
+        
+        .education-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #0891b2;
+        }
+        
+        .degree {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .institution {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .year {
+            color: #0891b2;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
         </style>
-        """,
-        unsafe_allow_html=True,
-    )
+    """, unsafe_allow_html=True)
 
 inyectar_css()
 
-# Dashboard de habilidades
+# Dashboard mejorado de habilidades con visualización por categoría
 def construir_dashboard_habilidades(
     habilidades: List[Tuple[str, List[Tuple[str, int]]]],
-    alto_px: int = 900,
-    ancho_px: int = 1100,
-    dpi: int = 180,
+    alto_px: int = 600,
+    ancho_px: int = 900,
+    dpi: int = 150,
 ) -> plt.Figure:
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import pandas as pd
+    
     filas: List[Dict[str, Any]] = []
     for grupo, items in habilidades:
         for (habilidad, pct) in items:
@@ -200,74 +320,76 @@ def construir_dashboard_habilidades(
     etiquetas = df["habilidad"].tolist()[::-1]
     grupos_plot = df["grupo"].tolist()[::-1]
 
-    ax.barh(y, [100] * n, color="#e2e8f0", edgecolor="none", height=0.68)
-    ax.barh(y, valores, color=colores, edgecolor="none", height=0.68)
+    # Fondo
+    ax.barh(y, [100] * n, color="#f1f5f9", edgecolor="none", height=0.65)
+    # Barras principales con gradiente visual
+    ax.barh(y, valores, color=colores, edgecolor="none", height=0.65, alpha=0.9)
 
-    ax.set_xlim(0, 100)
+    ax.set_xlim(0, 105)
     ax.set_yticks(y)
-    ax.set_yticklabels(etiquetas, fontsize=9, fontweight="600", color="#1e293b")
+    ax.set_yticklabels(etiquetas, fontsize=10, fontweight="600", color="#1e293b")
     ax.set_xticks([0, 25, 50, 75, 100])
-    ax.tick_params(axis="x", labelsize=8, colors="#64748b", length=0)
+    ax.tick_params(axis="x", labelsize=9, colors="#64748b", length=3)
+    
+    # Estilos de spines
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
-    ax.spines["left"].set_color("#e2e8f0")
-    ax.spines["bottom"].set_color("#e2e8f0")
-    ax.grid(axis="x", linestyle="--", linewidth=0.4, alpha=0.3, color="#cbd5e1")
+    ax.spines["left"].set_linewidth(1)
+    ax.spines["bottom"].set_linewidth(1)
+    ax.spines["left"].set_color("#cbd5e1")
+    ax.spines["bottom"].set_color("#cbd5e1")
+    
+    # Grid mejorado
+    ax.grid(axis="x", linestyle="--", linewidth=0.5, alpha=0.4, color="#cbd5e1")
+    ax.set_axisbelow(True)
 
+    # Etiquetas de porcentaje
     for i, v in enumerate(valores):
-        ax.text(min(v + 1.5, 99.0), y[i], f"{v}%", va="center", ha="left", fontsize=8, color="#0f172a", fontweight="600")
+        if v >= 50:
+            ax.text(v - 3, y[i], f"{v}%", va="center", ha="right", fontsize=9, 
+                   color="white", fontweight="700")
+        else:
+            ax.text(min(v + 2, 101), y[i], f"{v}%", va="center", ha="left", fontsize=9, 
+                   color="#0f172a", fontweight="700")
 
-    for spine in ["top", "right"]:
-        ax.spines[spine].set_visible(False)
-
+    # Separadores entre categorías
     for i in range(1, n):
         if grupos_plot[i] != grupos_plot[i - 1]:
-            ax.axhline(y=y[i] + 0.5, color="#cbd5e1", linewidth=1.2, linestyle="--", alpha=0.5)
+            ax.axhline(y=y[i] - 0.5, color="#cbd5e1", linewidth=2, linestyle="-", alpha=0.3)
 
+    ax.set_facecolor("white")
+    fig.patch.set_facecolor("white")
     fig.tight_layout()
     return fig
 
-# Renderizar página CV
-st.markdown(
-    f"""
-    <div class="cv-header">
-        <h1>{DATOS_PERSONALES["NOMBRE"]}</h1>
-        <div class="cv-sub">{DATOS_PERSONALES["UBICACION"]} | {DATOS_PERSONALES["TELEFONO"]} | {DATOS_PERSONALES["CORREO"]} | {DATOS_PERSONALES["LINKEDIN"]}</div>
-        <div class="cv-title">{DATOS_PERSONALES["TITULO"]}</div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+# Página Principal (Home)
+st.markdown(f"""
+<div class="hero-header">
+    <h1>🎯 {DATOS_PERSONALES['NOMBRE']}</h1>
+    <div class="hero-sub">📍 {DATOS_PERSONALES['UBICACION']} | 📱 {DATOS_PERSONALES['TELEFONO']}</div>
+    <div class="hero-sub">📧 {DATOS_PERSONALES['CORREO']} | 💼 {DATOS_PERSONALES['LINKEDIN']}</div>
+    <div class="hero-title">{DATOS_PERSONALES['TITULO']}</div>
+</div>
+""", unsafe_allow_html=True)
 
-col_izq, col_der = st.columns([1.25, 0.85], gap="large")
+st.markdown("## 📋 Resumen Profesional")
+st.write(DATOS_PERSONALES["RESUMEN"])
 
-with col_izq:
-    st.markdown('<div class="section-title">RESUMEN</div>', unsafe_allow_html=True)
-    st.write(DATOS_PERSONALES["RESUMEN"])
+st.divider()
+st.markdown("## 🚀 Explora mis secciones en el menú lateral →")
 
-    st.markdown('<div class="section-title">EXPERIENCIA</div>', unsafe_allow_html=True)
-    for item in EXPERIENCIA:
-        st.markdown(f'<div class="role">{item["cargo"]}</div>', unsafe_allow_html=True)
-        st.markdown(f'<div class="org">{item["organizacion"]} | {item["fechas"]}</div>', unsafe_allow_html=True)
-        if "nota" in item and str(item["nota"]).strip():
-            st.markdown(f'<div class="note">{item["nota"]}</div>', unsafe_allow_html=True)
-        st.markdown("<ul class='bullets'>" + "".join([f"<li>{b}</li>" for b in item["viñetas"]]) + "</ul>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.info("**👨‍💼 Perfil**\nMi información personal")
+with col2:
+    st.info("**💼 Experiencia**\nHistorial laboral completo")
+with col3:
+    st.info("**🎯 Habilidades**\nCompetencias profesionales")
 
-    st.markdown('<div class="muted">Referencias disponibles a solicitud.</div>', unsafe_allow_html=True)
-
-with col_der:
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown('<div class="section-title" style="margin-top:0.0rem;">HABILIDADES</div>', unsafe_allow_html=True)
-
-    fig = construir_dashboard_habilidades(HABILIDADES, alto_px=920, ancho_px=980, dpi=190)
-    st.pyplot(fig, clear_figure=True, use_container_width=True)
-
-    st.markdown('<div class="section-title">EDUCACIÓN</div>', unsafe_allow_html=True)
-    for grado, inst, fechas in EDUCACION:
-        st.markdown(f"**{grado}**", unsafe_allow_html=True)
-        st.markdown(f"<div class='muted'>{inst} | {fechas}</div>", unsafe_allow_html=True)
-
-    st.markdown('<div class="section-title">IDIOMAS</div>', unsafe_allow_html=True)
-    st.write(IDIOMAS)
-
-    st.markdown("</div>", unsafe_allow_html=True)
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.success("**🎓 Educación**\nFormación académica")
+with col2:
+    st.warning("**📧 Contacto**\nComo ponerse en contacto")
+with col3:
+    st.error("**📥 Descargar**\nCV en PDF (próximamente)")
