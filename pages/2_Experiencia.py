@@ -1,8 +1,9 @@
 # pages/2_Experiencia.py
 # -*- coding: utf-8 -*-
-import streamlit as st
 import plotly.graph_objects as go
-from datetime import datetime
+import streamlit as st
+
+from shared.ui_components import render_page_header
 
 st.set_page_config(page_title="Experiencia - Alexi Burgos CV", page_icon="💼", layout="wide")
 
@@ -11,12 +12,11 @@ header_color = "#7c3aed"
 
 # encabezado con nombre y subtítulo y gradient
 header_gradient = "linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)"
-st.markdown(f"""
-<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <h1>💼 ALEXI MARCELO BURGOS FLORES</h1>
-    <p>🌟 Experiencia Profesional</p>
-</div>
-""", unsafe_allow_html=True)
+render_page_header(
+    "💼 ALEXI MARCELO BURGOS FLORES",
+    "🌟 Experiencia Profesional",
+    header_gradient,
+)
 
 EXPERIENCIA = [
     dict(
@@ -115,6 +115,32 @@ EXPERIENCIA = [
     ),
 ]
 
+
+@st.cache_data(show_spinner=False)
+def build_timeline_data(experiencia: list[dict]) -> tuple[list[int], dict]:
+    """Precalcula años clave y mapeo de experiencias por año para mejorar rendimiento."""
+    key_years = set()
+    for item in experiencia:
+        key_years.add(item["inicio"])
+        key_years.add(item["fin"])
+
+    sorted_years = sorted(list(key_years))
+    years_dict: dict[int, dict] = {}
+
+    for year in sorted_years:
+        years_dict[year] = {
+            "items": [],
+            "cargos": [],
+            "tipos": set(),
+        }
+        for item in experiencia:
+            if item["inicio"] <= year <= item["fin"]:
+                years_dict[year]["items"].append(item)
+                years_dict[year]["cargos"].append(item["cargo"])
+                years_dict[year]["tipos"].add(item["tipo"])
+
+    return sorted_years, years_dict
+
 # CSS
 st.markdown("""
 <style>
@@ -206,28 +232,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Crear datos para el timeline - SOLO AÑOS CLAVE (inicio y fin de cada posición)
-key_years = set()
-for item in EXPERIENCIA:
-    key_years.add(item['inicio'])
-    key_years.add(item['fin'])
-
-sorted_years = sorted(list(key_years))
-
-# Crear información por año
-years_dict = {}
-for year in sorted_years:
-    years_dict[year] = {
-        'items': [],
-        'cargos': [],
-        'tipos': set()
-    }
-    
-    for item in EXPERIENCIA:
-        if item['inicio'] <= year <= item['fin']:
-            years_dict[year]['items'].append(item)
-            years_dict[year]['cargos'].append(item['cargo'])
-            years_dict[year]['tipos'].add(item['tipo'])
+sorted_years, years_dict = build_timeline_data(EXPERIENCIA)
 
 # Crear visualización con Plotly
 fig = go.Figure()
@@ -431,4 +436,3 @@ with col3:
     st.metric("Posiciones", f"{len(EXPERIENCIA)}")
 
 st.divider()
-

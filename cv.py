@@ -1,270 +1,16 @@
 # cv.py - Home Page
 # -*- coding: utf-8 -*-
-import streamlit as st
 from typing import Any, Dict, List, Tuple
+
+import streamlit as st
+
+from shared.cv_content import DATOS_PERSONALES
+from shared.ui_components import render_quick_links
 
 st.set_page_config(page_title="Alexi Burgos CV", page_icon="📄", layout="wide")
 
-# page-specific header color (text)
-header_color = "#0891b2"
 # gradient for main page header (mirrors section style in other pages)
 header_gradient = "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)"
-
-DATOS_PERSONALES: Dict[str, Any] = {
-    "NOMBRE": "ALEXI MARCELO BURGOS FLORES",
-    "UBICACION": "Villa Alemana, Valparaíso, Chile",
-    "TELEFONO": "+56 9 4513 0486",
-    "CORREO": "alexi.fs341@gmail.com",
-    "LINKEDIN": "linkedin.com/in/alexiburgos",
-    "TITULO": "Analista de Datos Institucionales | Docente Logística en Capacitación y Desarrollo UC | Diplomado en Evaluación de Aprendizajes PUC | Analista de Inventario y Costos | Coordinador Académico IP-CFT",
-    "RESUMEN": (
-        "Soy un profesional con 13 años de experiencia en logística y 7 en gestión educativa, especializado en coordinación académica "
-        "y administración de procesos educativos. Me destaco por mi capacidad para optimizar operaciones académicas, mejorar la calidad "
-        "educativa y fortalecer la vinculación con el sector laboral. Poseo habilidades en liderazgo, resolución de conflictos, análisis "
-        "de datos y toma de decisiones estratégicas. Puedo crear paneles de KPI y OKR en Power BI, incluyendo paneles de progreso académico, "
-        "seguimiento de desempeño estudiantil y análisis de deserción académica. Además, manejo Python básico-intermedio para el análisis "
-        "de bases de datos y Excel avanzado para la gestión y visualización de información."
-    ),
-}
-
-HABILIDADES: List[Tuple[str, List[Tuple[str, int]]]] = [
-    ("Data & Business Intelligence", [
-        ("Power BI (dashboards KPI/OKR)", 90),
-        ("Excel avanzado (modelamiento/visualización)", 95),
-        ("Python (análisis de datos)", 75),
-    ]),
-    ("Plataformas Educativas", [
-        ("Banner", 80),
-        ("Blackboard", 75),
-        ("Moodle (intermedio)", 75),
-        ("Bettersoft U+", 70),
-        ("Syllabus", 70),
-    ]),
-    ("Herramientas Ofimáticas y Colaboración", [
-        ("MS Office 365 (Word, Excel, PowerPoint)", 95),
-        ("GSuite (Gmail, Docs, Sheets, Meet)", 90),
-        ("Kahoot (evaluación gamificada)", 85),
-        ("Mentimeter (encuestas interactivas)", 85),
-    ]),
-    ("Sistemas Operativos y Dispositivos", [
-        ("MacOS", 95),
-        ("Windows", 90),
-        ("iOS", 90),
-        ("Android (intermedio)", 75),
-    ]),
-    ("Idiomas", [
-        ("Inglés técnico (lectora/comprensión auditiva)", 80),
-        ("Español (nativo)", 100),
-    ]),
-    ("Creatividad", [
-        ("Autor y Compositor", 85),
-        ("Producción Musical", 80),
-        ("Edición Musical", 75),
-    ]),
-]
-
-EXPERIENCIA: List[Dict[str, Any]] = [
-    dict(
-        cargo="Docente UC – Educación Continua",
-        organizacion="Pontificia Universidad Católica de Chile (Remoto)",
-        fechas="Julio 2025 – Actualidad",
-        nivel="Senior | Freelance",
-        viñetas=[
-            "Imparto los cursos 'Gestión Eficiente de Bodegas y Control de Inventario' y 'Gestión en Compras y Adquisiciones'.",
-            "Diseño y facilito contenidos actualizados sobre almacenamiento, inventarios, compras estratégicas, KPI/OKR, TCO y evaluación de proveedores.",
-            "Integro metodologías activas y casos reales para aplicación inmediata de conocimientos.",
-            "Enfoque orientado a reducción de costos, optimización de procesos y mejora de tiempos de respuesta.",
-        ],
-    ),
-    dict(
-        cargo="Analista de Datos Institucional – Docente",
-        organizacion="Instituto Profesional San Sebastián (Híbrido)",
-        fechas="Mayo 2025 – Actualidad",
-        nivel="Junior | Full Time",
-        viñetas=[
-            "Recopilación, procesamiento y análisis de datos institucionales para gestión, mejora continua y acreditación.",
-            "Elaboro indicadores clave: retención, aprobación, titulación, empleabilidad y satisfacción estudiantil.",
-            "Coordino procesos de acreditación institucional, auditorías y autoevaluaciones.",
-            "Desarrollo automatizaciones, tableros Power BI y herramientas de consulta para mejorar eficiencia.",
-            "Genero reportes a SIES y estudios académicos de desempeño estudiantil.",
-        ],
-    ),
-    dict(
-        cargo="Asistente Académico – Carreras Virtuales",
-        organizacion="CFT PUCV (Viña del Mar)",
-        fechas="Marzo 2024 – Enero 2025",
-        nivel="Senior | Full Time",
-        viñetas=[
-            "Supervisé y coordiné programas académicos de Administración, Contabilidad, Adm. Pública, Logística y Prevención de Riesgos.",
-            "Gestioné acciones de captación y retención, aumentando la permanencia académica.",
-            "Seleccioné y evalué personal docente, garantizando estándares de calidad educativa.",
-            "Fomenté vinculación con sector público/privado para fortalecer empleabilidad de egresados.",
-        ],
-    ),
-    dict(
-        cargo="Docente Online – Comercio Exterior",
-        organizacion="Escuela de Comercio de Santiago (Online)",
-        fechas="Marzo 2023 – Mayo 2024",
-        nivel="Senior | Freelance | Part Time",
-        viñetas=[
-            "Docente para asignaturas: Taller de Aplicación de Comercio Exterior y Tramitación y Valoración Aduanera.",
-            "Carreras: Técnico en Comercio Exterior e Ingeniería en Comercio Internacional.",
-            "Desarrollo de contenidos y evaluaciones en modalidad 100% online.",
-        ],
-    ),
-    dict(
-        cargo="Docente – Técnico en Administración y Logística",
-        organizacion="CFT ENAC (Santiago Centro)",
-        fechas="Marzo 2022 – Marzo 2024",
-        nivel="Senior | Freelance | Part Time",
-        viñetas=[
-            "Docente en asignaturas: Gestión de Bodega e Inventario, Gestión de Adquisiciones y Administración de Post-Venta.",
-            "Carrera: Técnico en Administración de Empresas.",
-            "QA (Quality Assurance) para asignatura online Gestión de Almacenes.",
-        ],
-    ),
-    dict(
-        cargo="Coordinador de Carrera – Administración y Logística & Docente",
-        organizacion="IP-CFT Santo Tomás (Sedes Estación Central y Santiago Centro)",
-        fechas="Ago 2019 – Marzo 2024",
-        nivel="Senior | Freelance/Full Time según período",
-        viñetas=[
-            "Coordinación académica: planificación, carga horaria, asignación docente, inscripciones y registro de calificaciones.",
-            "Supervisión de procesos académicos, asegurando estándares de calidad y satisfacción estudiantil.",
-            "Docencia en Logística, Comercio Exterior y Supply Chain Management (programas técnicos y profesionales).",
-            "Docente guía y miembro de comisiones de práctica y titulación (proyectos y portafolios de evidencias).",
-        ],
-    ),
-    dict(
-        cargo="Asistente Contable | Analista de Control de Inventario | Responsable de Garantías | Encargado de Bodega",
-        organizacion="Sociedad Importadora y Comercializadora GK (Providencia)",
-        fechas="Julio 2015 – Enero 2018",
-        nivel="Semi Senior | Full Time",
-        viñetas=[
-            "Gestión de cuentas corrientes, facturación y pagos, manteniendo relación directa con Gerencia.",
-            "Control de inventarios periódicos y selectivos, generando reportes de pérdidas y ajustes contables.",
-            "Administración de procesos de garantías con proveedores nacionales e internacionales.",
-            "Liderazgo en recepción, almacenamiento y despacho de productos, implementando control con RFID.",
-        ],
-    ),
-    dict(
-        cargo="Control de Costos | Asistente de Bodega",
-        organizacion="Hotel Plaza San Francisco (Santiago Centro)",
-        fechas="Agosto 2018 – Abril 2019",
-        nivel="Semi Senior | Full Time",
-        viñetas=[
-            "Gestión de facturación e inventario en múltiples áreas: Ama de llaves, recepción, bar, cocina, restaurante.",
-            "Valorización y codificación de productos.",
-            "Control de costos del menú del Restaurante Bristol.",
-        ],
-    ),
-    dict(
-        cargo="Asistente de Bodega",
-        organizacion="Empresas La Polar | Amphora Beauty Shop | Computación Integral S.A (Valparaíso)",
-        fechas="Marzo 2013 – Junio 2015",
-        nivel="Junior | Full Time",
-        viñetas=[
-            "Recepción, almacenamiento y despacho de productos.",
-            "Control mediante RFID de productos recepcionados.",
-            "Labores de valor agregado: censado y etiquetado de productos.",
-            "Preparación y acondicionamiento de pedidos nacionales e internacionales.",
-        ],
-    ),
-    dict(
-        cargo="Encargado de Bodega – Tienda Manuel Montt",
-        organizacion="Casa Ximena (Valparaíso)",
-        fechas="Mayo 2012 – Marzo 2013",
-        nivel="Semi Senior | Full Time",
-        viñetas=[
-            "Supervisión de procesos logísticos: recepción, almacenamiento, reposición y despacho de productos.",
-            "Implementación de conteos cíclicos y criterios merciológicos para optimizar almacenamiento y control de stock.",
-            "Gestión de documentación operativa (boletas, facturas, guías) y orden de bodegas.",
-            "Coordinación con ventas y promotores para mejorar experiencia del cliente.",
-        ],
-    ),
-]
-
-EDUCACION: List[Tuple[str, str, str]] = [
-    ("Ingeniería en Gestión de Operaciones Logísticas (Titulado)", "Instituto Profesional AIEP (Online)", "2023 – 2025"),
-    ("Diplomado en Medición y Evaluación de Aprendizajes (160 horas pedagógicas)", "Escuela de Psicología - Pontificia Universidad Católica de Santiago de Chile (Online)", "Octubre 2022 – Mayo 2023"),
-    ("Técnico de Nivel Superior en Logística (Titulado)", "CFT PUCV (Valparaíso)", "2013 – 2015"),
-]
-
-COMPETENCIAS: Dict[str, str] = {
-    "Gestión Académica y Tecnológica": (
-        "Integración de TIC, TAC y TEP en la coordinación y gestión de procesos académicos y administrativos. "
-        "Uso de tecnologías avanzadas para la planificación, evaluación y seguimiento de los aprendizajes esperados, "
-        "garantizando calidad y efectividad en su implementación. Colaboración proactiva en equipos interdisciplinarios "
-        "a través de plataformas digitales, asegurando la integración de recursos tecnológicos para potenciar la educación "
-        "y el desarrollo profesional."
-    ),
-    "Metodologías y Evaluación": (
-        "Modelo por competencias, metodologías de enseñanza y evaluación, diseño y validación de instrumentos de levantamiento "
-        "de datos para la toma de decisiones y la mejora continua. Diseño y medición de indicadores clave de desempeño (KPI) "
-        "para evaluar la efectividad de programas y procesos educativos."
-    ),
-    "Conocimientos Específicos": (
-        "Comprensión profunda de la normativa, políticas y procedimientos que rigen los procesos educativos en la Educación "
-        "Superior en Chile."
-    ),
-}
-
-EQUIPAMIENTO: Dict[str, str] = {
-    "Hardware": "MacBook Pro 13\" M1 2020 SSD 512 GB | Monitor Samsung de 24\" A600UCL | iPhone 15 Pro Max 256 GB | AirPods Pro (3.ª generación)",
-    "Conectividad": "Internet fibra óptica VTR 900 Mbps (wifi y cable de red)",
-    "Movilización": "Kia Niro 2023 | Scooter Eléctrico Mantis 8 plus",
-}
-
-INTERESES: List[str] = [
-    "Gestión Educacional",
-    "Producción y Edición Musical",
-    "Viajes",
-    "Fotografía",
-    "Ciencia",
-    "Tecnología",
-    "Ajedrez",
-    "Voleibol",
-]
-
-REFERENCIAS: List[Dict[str, str]] = [
-    {
-        "nombre": "Karla Muñoz Gajardo",
-        "cargo": "Directora de Análisis Institucional y Estudios",
-        "organizacion": "Instituto Profesional San Sebastián",
-        "telefono": "+56 9 7576 9127",
-        "email": "karla.munoz@ipss.cl",
-    },
-    {
-        "nombre": "Roberto Zúñiga Ruminot",
-        "cargo": "Jefe de Carreras Comercio Exterior y Logística",
-        "organizacion": "IP–CFT Santo Tomás Sede Vergara",
-        "telefono": "+56 9 3940 1836",
-        "email": "rzuniga9@santotomas.cl",
-    },
-    {
-        "nombre": "Francisco Gajardo Peñaloza",
-        "cargo": "Jefe de Carreras Administración - Comercio Exterior y Mercados Digitales",
-        "organizacion": "CFT ENAC",
-        "telefono": "+56 9 78312130",
-        "email": "fgajardop@enac.cl",
-    },
-    {
-        "nombre": "Ximena Pinto Soto",
-        "cargo": "Gerente de Administración y Finanzas",
-        "organizacion": "Hotel Plaza San Francisco",
-        "telefono": "+56 9 6496 5540",
-        "email": "xpinto@plazasanfrancisco.cl",
-    },
-    {
-        "nombre": "Tomás Kusianovich",
-        "cargo": "Gerente General",
-        "organizacion": "Importadora y Comercializadora GK",
-        "telefono": "+56 9 5405 1783",
-        "email": "tomas.kusianovich@importadoragk.cl",
-    },
-]
-
-IDIOMAS = "Inglés técnico"
 
 PALETA_GRUPOS = {
     "Data & Business Intelligence": "#0891b2",
@@ -274,9 +20,6 @@ PALETA_GRUPOS = {
     "Idiomas": "#ef4444",
     "Creatividad": "#ec4899",
 }
-COLOR_PRINCIPAL = "#0f172a"
-COLOR_TEXTO_SUAVE = "#475569"
-COLOR_FONDO_BARRA = "#f1f5f9"
 
 # CSS Global
 def inyectar_css() -> None:
@@ -580,37 +323,17 @@ st.markdown(specialization)
 st.divider()
 # Quick links also on home page
 st.markdown("## 🔗 Enlaces Rápidos")
-ql1, ql2, ql3 = st.columns(3)
-with ql1:
-    st.markdown(f"""
-    <a href=\"mailto:{DATOS_PERSONALES['CORREO']}\" style=\"text-decoration: none;\">
-        <button style=\"width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;\">
-            📧 Enviar Email
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
-with ql2:
-    st.markdown(f"""
-    <a href=\"https://linkedin.com/in/alexiburgos\" target=\"_blank\" style=\"text-decoration: none;\">
-        <button style=\"width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;\">
-            💼 LinkedIn
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
-with ql3:
-    st.markdown(f"""
-    <a href=\"tel:{DATOS_PERSONALES['TELEFONO']}\" style=\"text-decoration: none;\">
-        <button style=\"width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;\">
-            📞 Llamar
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
+render_quick_links(
+    DATOS_PERSONALES["CORREO"],
+    DATOS_PERSONALES["TELEFONO"],
+    "https://linkedin.com/in/alexiburgos",
+)
 
 st.markdown("## 🚀 Explora mis secciones en el menú lateral →")
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.info("**� Experiencia**\nHistorial laboral completo")
+    st.info("**💼 Experiencia**\nHistorial laboral completo")
 with col2:
     st.info("**🎯 Habilidades**\nCompetencias profesionales")
 with col3:

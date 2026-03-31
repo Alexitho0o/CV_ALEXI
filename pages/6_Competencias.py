@@ -2,26 +2,10 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
 
-st.set_page_config(page_title="Competencias - Alexi Burgos CV", page_icon="🎯", layout="wide")
+from shared.cv_content import COMPETENCIAS
+from shared.ui_components import render_page_header
 
-COMPETENCIAS = {
-    "Gestión Académica y Tecnológica": (
-        "Integración de TIC, TAC y TEP en la coordinación y gestión de procesos académicos y administrativos. "
-        "Uso de tecnologías avanzadas para la planificación, evaluación y seguimiento de los aprendizajes esperados, "
-        "garantizando calidad y efectividad en su implementación. Colaboración proactiva en equipos interdisciplinarios "
-        "a través de plataformas digitales, asegurando la integración de recursos tecnológicos para potenciar la educación "
-        "y el desarrollo profesional."
-    ),
-    "Metodologías y Evaluación": (
-        "Modelo por competencias, metodologías de enseñanza y evaluación, diseño y validación de instrumentos de levantamiento "
-        "de datos para la toma de decisiones y la mejora continua. Diseño y medición de indicadores clave de desempeño (KPI) "
-        "para evaluar la efectividad de programas y procesos educativos."
-    ),
-    "Conocimientos Específicos": (
-        "Comprensión profunda de la normativa, políticas y procedimientos que rigen los procesos educativos en la Educación "
-        "Superior en Chile."
-    ),
-}
+st.set_page_config(page_title="Competencias - Alexi Burgos CV", page_icon="🎯", layout="wide")
 
 # CSS
 st.markdown("""
@@ -81,12 +65,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 header_gradient = "linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)"
-st.markdown(f"""
-<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <h1>🎯 Competencias Profesionales</h1>
-    <p>Fortalezas y áreas de especialización</p>
-</div>
-""", unsafe_allow_html=True)
+render_page_header(
+    "🎯 Competencias Profesionales",
+    "Fortalezas y áreas de especialización",
+    header_gradient,
+)
 
 st.markdown("## Mis Competencias Clave")
 

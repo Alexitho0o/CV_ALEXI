@@ -5,12 +5,17 @@ Módulo para envío de corrios electrónicos desde el formulario de contacto.
 Utiliza SMTP de Gmail con credenciales desde variables de entorno.
 """
 
-import smtplib
+import html
+import logging
 import os
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import smtplib
 from datetime import datetime
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
 
 # Cargar variables de entorno
 load_dotenv()
@@ -42,12 +47,18 @@ def send_contact_email(nombre: str, email_remitente: str, asunto_tipo: str, mens
         )
     
     try:
+        # Sanitizar entradas para evitar inyección HTML en el cuerpo del correo
+        safe_nombre = html.escape(nombre.strip())
+        safe_email = html.escape(email_remitente.strip())
+        safe_asunto = html.escape(asunto_tipo.strip())
+        safe_mensaje = html.escape(mensaje.strip())
+
         # Crear mensaje
         msg = MIMEMultipart("alternative")
-        msg["Subject"] = f"[CONTACTO] {asunto_tipo}"
+        msg["Subject"] = f"[CONTACTO] {safe_asunto}"
         msg["From"] = GMAIL_USER
         msg["To"] = DESTINATARIO
-        msg["Reply-To"] = email_remitente
+        msg["Reply-To"] = safe_email
         
         # Cuerpo del mensaje en HTML
         fecha_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -61,9 +72,9 @@ def send_contact_email(nombre: str, email_remitente: str, asunto_tipo: str, mens
                     </h2>
                     
                     <div style="margin: 20px 0;">
-                        <p><strong style="color: #0f172a;">📝 Nombre:</strong> {nombre}</p>
-                        <p><strong style="color: #0f172a;">📧 Correo:</strong> <a href="mailto:{email_remitente}">{email_remitente}</a></p>
-                        <p><strong style="color: #0f172a;">📌 Asunto:</strong> {asunto_tipo}</p>
+                        <p><strong style="color: #0f172a;">📝 Nombre:</strong> {safe_nombre}</p>
+                        <p><strong style="color: #0f172a;">📧 Correo:</strong> <a href="mailto:{safe_email}">{safe_email}</a></p>
+                        <p><strong style="color: #0f172a;">📌 Asunto:</strong> {safe_asunto}</p>
                         <p><strong style="color: #0f172a;">📅 Fecha/Hora:</strong> {fecha_hora}</p>
                     </div>
                     
@@ -71,7 +82,7 @@ def send_contact_email(nombre: str, email_remitente: str, asunto_tipo: str, mens
                     
                     <div style="margin: 20px 0; white-space: pre-wrap; line-height: 1.6; color: #334155;">
                         <strong>Mensaje:</strong>
-                        <p>{mensaje}</p>
+                        <p>{safe_mensaje}</p>
                     </div>
                     
                     <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;">
@@ -89,15 +100,15 @@ def send_contact_email(nombre: str, email_remitente: str, asunto_tipo: str, mens
 Nuevo Mensaje de Contacto
 ========================
 
-Nombre: {nombre}
-Correo: {email_remitente}
-Asunto: {asunto_tipo}
+Nombre: {safe_nombre}
+Correo: {safe_email}
+Asunto: {safe_asunto}
 Fecha/Hora: {fecha_hora}
 
 ---
 
 Mensaje:
-{mensaje}
+{safe_mensaje}
         """
         
         # Adjuntar ambas versiones
@@ -112,11 +123,14 @@ Mensaje:
         return True, f"✅ Mensaje enviado exitosamente a {DESTINATARIO}"
         
     except smtplib.SMTPAuthenticationError:
+        logger.exception("Error de autenticación SMTP al enviar correo de contacto")
         return False, (
             "❌ Error de autenticación. Las credenciales de Gmail son incorrectas. "
             "Verifica GMAIL_USER y GMAIL_PASSWORD en variables de entorno."
         )
     except smtplib.SMTPException as e:
+        logger.exception("Error SMTP al enviar correo de contacto")
         return False, f"❌ Error SMTP: {str(e)}"
-    except Exception as e:
-        return False, f"❌ Error al enviar correo: {str(e)}"
+    except Exception:
+        logger.exception("Error inesperado al enviar correo de contacto")
+        return False, "❌ No fue posible enviar el mensaje en este momento. Intenta nuevamente más tarde."
