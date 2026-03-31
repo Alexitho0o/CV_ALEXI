@@ -2,24 +2,10 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
 
+from shared.cv_content import EQUIPAMIENTO, INTERESES
+from shared.ui_components import render_page_header
+
 st.set_page_config(page_title="Equipamiento - Alexi Burgos CV", page_icon="💻", layout="wide")
-
-EQUIPAMIENTO = {
-    "Hardware": "MacBook Pro 13\" M1 2020 SSD 512 GB | Monitor Samsung de 24\" A600UCL | iPhone 15 Pro Max 256 GB | AirPods Pro (3.ª generación)",
-    "Conectividad": "Internet fibra óptica VTR 900 Mbps (wifi y cable de red)",
-    "Movilización": "Kia Niro 2023 | Scooter Eléctrico Mantis 8 plus",
-}
-
-INTERESES = [
-    "Gestión Educacional",
-    "Producción y Edición Musical",
-    "Viajes",
-    "Fotografía",
-    "Ciencia",
-    "Tecnología",
-    "Ajedrez",
-    "Voleibol",
-]
 
 # CSS
 st.markdown("""
@@ -94,12 +80,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 header_gradient = "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)"
-st.markdown(f"""
-<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <h1>💻 Equipamiento e Intereses</h1>
-    <p>Recursos y áreas de interés personal</p>
-</div>
-""", unsafe_allow_html=True)
+render_page_header(
+    "💻 Equipamiento e Intereses",
+    "Recursos y áreas de interés personal",
+    header_gradient,
+)
 
 st.markdown("## 🖥️ Equipamiento para Trabajo Remoto/Híbrido")
 

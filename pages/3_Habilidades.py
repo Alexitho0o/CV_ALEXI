@@ -1,50 +1,19 @@
 # pages/3_Habilidades.py
 # -*- coding: utf-8 -*-
-import streamlit as st
 import matplotlib
+import streamlit as st
+
 matplotlib.use("Agg")
+from typing import Any, List, Tuple
+
 import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
-from typing import Any, Dict, List, Tuple
+import pandas as pd
+
+from shared.cv_content import HABILIDADES
+from shared.ui_components import render_page_header
 
 st.set_page_config(page_title="Habilidades - Alexi Burgos CV", page_icon="🎯", layout="wide")
-
-HABILIDADES: List[Tuple[str, List[Tuple[str, int]]]] = [
-    ("Data & Business Intelligence", [
-        ("Power BI (dashboards KPI/OKR)", 90),
-        ("Excel avanzado (modelamiento/visualización)", 95),
-        ("Python (análisis de datos)", 75),
-    ]),
-    ("Plataformas Educativas", [
-        ("Banner", 80),
-        ("Blackboard", 75),
-        ("Moodle (intermedio)", 75),
-        ("Bettersoft U+", 70),
-        ("Syllabus", 70),
-    ]),
-    ("Sistemas Operativos y Dispositivos", [
-        ("MacOS", 95),
-        ("Windows", 90),
-        ("iOS", 90),
-        ("Android (intermedio)", 75),
-    ]),
-    ("Herramientas Ofimáticas y Colaboración", [
-        ("MS Office 365 (Word, Excel, PowerPoint)", 95),
-        ("GSuite (Gmail, Docs, Sheets, Meet)", 90),
-        ("Kahoot (evaluación gamificada)", 85),
-        ("Mentimeter (encuestas interactivas)", 85),
-    ]),
-    ("Creatividad", [
-        ("Autor y Compositor", 85),
-        ("Producción Musical", 80),
-        ("Edición Musical", 75),
-    ]),
-    ("Idiomas", [
-        ("Inglés técnico (lectora/comprensión)", 80),
-        ("Español (nativo)", 100),
-    ]),
-]
 
 PALETA_GRUPOS = {
     "Data & Business Intelligence": "#0891b2",
@@ -261,9 +230,6 @@ def grafico_radar(grupo: str, items: List[Tuple[str, int]], color: str, height_p
     
     # Para Creatividad, crear una presentación visual sin porcentajes
     fig, ax = plt.subplots(figsize=(8, height_px/100), dpi=100)
-    
-    # Crear texto limpio con los nombres
-    y_positions = np.arange(len(skills))
     
     for i, skill in enumerate(skills):
         # Rectángulo de fondo
@@ -494,12 +460,11 @@ st.markdown("""
 
 # header for habilidades
 header_gradient = "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)"
-st.markdown(f"""
-<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <h1>🎯 Habilidades y Competencias</h1>
-    <p>*Especialista en análisis de datos, gestión académica y educación*</p>
-</div>
-""", unsafe_allow_html=True)
+render_page_header(
+    "🎯 Habilidades y Competencias",
+    "*Especialista en análisis de datos, gestión académica y educación*",
+    header_gradient,
+)
 
 # Detalles por categoría con gráficos variados
 st.markdown("## 📋 Detalle por Área")

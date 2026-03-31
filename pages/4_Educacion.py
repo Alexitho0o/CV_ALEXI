@@ -2,13 +2,10 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
 
-st.set_page_config(page_title="Educación - Alexi Burgos CV", page_icon="🎓", layout="wide")
+from shared.cv_content import EDUCACION
+from shared.ui_components import render_page_header
 
-EDUCACION = [
-    ("Ingeniería en Gestión de Operaciones Logísticas (Titulado)", "Instituto Profesional AIEP (Online)", "2023 – 2025"),
-    ("Diplomado en Medición y Evaluación de Aprendizajes (160 hrs)", "Pontificia Universidad Católica de Chile (Online)", "Oct 2022 – May 2023"),
-    ("Técnico de Nivel Superior en Logística (Titulado)", "CFT PUCV", "2013 – 2015"),
-]
+st.set_page_config(page_title="Educación - Alexi Burgos CV", page_icon="🎓", layout="wide")
 
 IDIOMAS = "Inglés técnico"
 
@@ -66,12 +63,11 @@ st.markdown("""
 
 # header
 header_gradient = "linear-gradient(135deg, #ef4444 0%, #f87171 100%)"
-st.markdown(f"""
-<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <h1>🎓 Educación y Formación</h1>
-    <p>*Formación académica en logística, educación y análisis de datos*</p>
-</div>
-""", unsafe_allow_html=True)
+render_page_header(
+    "🎓 Educación y Formación",
+    "*Formación académica en logística, educación y análisis de datos*",
+    header_gradient,
+)
 
 st.divider()
 

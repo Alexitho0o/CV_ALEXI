@@ -1,23 +1,12 @@
 # pages/5_Contacto.py
 # -*- coding: utf-8 -*-
 import streamlit as st
-import sys
-from pathlib import Path
 
-# Agregar el directorio raíz al path para importar utils
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from utils.email_sender import send_contact_email
+from services.contact_service import submit_contact_form
+from shared.cv_content import DATOS_PERSONALES
+from shared.ui_components import render_page_header, render_quick_links
 
 st.set_page_config(page_title="Contacto - Alexi Burgos CV", page_icon="📧", layout="wide")
-
-DATOS_PERSONALES = {
-    "NOMBRE": "ALEXI MARCELO BURGOS FLORES",
-    "UBICACION": "Villa Alemana, Valparaíso, Chile",
-    "TELEFONO": "+56 9 4513 0486",
-    "CORREO": "alexi.fs341@gmail.com",
-    "LINKEDIN": "linkedin.com/in/alexiburgos",
-}
 
 # CSS
 st.markdown("""
@@ -99,12 +88,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown(f"""
-<div class="contact-hero">
-    <h1>📬 Contacto</h1>
-    <p>¡Estoy disponible para colaboraciones y oportunidades profesionales!</p>
-</div>
-""", unsafe_allow_html=True)
+render_page_header(
+    "📬 Contacto",
+    "¡Estoy disponible para colaboraciones y oportunidades profesionales!",
+    "linear-gradient(135deg, #0891b2 0%, #06b6d4 100%)",
+)
 
 col1, col2 = st.columns([1, 1])
 
@@ -140,7 +128,7 @@ with col2:
     
     availab_html = """
     <div class="contact-card">
-        <div class="contact-label">� Modalidad</div>
+        <div class="contact-label">📍 Modalidad</div>
         <div class="contact-value">
             ✅ En línea únicamente
         </div>
@@ -210,56 +198,28 @@ with st.form("contact_form"):
     submitted = st.form_submit_button("📧 Enviar Mensaje", use_container_width=True)
     
     if submitted:
-        if nombre and email and mensaje:
-            # Intentar enviar el correo
-            exito, respuesta = send_contact_email(nombre, email, asunto, mensaje)
+        exito, respuesta = submit_contact_form(nombre, email, asunto, mensaje)
+
+        if exito:
+            st.success(f"""
+            {respuesta}
             
-            if exito:
-                st.success(f"""
-                {respuesta}
-                
-                **Detalles del contacto:**
-                - Nombre: {nombre}
-                - Correo: {email}
-                - Asunto: {asunto}
-                """)
-            else:
-                st.warning(respuesta)
+            **Detalles del contacto:**
+            - Nombre: {nombre.strip()}
+            - Correo: {email.strip()}
+            - Asunto: {asunto}
+            """)
         else:
-            st.error("❌ Por favor completa todos los campos")
+            st.error(respuesta)
 
 st.divider()
 
 st.markdown("## 🔗 Enlaces Rápidos")
-
-button_col1, button_col2, button_col3 = st.columns(3)
-
-with button_col1:
-    st.markdown(f"""
-    <a href="mailto:{DATOS_PERSONALES['CORREO']}" style="text-decoration: none;">
-        <button style="width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-            📧 Enviar Email
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
-
-with button_col2:
-    st.markdown(f"""
-    <a href="https://linkedin.com/in/alexiburgos" target="_blank" style="text-decoration: none;">
-        <button style="width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-            💼 LinkedIn
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
-
-with button_col3:
-    st.markdown(f"""
-    <a href="tel:{DATOS_PERSONALES['TELEFONO']}" style="text-decoration: none;">
-        <button style="width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-            📞 Llamar
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
+render_quick_links(
+    DATOS_PERSONALES["CORREO"],
+    DATOS_PERSONALES["TELEFONO"],
+    "https://linkedin.com/in/alexiburgos",
+)
 
 st.divider()
 
