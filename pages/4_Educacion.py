@@ -2,13 +2,10 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
 
-st.set_page_config(page_title="Educación - Alexi Burgos CV", page_icon="🎓", layout="wide")
+from shared.cv_content import EDUCACION
+from shared.ui_components import EXECUTIVE_HEADER_GRADIENT, render_page_header
 
-EDUCACION = [
-    ("Ingeniería en Gestión de Operaciones Logísticas (Titulado)", "Instituto Profesional AIEP (Online)", "2023 – 2025"),
-    ("Diplomado en Medición y Evaluación de Aprendizajes (160 hrs)", "Pontificia Universidad Católica de Chile (Online)", "Oct 2022 – May 2023"),
-    ("Técnico de Nivel Superior en Logística (Titulado)", "CFT PUCV", "2013 – 2015"),
-]
+st.set_page_config(page_title="Educación - Alexi Burgos CV", page_icon="🎓", layout="wide")
 
 IDIOMAS = "Inglés técnico"
 
@@ -16,71 +13,76 @@ IDIOMAS = "Inglés técnico"
 st.markdown("""
 <style>
 .education-item {
-    background: linear-gradient(135deg, #f8fafc 0%, white 100%);
-    padding: 2rem;
+    background: #FFFFFF;
+    padding: 1.55rem;
     border-radius: 12px;
-    border-top: 5px solid #0891b2;
-    margin: 1.5rem 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid #CBD5E1;
+    border-left: 4px solid #0E7490;
+    margin: 1rem 0;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
 }
 .degree {
-    font-size: 1.2rem;
+    font-size: 1.08rem;
     font-weight: 900;
-    color: #0f172a;
-    margin-bottom: 0.5rem;
+    color: #0F172A;
+    margin-bottom: 0.35rem;
 }
 .institution {
-    font-size: 1rem;
-    color: #64748b;
+    font-size: 0.95rem;
+    color: #475569;
     margin-bottom: 0.3rem;
 }
 .year {
-    font-size: 0.95rem;
-    color: #0891b2;
+    font-size: 0.86rem;
+    color: #0E7490;
     font-weight: 700;
     display: inline-block;
-    background: rgba(8,145,178,0.1);
-    padding: 0.4rem 1rem;
-    border-radius: 20px;
+    background: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    padding: 0.34rem 0.74rem;
+    border-radius: 999px;
     margin-top: 0.5rem;
 }
 .language-box {
-    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-    color: white;
-    padding: 2rem;
+    background: #FFFFFF;
+    color: #0F172A;
+    padding: 1.4rem;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(124,58,237,0.2);
+    border: 1px solid #CBD5E1;
+    border-left: 4px solid #1E3A8A;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
 }
 .language-box h3 {
     margin: 0 0 0.5rem 0;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 .language-box p {
     margin: 0;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    color: #475569;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # header
-header_gradient = "linear-gradient(135deg, #ef4444 0%, #f87171 100%)"
-st.markdown(f"""
-<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <h1>🎓 Educación y Formación</h1>
-    <p>*Formación académica en logística, educación y análisis de datos*</p>
-</div>
-""", unsafe_allow_html=True)
+header_gradient = EXECUTIVE_HEADER_GRADIENT
+render_page_header(
+    "Educación y Formación",
+    "*Formación profesional y postítulo en logística, educación y analítica*",
+    header_gradient,
+)
 
 st.divider()
 
-st.markdown("## 📚 Formación Académica")
+st.markdown("## 📚 Títulos y Formación de Postítulo")
 
 for degree, institution, years in EDUCACION:
+    icono = "🏆 " if degree.startswith("Título") else "📘 "
     edu_html = f"""
     <div class="education-item">
-        <div class="degree">{'🏆 ' if 'Titulado' in degree else '📖 '}{degree}</div>
+        <div class="degree">{icono}{degree}</div>
         <div class="institution">{institution}</div>
         <div class="year">{years}</div>
     </div>
@@ -126,18 +128,18 @@ with col2:
 
 st.divider()
 
-st.markdown("## 📊 Resumen Académico")
+st.markdown("## 📊 Resumen Formativo")
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.metric("Grados Obtenidos", "3")
+    st.metric("Títulos Obtenidos", "2")
     
 with col2:
-    st.metric("Años de Estudio", "7+")
+    st.metric("Postítulos", "1")
     
 with col3:
-    st.metric("Especialidades", "2")
+    st.metric("Años de Estudio", "7+")
 
 st.divider()
 

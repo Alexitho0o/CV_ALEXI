@@ -2,91 +2,53 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
 
-st.set_page_config(page_title="Competencias - Alexi Burgos CV", page_icon="🎯", layout="wide")
+from shared.cv_content import COMPETENCIAS
+from shared.ui_components import EXECUTIVE_HEADER_GRADIENT, render_page_header
 
-COMPETENCIAS = {
-    "Gestión Académica y Tecnológica": (
-        "Integración de TIC, TAC y TEP en la coordinación y gestión de procesos académicos y administrativos. "
-        "Uso de tecnologías avanzadas para la planificación, evaluación y seguimiento de los aprendizajes esperados, "
-        "garantizando calidad y efectividad en su implementación. Colaboración proactiva en equipos interdisciplinarios "
-        "a través de plataformas digitales, asegurando la integración de recursos tecnológicos para potenciar la educación "
-        "y el desarrollo profesional."
-    ),
-    "Metodologías y Evaluación": (
-        "Modelo por competencias, metodologías de enseñanza y evaluación, diseño y validación de instrumentos de levantamiento "
-        "de datos para la toma de decisiones y la mejora continua. Diseño y medición de indicadores clave de desempeño (KPI) "
-        "para evaluar la efectividad de programas y procesos educativos."
-    ),
-    "Conocimientos Específicos": (
-        "Comprensión profunda de la normativa, políticas y procedimientos que rigen los procesos educativos en la Educación "
-        "Superior en Chile."
-    ),
-}
+st.set_page_config(page_title="Competencias - Alexi Burgos CV", page_icon="🎯", layout="wide")
 
 # CSS
 st.markdown("""
 <style>
-.hero-header {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: white;
-    padding: 3rem 2rem;
-    border-radius: 16px;
-    margin-bottom: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.hero-header h1 {
-    font-size: 2.5rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-}
-
-.hero-sub {
-    color: #cbd5e1;
-    font-size: 1rem;
-    margin: 0.5rem 0;
-    font-weight: 500;
-}
-
 .competencia-card {
-    background: white;
-    padding: 2rem;
+    background: #FFFFFF;
+    padding: 1.35rem;
     border-radius: 12px;
-    margin: 1.5rem 0;
-    border-left: 4px solid #0891b2;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin: 1rem 0;
+    border: 1px solid #CBD5E1;
+    border-left: 4px solid #0E7490;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
     transition: all 0.3s ease;
 }
 
 .competencia-card:hover {
-    box-shadow: 0 8px 20px rgba(8,145,178,0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(14, 116, 144, 0.14);
+    transform: translateY(-1px);
 }
 
 .competencia-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #0891b2;
+    color: #0F172A;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 2px solid #CBD5E1;
 }
 
 .competencia-text {
     color: #475569;
-    line-height: 1.8;
+    line-height: 1.68;
     font-size: 0.95rem;
 }
 </style>
 """, unsafe_allow_html=True)
 
-header_gradient = "linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)"
-st.markdown(f"""
-<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <h1>🎯 Competencias Profesionales</h1>
-    <p>Fortalezas y áreas de especialización</p>
-</div>
-""", unsafe_allow_html=True)
+header_gradient = EXECUTIVE_HEADER_GRADIENT
+render_page_header(
+    "Competencias Profesionales",
+    "Fortalezas y áreas de especialización",
+    header_gradient,
+)
 
 st.markdown("## Mis Competencias Clave")
 

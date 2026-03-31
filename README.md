@@ -55,7 +55,7 @@ Para publicar tu CV en internet de forma gratuita:
 
 2. **Conecta tu repositorio GitHub**
    - Autoriza a Streamlit a acceder a tus repositorios
-   - Selecciona `Alexitho0o/gdp-dashboard`
+   - Selecciona este repositorio (`CV_ALEXI`)
 
 3. **Configura los Secrets** (si usas formulario de contacto)
    - En tu app Streamlit Cloud, ve a **Settings → Secrets**
@@ -68,7 +68,7 @@ Para publicar tu CV en internet de forma gratuita:
 
 4. **¡Listo!** Tu app estará disponible en:
    ```
-   https://alexitho0o-gdp-dashboard.streamlit.app
+   https://<tu-usuario>-cv-alexi.streamlit.app
    ```
 
 ### URL Pública
@@ -109,18 +109,43 @@ git push origin main
 ```
 .
 ├── cv.py                    # Página principal
+├── shared/
+│   ├── cv_content.py        # Contenido compartido del CV (fuente única)
+│   └── ui_components.py     # Componentes UI reutilizables
+├── services/
+│   └── contact_service.py   # Validación y orquestación del formulario
 ├── pages/
-│   ├── 1_Perfil.py         # Datos personales y contacto
-│   ├── 2_Experiencia.py    # Timeline profesional
-│   ├── 3_Habilidades.py    # Dashboard de competencias
-│   ├── 4_Educacion.py      # Formación académica
-│   ├── 5_Contacto.py       # Formulario de contacto
-│   ├── 6_Competencias.py   # Especializaciones profes
-│   ├── 7_Equipamiento.py   # Hardware e intereses
-│   └── 8_Referencias.py    # Contactos profesionales
+│   ├── 2_Experiencia.py     # Timeline profesional
+│   ├── 3_Habilidades.py     # Dashboard de competencias
+│   ├── 4_Educacion.py       # Formación académica
+│   ├── 5_Contacto.py        # Formulario de contacto
+│   ├── 6_Competencias.py    # Especializaciones profesionales
+│   ├── 7_Equipamiento.py    # Hardware e intereses
+│   └── 8_Referencias.py     # Contactos profesionales
 ├── utils/
 │   └── email_sender.py     # Función de envío de correos SMTP
 ├── requirements.txt         # Dependencias Python
 ├── .env                     # Variables de entorno (no commitear credenciales)
 └── .env.example            # Plantilla de variables de entorno
 ```
+
+## Calidad y pruebas
+
+Comandos recomendados para validación local:
+
+```bash
+# Verificación estática básica
+ruff check .
+
+# Compilación rápida para detectar errores de sintaxis/import
+python -m compileall cv.py pages utils shared services
+
+# Pruebas unitarias
+pytest -q
+```
+
+También se ejecutan automáticamente en GitHub Actions con el workflow `CI`.
+
+## Privacidad de referencias
+
+Los datos de contacto de referencias profesionales mostrados en la app están enmascarados en el repositorio para reducir exposición pública de información personal.

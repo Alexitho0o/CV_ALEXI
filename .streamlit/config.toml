@@ -5,15 +5,11 @@ showErrorDetails = false
 level = "info"
 
 [theme]
-primaryColor = "#0891b2"
-backgroundColor = "#f8fafc"
-secondaryBackgroundColor = "#e2e8f0"
-textColor = "#0f172a"
+primaryColor = "#0E7490"
+backgroundColor = "#F8FAFC"
+secondaryBackgroundColor = "#F1F5F9"
+textColor = "#0F172A"
 font = "sans serif"
 
 [browser]
 gatherUsageStats = false
-
-[app]
-# Nombre de la aplicación en el navegador y URL amigable
-title = "Alexi Burgos - CV"

@@ -2,112 +2,50 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
 
-st.set_page_config(page_title="Referencias - Alexi Burgos CV", page_icon="👥", layout="wide")
+from shared.cv_content import REFERENCIAS
+from shared.ui_components import EXECUTIVE_HEADER_GRADIENT, render_page_header
 
-REFERENCIAS = [
-    {
-        "nombre": "Karla Muñoz Gajardo",
-        "cargo": "Directora de Análisis Institucional y Estudios",
-        "organizacion": "Instituto Profesional San Sebastián",
-        "telefono": "+56 9 7576 9127",
-        "email": "karla.munoz@ipss.cl",
-        "relacion": "Supervisora directa en análisis de datos e indicadores institucionales",
-    },
-    {
-        "nombre": "Roberto Zúñiga Ruminot",
-        "cargo": "Jefe de Carreras Comercio Exterior y Logística",
-        "organizacion": "IP–CFT Santo Tomás Sede Vergara",
-        "telefono": "+56 9 3940 1836",
-        "email": "rzuniga9@santotomas.cl",
-        "relacion": "Jefe directo durante coordinación de carrera en Santo Tomás",
-    },
-    {
-        "nombre": "Francisco Gajardo Peñaloza",
-        "cargo": "Jefe de Carreras Administración - Comercio Exterior y Mercados Digitales",
-        "organizacion": "CFT ENAC",
-        "telefono": "+56 9 78312130",
-        "email": "fgajardop@enac.cl",
-        "relacion": "Supervisor de docencia en Gestión de Bodega y Adquisiciones",
-    },
-    {
-        "nombre": "Ximena Pinto Soto",
-        "cargo": "Gerente de Administración y Finanzas",
-        "organizacion": "Hotel Plaza San Francisco",
-        "telefono": "+56 9 6496 5540",
-        "email": "xpinto@plazasanfrancisco.cl",
-        "relacion": "Supervisora en gestión de costos e inventario hotelero",
-    },
-    {
-        "nombre": "Tomás Kusianovich",
-        "cargo": "Gerente General",
-        "organizacion": "Importadora y Comercializadora GK",
-        "telefono": "+56 9 5405 1783",
-        "email": "tomas.kusianovich@importadoragk.cl",
-        "relacion": "Supervisor en operaciones logísticas y control de inventario",
-    },
-]
+st.set_page_config(page_title="Referencias - Alexi Burgos CV", page_icon="👥", layout="wide")
 
 # CSS
 st.markdown("""
 <style>
-.hero-header {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: white;
-    padding: 3rem 2rem;
-    border-radius: 16px;
-    margin-bottom: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.hero-header h1 {
-    font-size: 2.5rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-}
-
-.hero-sub {
-    color: #cbd5e1;
-    font-size: 1rem;
-    margin: 0.5rem 0;
-    font-weight: 500;
-}
-
 .referencia-card {
-    background: white;
-    padding: 2rem;
+    background: #FFFFFF;
+    padding: 1.45rem;
     border-radius: 12px;
-    margin: 1.5rem 0;
-    border: 1px solid #e2e8f0;
-    border-left: 4px solid #0891b2;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin: 1rem 0;
+    border: 1px solid #CBD5E1;
+    border-left: 4px solid #0E7490;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
     transition: all 0.3s ease;
 }
 
 .referencia-card:hover {
-    box-shadow: 0 8px 20px rgba(8,145,178,0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(14, 116, 144, 0.14);
+    transform: translateY(-1px);
 }
 
 .ref-nombre {
-    font-size: 1.25rem;
+    font-size: 1.08rem;
     font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 0.5rem;
+    color: #0F172A;
+    margin-bottom: 0.35rem;
 }
 
 .ref-cargo {
-    color: #0891b2;
+    color: #0E7490;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     margin-bottom: 0.25rem;
 }
 
 .ref-organizacion {
-    color: #64748b;
-    font-size: 0.9rem;
+    color: #475569;
+    font-size: 0.88rem;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid #CBD5E1;
 }
 
 .ref-relacion {
@@ -115,10 +53,10 @@ st.markdown("""
     font-size: 0.9rem;
     font-style: italic;
     margin-bottom: 1rem;
-    background: #f8fafc;
+    background: #F8FAFC;
     padding: 0.75rem;
     border-radius: 6px;
-    border-left: 3px solid #059669;
+    border-left: 3px solid #1E3A8A;
 }
 
 .ref-contacto {
@@ -136,19 +74,18 @@ st.markdown("""
 }
 
 .ref-icon {
-    color: #0891b2;
+    color: #0E7490;
     font-weight: 600;
 }
 </style>
 """, unsafe_allow_html=True)
 
-header_gradient = "linear-gradient(135deg, #64748b 0%, #94a3b8 100%)"
-st.markdown(f"""
-<div style="background: {header_gradient}; color: white; padding: 3rem 2rem; border-radius: 16px; margin-bottom: 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    <h1>👥 Referencias Profesionales</h1>
-    <p>Personas que pueden validar mi experiencia y desempeño</p>
-</div>
-""", unsafe_allow_html=True)
+header_gradient = EXECUTIVE_HEADER_GRADIENT
+render_page_header(
+    "Referencias Profesionales",
+    "Personas que pueden validar mi experiencia y desempeño",
+    header_gradient,
+)
 
 st.markdown("## Contactos de Referencia")
 
@@ -162,11 +99,11 @@ for ref in REFERENCIAS:
         <div class="ref-contacto">
             <div class="ref-item">
                 <span class="ref-icon">📱</span>
-                <a href="tel:{ref['telefono'].replace(' ', '')}" style="color: #0891b2; text-decoration: none;">{ref['telefono']}</a>
+                <span style="color: #0E7490;">{ref['telefono']}</span>
             </div>
             <div class="ref-item">
                 <span class="ref-icon">📧</span>
-                <a href="mailto:{ref['email']}" style="color: #0891b2; text-decoration: none;">{ref['email']}</a>
+                <span style="color: #0E7490;">{ref['email']}</span>
             </div>
         </div>
     </div>

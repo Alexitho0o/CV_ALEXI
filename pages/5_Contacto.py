@@ -1,75 +1,50 @@
 # pages/5_Contacto.py
 # -*- coding: utf-8 -*-
 import streamlit as st
-import sys
-from pathlib import Path
 
-# Agregar el directorio raíz al path para importar utils
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from utils.email_sender import send_contact_email
+from services.contact_service import submit_contact_form
+from shared.cv_content import DATOS_PERSONALES
+from shared.ui_components import (
+    EXECUTIVE_HEADER_GRADIENT,
+    render_page_header,
+    render_quick_links,
+)
 
 st.set_page_config(page_title="Contacto - Alexi Burgos CV", page_icon="📧", layout="wide")
-
-DATOS_PERSONALES = {
-    "NOMBRE": "ALEXI MARCELO BURGOS FLORES",
-    "UBICACION": "Villa Alemana, Valparaíso, Chile",
-    "TELEFONO": "+56 9 4513 0486",
-    "CORREO": "alexi.fs341@gmail.com",
-    "LINKEDIN": "linkedin.com/in/alexiburgos",
-}
 
 # CSS
 st.markdown("""
 <style>
-.contact-hero {
-    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-    color: white;
-    padding: 3rem 2rem;
-    border-radius: 16px;
-    margin-bottom: 2rem;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(8,145,178,0.2);
-}
-.contact-hero h1 {
-    font-size: 2.5rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-}
-.contact-hero p {
-    font-size: 1.1rem;
-    margin: 0;
-}
 .contact-card {
-    background: white;
-    padding: 2rem;
+    background: #FFFFFF;
+    padding: 1.35rem;
     border-radius: 12px;
-    border: 2px solid #e2e8f0;
-    margin: 1.5rem 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid #CBD5E1;
+    margin: 0.8rem 0;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
     transition: all 0.3s ease;
 }
 .contact-card:hover {
-    border-color: #0891b2;
-    box-shadow: 0 4px 16px rgba(8,145,178,0.1);
-    transform: translateY(-2px);
+    border-color: #0E7490;
+    box-shadow: 0 12px 24px rgba(14, 116, 144, 0.14);
+    transform: translateY(-1px);
 }
 .contact-label {
-    font-size: 0.9rem;
-    color: #64748b;
+    font-size: 0.82rem;
+    color: #475569;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
     font-weight: 600;
 }
 .contact-value {
-    font-size: 1.2rem;
-    color: #0f172a;
+    font-size: 1.02rem;
+    color: #0F172A;
     font-weight: 600;
     word-break: break-all;
 }
 .contact-value a {
-    color: #0891b2;
+    color: #0E7490;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.2s ease;
@@ -77,18 +52,19 @@ st.markdown("""
     display: inline-block;
 }
 .contact-value a:hover {
-    color: #0284c7;
-    border-bottom: 2px solid #0891b2;
+    color: #1E3A8A;
+    border-bottom: 2px solid #0E7490;
 }
 .icon {
     font-size: 1.8rem;
     margin-right: 0.5rem;
 }
 .contact-form {
-    background: linear-gradient(135deg, #f8fafc 0%, white 100%);
-    padding: 2rem;
+    background: #FFFFFF;
+    padding: 1.2rem;
     border-radius: 12px;
-    margin: 2rem 0;
+    margin: 1rem 0;
+    border: 1px solid #CBD5E1;
 }
 .button-group {
     display: grid;
@@ -99,12 +75,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown(f"""
-<div class="contact-hero">
-    <h1>📬 Contacto</h1>
-    <p>¡Estoy disponible para colaboraciones y oportunidades profesionales!</p>
-</div>
-""", unsafe_allow_html=True)
+render_page_header(
+    "Contacto",
+    "¡Estoy disponible para colaboraciones y oportunidades profesionales!",
+    EXECUTIVE_HEADER_GRADIENT,
+)
 
 col1, col2 = st.columns([1, 1])
 
@@ -129,7 +104,7 @@ with col1:
     
     <div class="contact-card">
         <div class="contact-label">💼 LinkedIn</div>
-        <div class="contact-value"><a href="https://www.linkedin.com/in/alexiburgos" target="_blank">linkedin.com/in/alexiburgos ↗</a></div>
+        <div class="contact-value"><a href="https://linkedin.com/in/alexiburgos" target="_blank">linkedin.com/in/alexiburgos ↗</a></div>
     </div>
     """
     
@@ -140,7 +115,7 @@ with col2:
     
     availab_html = """
     <div class="contact-card">
-        <div class="contact-label">� Modalidad</div>
+        <div class="contact-label">📍 Modalidad</div>
         <div class="contact-value">
             ✅ En línea únicamente
         </div>
@@ -210,63 +185,35 @@ with st.form("contact_form"):
     submitted = st.form_submit_button("📧 Enviar Mensaje", use_container_width=True)
     
     if submitted:
-        if nombre and email and mensaje:
-            # Intentar enviar el correo
-            exito, respuesta = send_contact_email(nombre, email, asunto, mensaje)
+        exito, respuesta = submit_contact_form(nombre, email, asunto, mensaje)
+
+        if exito:
+            st.success(f"""
+            {respuesta}
             
-            if exito:
-                st.success(f"""
-                {respuesta}
-                
-                **Detalles del contacto:**
-                - Nombre: {nombre}
-                - Correo: {email}
-                - Asunto: {asunto}
-                """)
-            else:
-                st.warning(respuesta)
+            **Detalles del contacto:**
+            - Nombre: {nombre.strip()}
+            - Correo: {email.strip()}
+            - Asunto: {asunto}
+            """)
         else:
-            st.error("❌ Por favor completa todos los campos")
+            st.error(respuesta)
 
 st.divider()
 
 st.markdown("## 🔗 Enlaces Rápidos")
-
-button_col1, button_col2, button_col3 = st.columns(3)
-
-with button_col1:
-    st.markdown(f"""
-    <a href="mailto:{DATOS_PERSONALES['CORREO']}" style="text-decoration: none;">
-        <button style="width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-            📧 Enviar Email
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
-
-with button_col2:
-    st.markdown(f"""
-    <a href="https://linkedin.com/in/alexiburgos" target="_blank" style="text-decoration: none;">
-        <button style="width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-            💼 LinkedIn
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
-
-with button_col3:
-    st.markdown(f"""
-    <a href="tel:{DATOS_PERSONALES['TELEFONO']}" style="text-decoration: none;">
-        <button style="width: 100%; padding: 0.75rem; background: #0891b2; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-            📞 Llamar
-        </button>
-    </a>
-    """, unsafe_allow_html=True)
+render_quick_links(
+    DATOS_PERSONALES["CORREO"],
+    DATOS_PERSONALES["TELEFONO"],
+    "https://linkedin.com/in/alexiburgos",
+)
 
 st.divider()
 
 st.markdown("### ⏱️ Horarios de Disponibilidad")
 
 schedule_html = """
-<div style="background: linear-gradient(135deg, #f8fafc 0%, white 100%); padding: 1.5rem; border-radius: 12px; border-left: 4px solid #0891b2;">
+<div style="background: #FFFFFF; padding: 1.2rem; border-radius: 12px; border: 1px solid #CBD5E1; border-left: 4px solid #0E7490;">
     <strong>Lunes a Viernes:</strong> 9:00 - 18:00 (Hora de Chile)<br>
     <strong>Sábados:</strong> Disponible para consultas urgentes<br>
     <strong>Domingos:</strong> Descanso
