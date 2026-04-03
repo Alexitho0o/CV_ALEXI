@@ -5,7 +5,7 @@ Incluye un **dashboard de habilidades** con **Chart.js** y un formulario de cont
 
 ## Cómo Ejecutarlo
 
-1. Abre el archivo `html/index.html` o `index.html` en cualquier navegador web.
+1. Abre el archivo `docs/index.html` en cualquier navegador web.
 
 ## Despliegue
 
@@ -24,7 +24,7 @@ Incluye un **dashboard de habilidades** con **Chart.js** y un formulario de cont
 ## Notas Finales
 
 - Asegúrate de que los archivos `css/styles.css` y `js/app.js` estén minificados para un mejor rendimiento.
-- Si usas `EmailJS` en el formulario de contacto, revisa `html/contacto.html` y configura las claves públicas/privadas que requiere ese servicio.
+- Si usas `EmailJS` en el formulario de contacto, revisa `docs/contacto.html` y configura las claves públicas/privadas que requiere ese servicio.
 
 ## Problemas comunes
 

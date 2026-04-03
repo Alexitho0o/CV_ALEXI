@@ -14,16 +14,16 @@ jobs:
       - name: List static site files
         run: |
           echo "Repository type: static HTML site"
-          echo "html/ contents:"; ls -la html || true
-          echo "css/ contents:"; ls -la css || true
+          echo "docs/ contents:"; ls -la docs || true
+          echo "docs/css/ contents:"; ls -la docs/css || true
           echo "js/ contents:"; ls -la js || true
 
       - name: Quick consistency checks
         run: |
-          # Ensure there is an index.html or html/index.html
-          if [ -f index.html ] || [ -f html/index.html ]; then
+          # Ensure there is an index.html in docs/ (GitHub Pages source)
+          if [ -f docs/index.html ]; then
             echo "Index file present"
           else
-            echo "WARNING: No index.html found"; exit 0
+            echo "WARNING: No docs/index.html found"; exit 1
           fi
 
