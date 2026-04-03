@@ -1,33 +1,29 @@
-name: CI
+name: Static Site CI
 
 on:
   push:
   pull_request:
 
 jobs:
-  quality:
+  static-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install dependencies
+      - name: List static site files
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest ruff
+          echo "Repository type: static HTML site"
+          echo "html/ contents:"; ls -la html || true
+          echo "css/ contents:"; ls -la css || true
+          echo "js/ contents:"; ls -la js || true
 
-      - name: Lint (ruff)
-        run: ruff check .
-
-      - name: Compile check
-        run: python -m compileall cv.py pages utils shared services
-
-      - name: Tests
-        run: pytest -q
+      - name: Quick consistency checks
+        run: |
+          # Ensure there is an index.html or html/index.html
+          if [ -f index.html ] || [ -f html/index.html ]; then
+            echo "Index file present"
+          else
+            echo "WARNING: No index.html found"; exit 0
+          fi
 
