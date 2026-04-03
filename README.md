@@ -149,3 +149,32 @@ También se ejecutan automáticamente en GitHub Actions con el workflow `CI`.
 ## Privacidad de referencias
 
 Los datos de contacto de referencias profesionales mostrados en la app están enmascarados en el repositorio para reducir exposición pública de información personal.
+
+---
+
+## Despliegue en GitHub Pages
+
+Para publicar tu CV en internet de forma gratuita:
+
+1. **Crea una cuenta** en https://github.com
+
+2. **Conecta tu repositorio GitHub**
+   - Autoriza a GitHub a acceder a tus repositorios
+   - Selecciona este repositorio (`CV_ALEXI`)
+
+3. **Configura los Secrets** (si usas formulario de contacto)
+   - En tu app Streamlit Cloud, ve a **Settings → Secrets**
+   - Agrega las siguientes líneas:
+   ```toml
+   GMAIL_USER = "tu_email@gmail.com"
+   GMAIL_PASSWORD = "xxxx xxxx xxxx xxxx"
+   ```
+   - (Donde `GMAIL_PASSWORD` es tu contraseña de aplicación de Google)
+
+4. **¡Listo!** Tu app estará disponible en:
+   ```
+   https://<tu-usuario>-cv-alexi.streamlit.app
+   ```
+
+### URL Pública
+Una vez desplegada, comparte este URL con reclutadores y contactos. Streamlit Cloud mantiene la app corriendo 24/7 de forma gratuita.
