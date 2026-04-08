@@ -33,4 +33,5 @@ Este proyecto puede publicarse como sitio estático en GitHub Pages, Netlify o V
 
 - Mantén `index.html`, `css/styles.css` y `js/main.js` sincronizados: son los archivos críticos del sitio.
 - Usa nombres de assets consistentes para evitar problemas de rutas entre sistemas con sensibilidad a mayúsculas/minúsculas.
+- Este repositorio no necesita `.env`, credenciales ni librerías vendor locales adicionales para funcionar.
 - No subas secretos ni credenciales al repositorio.
