@@ -60,7 +60,7 @@ jobs:
 
           def is_local(ref: str) -> bool:
               return not (
-                  ref.startswith(("http://", "https://", "mailto:", "tel:", "#", "data:"))
+                  ref.startswith(("http://", "https://", "//", "mailto:", "tel:", "#", "data:"))
               )
 
           files_to_scan = ["index.html", *redirect_targets.keys()]
