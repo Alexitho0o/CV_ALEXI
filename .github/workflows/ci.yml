@@ -23,7 +23,7 @@ jobs:
 
       - name: Validate redirects and local assets
         run: |
-          python3 <<'PY'
+          python3 <<'PYTHON'
           from html.parser import HTMLParser
           from pathlib import Path
 
@@ -80,4 +80,4 @@ jobs:
               raise SystemExit("Missing local asset references:\n" + "\n".join(missing))
 
           print("Static site checks passed")
-          PY
+          PYTHON
