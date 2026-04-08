@@ -11,19 +11,73 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: List static site files
+      - name: Validate required files
         run: |
-          echo "Repository type: static HTML site"
-          echo "html/ contents:"; ls -la html || true
-          echo "css/ contents:"; ls -la css || true
-          echo "js/ contents:"; ls -la js || true
+          set -eu
+          for file in index.html css/styles.css js/main.js; do
+            if [ ! -f "$file" ]; then
+              echo "Missing required file: $file"
+              exit 1
+            fi
+          done
 
-      - name: Quick consistency checks
+      - name: Validate redirects and local assets
         run: |
-          # Ensure there is an index.html or html/index.html
-          if [ -f index.html ] || [ -f html/index.html ]; then
-            echo "Index file present"
-          else
-            echo "WARNING: No index.html found"; exit 0
-          fi
+          python3 <<'PYTHON'
+          from html.parser import HTMLParser
+          from pathlib import Path
 
+          root = Path(".")
+          redirect_targets = {
+              "experiencia.html": "#experiencia",
+              "habilidades.html": "#habilidades",
+              "educacion.html": "#educacion",
+              "contacto.html": "#contacto",
+              "competencias.html": "#competencias",
+              "equipamiento.html": "#equipamiento",
+              "referencias.html": "#referencias",
+          }
+
+          for file_name, fragment in redirect_targets.items():
+              content = (root / file_name).read_text(encoding="utf-8")
+              expected = f"index.html{fragment}"
+              if expected not in content:
+                  raise SystemExit(f"{file_name} must redirect to {expected}")
+
+          class AssetParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.refs = []
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  if tag == "img" and attrs.get("src"):
+                      self.refs.append(attrs["src"])
+                  elif tag == "script" and attrs.get("src"):
+                      self.refs.append(attrs["src"])
+                  elif tag == "link" and attrs.get("href"):
+                      self.refs.append(attrs["href"])
+
+          def is_local(ref: str) -> bool:
+              return not (
+                  ref.startswith(("http://", "https://", "//", "mailto:", "tel:", "#", "data:"))
+              )
+
+          files_to_scan = ["index.html", *redirect_targets.keys()]
+          missing = []
+
+          for file_name in files_to_scan:
+              parser = AssetParser()
+              parser.feed((root / file_name).read_text(encoding="utf-8"))
+              for ref in parser.refs:
+                  target = ref.split("#", 1)[0].split("?", 1)[0]
+                  if not target or not is_local(target):
+                      continue
+                  if not (root / target).exists():
+                      missing.append(f"{file_name} -> {target}")
+
+          if missing:
+              raise SystemExit("Missing local asset references:\n" + "\n".join(missing))
+
+          print("Static site checks passed")
+          PYTHON

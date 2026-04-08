@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alexi Burgos – CV Profesional</title>
     <meta name="description" content="CV profesional de Alexi Burgos, especialista en gestión educativa, analítica institucional y operaciones logísticas.">
+    <meta name="author" content="Alexi Marcelo Burgos Flores">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#0f172a">
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Alexi Burgos – CV Profesional">
+    <meta property="og:description" content="Perfil profesional de Alexi Burgos con experiencia en gestión educativa, analítica institucional y operaciones logísticas.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Alexi Burgos – CV Profesional">
+    <meta name="twitter:description" content="CV profesional con experiencia en gestión educativa, analítica institucional y operaciones logísticas.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
     <svg class="icon-sprite" aria-hidden="true" focusable="false">
         <symbol id="icon-document" viewBox="0 0 24 24">
             <path d="M7 3.75h7.5L19.25 8.5v11.75a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4.75a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
@@ -41,10 +52,10 @@
                     </span>
                     <span>Alexi Burgos</span>
                 </a>
-                <button class="navbar-toggle" aria-label="Abrir menú" aria-expanded="false">
+                <button class="navbar-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-navigation">
                     <span></span><span></span><span></span>
                 </button>
-                <ul class="nav-menu">
+                <ul class="nav-menu" id="site-navigation">
                     <li><a class="nav-link" href="#inicio" data-section="inicio">Inicio</a></li>
                     <li><a class="nav-link" href="#perfil" data-section="perfil">Perfil</a></li>
                     <li><a class="nav-link" href="#experiencia" data-section="experiencia">Experiencia</a></li>
@@ -59,7 +70,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="contenido-principal" tabindex="-1">
         <section id="inicio" class="hero hero-dark">
             <div class="hero-content">
                 <p class="hero-eyebrow">CV profesional</p>
@@ -75,7 +86,7 @@
                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-mail"></use></svg>
                         <span>alexi.fs341@gmail.com</span>
                     </a>
-                    <a class="hero-link-item" href="https://linkedin.com/in/alexiburgos" target="_blank" rel="noreferrer">
+                    <a class="hero-link-item" href="https://linkedin.com/in/alexiburgos" target="_blank" rel="noopener noreferrer">
                         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
                         <span>linkedin.com/in/alexiburgos</span>
                     </a>
@@ -89,8 +100,8 @@
                     <h2 class="section-title">Perfil Profesional</h2>
                     <p class="section-text">Soy un profesional con 13 años de experiencia en logística y 7 en gestión educativa, especializado en coordinación académica y administración de procesos educativos. Me destaco por mi capacidad para optimizar operaciones académicas, mejorar la calidad educativa y fortalecer la vinculación con el sector laboral. Poseo habilidades en liderazgo, resolución de conflictos, análisis de datos y toma de decisiones estratégicas. Puedo crear paneles de KPI y OKR en Power BI, incluyendo paneles de progreso académico, seguimiento de desempeño estudiantil y análisis de deserción académica. Además, manejo Python básico-intermedio para el análisis de bases de datos y Excel avanzado para la gestión y visualización de información.</p>
                 </div>
-                <figure class="section-image media-slot" data-image-file="IMAGEN-1.png" aria-label="IMAGEN-1">
-                    <img src="IMAGEN-1.png" alt="Imagen de perfil profesional">
+                <figure class="section-image media-slot" data-image-file="imagen-1.png" aria-label="Imagen de perfil profesional">
+                    <img src="imagen-1.png" alt="Imagen de perfil profesional" loading="lazy" decoding="async">
                 </figure>
             </div>
         </section>
@@ -99,8 +110,9 @@
             <div class="section-wrapper">
                 <div class="section-content">
                     <h2 class="section-title">Experiencia Laboral</h2>
-                    <div class="experience-progress" id="experience-progress">Mostrando 3 de 10</div>
+                    <div class="experience-progress" id="experience-progress" aria-live="polite">Mostrando 3 de 10</div>
 
+                    <div id="experience-list">
                     <article class="experience-card">
                         <figure class="experience-media media-slot" data-image-file="EXPERIENCIA-1.png"></figure>
                         <div class="experience-body">
@@ -231,10 +243,11 @@
                         </div>
                         <figure class="experience-media media-slot"></figure>
                     </article>
+                    </div>
 
                     <div class="experience-controls">
-                        <button id="show-more-experience" class="btn-show-more" type="button">Mostrar más</button>
-                        <span id="remaining-experience" class="remaining-text">7 restantes</span>
+                        <button id="show-more-experience" class="btn-show-more" type="button" aria-controls="experience-list">Mostrar más</button>
+                        <span id="remaining-experience" class="remaining-text" aria-live="polite">7 restantes</span>
                     </div>
                 </div>
             </div>
@@ -426,7 +439,7 @@
                     </div>
                     <div class="contact-item">
                         <p class="contact-label"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-linkedin"></use></svg><span>LinkedIn</span></p>
-                        <a href="https://linkedin.com/in/alexiburgos" target="_blank" rel="noreferrer" class="contact-value contact-link">linkedin.com/in/alexiburgos</a>
+                        <a href="https://linkedin.com/in/alexiburgos" target="_blank" rel="noopener noreferrer" class="contact-value contact-link">linkedin.com/in/alexiburgos</a>
                     </div>
                 </div>
             </div>

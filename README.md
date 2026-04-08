@@ -1,48 +1,37 @@
-# 📄 CV — Alexi Burgos (HTML)
+# CV — Alexi Burgos
 
-Este repositorio contiene un **CV estático** en HTML con diseño responsivo y recursos estáticos.
-Incluye un **dashboard de habilidades** con **Chart.js** y un formulario de contacto basado en **EmailJS**.
+Sitio estático de una sola página para presentar el CV profesional de Alexi Burgos.
 
-## Cómo Ejecutarlo
+## Estructura actual
 
-1. Abre el archivo `html/index.html` o `index.html` en cualquier navegador web.
+- `index.html`: entrada principal del sitio
+- `css/styles.css`: estilos del CV
+- `js/main.js`: navegación, animaciones y carga progresiva de contenido
+- `experiencia.html`, `habilidades.html`, `educacion.html`, `contacto.html`, `competencias.html`, `equipamiento.html`, `referencias.html`: redirecciones a secciones internas de `index.html`
+
+## Cómo verlo localmente
+
+### Opción rápida
+
+Abre `index.html` directamente en el navegador.
+
+### Opción recomendada
+
+Levanta un servidor estático desde la raíz del proyecto:
+
+```bash
+python3 -m http.server 8000
+```
+
+Luego abre `http://localhost:8000`.
 
 ## Despliegue
 
-1. **GitHub Pages**:
-   - Sube el contenido del proyecto a un repositorio en GitHub.
-   - Ve a la configuración del repositorio y habilita GitHub Pages en la rama `main`.
-   - Accede al CV desde la URL proporcionada por GitHub Pages.
+Este proyecto puede publicarse como sitio estático en GitHub Pages, Netlify o Vercel usando la raíz del repositorio como directorio público.
 
-2. **Netlify**:
-   - Arrastra y suelta el contenido del proyecto en la interfaz de Netlify.
-   - Netlify generará automáticamente una URL para tu CV.
+## Mantenimiento
 
-3. **Vercel**:
-   - Sube el proyecto a Vercel y selecciona la carpeta raíz como punto de inicio.
-
-## Notas Finales
-
-- Asegúrate de que los archivos `css/styles.css` y `js/app.js` estén minificados para un mejor rendimiento.
-- Si usas `EmailJS` en el formulario de contacto, revisa `html/contacto.html` y configura las claves públicas/privadas que requiere ese servicio.
-
-## Problemas comunes
-
-- Evita subir credenciales en texto plano: archivos como `.env` deben mantenerse fuera del repositorio público.
-
-## Comandos útiles de despliegue
-
-```bash
-# Redeploy manual: push a main
-git push origin main
-```
-
-## Dependencias del Proyecto (recursos estáticos)
-
-### CSS
-
-- **Bootstrap**: Archivo: `css/bootstrap.min.css`
-
-### JavaScript
-
-- **Chart.js**: Archivo: `js/chart.min.js`
+- Mantén `index.html`, `css/styles.css` y `js/main.js` sincronizados: son los archivos críticos del sitio.
+- Usa nombres de assets consistentes para evitar problemas de rutas entre sistemas con sensibilidad a mayúsculas/minúsculas.
+- Este repositorio no necesita `.env`, credenciales ni librerías vendor locales adicionales para funcionar.
+- No subas secretos ni credenciales al repositorio.

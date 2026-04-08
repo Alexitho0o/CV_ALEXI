@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const nav = document.querySelector(".navbar");
   const navLinks = Array.from(document.querySelectorAll(".nav-link"));
   const sections = Array.from(document.querySelectorAll("main section[id]"));
@@ -12,6 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const isOpen = navMenu.classList.toggle("open");
       navToggle.setAttribute("aria-expanded", String(isOpen));
     });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !navMenu.classList.contains("open")) return;
+      navMenu.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.focus();
+    });
   }
 
   navLinks.forEach((link) => {
@@ -24,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       event.preventDefault();
       const top = target.getBoundingClientRect().top + window.scrollY - getNavOffset();
-      window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" });
+      window.scrollTo({ top: Math.max(top, 0), behavior: prefersReducedMotion ? "auto" : "smooth" });
+      target.focus({ preventScroll: true });
 
       if (navMenu && navMenu.classList.contains("open")) {
         navMenu.classList.remove("open");
@@ -44,7 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     navLinks.forEach((link) => {
-      link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+      const isActive = link.getAttribute("href") === `#${current}`;
+      link.classList.toggle("active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
   };
 
@@ -54,18 +69,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const revealTargets = document.querySelectorAll(".section, .experience-card, .media-slot");
   revealTargets.forEach((el) => el.classList.add("reveal"));
 
-  const revealObserver = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("in-view");
-        obs.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
-  );
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    revealTargets.forEach((el) => el.classList.add("in-view"));
+  } else {
+    const revealObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in-view");
+          obs.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+    );
 
-  revealTargets.forEach((el) => revealObserver.observe(el));
+    revealTargets.forEach((el) => revealObserver.observe(el));
+  }
 
   const loadImageIfExists = (slot) => {
     const existingImage = slot.querySelector("img");
@@ -107,6 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const realImg = document.createElement("img");
         realImg.src = src;
         realImg.alt = baseName;
+        realImg.loading = "lazy";
+        realImg.decoding = "async";
         slot.classList.add("has-image");
         slot.classList.remove("is-empty");
         slot.appendChild(realImg);
@@ -139,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnShowMore) {
       btnShowMore.style.display = remaining > 0 ? "inline-flex" : "none";
+      btnShowMore.setAttribute("aria-label", remaining > 0 ? `Mostrar ${Math.min(remaining, 1)} experiencia adicional` : "No hay más experiencias para mostrar");
     }
   };
 
@@ -152,8 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!next) return;
 
       next.classList.remove("is-hidden");
-      next.classList.add("is-reveal");
-      setTimeout(() => next.classList.remove("is-reveal"), 520);
+      if (!prefersReducedMotion) {
+        next.classList.add("is-reveal");
+        setTimeout(() => next.classList.remove("is-reveal"), 520);
+      }
 
       updateExperienceCounters();
     });
