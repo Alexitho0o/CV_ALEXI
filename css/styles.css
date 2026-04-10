@@ -936,3 +936,113 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+/* Ajustes solicitados para el despliegue principal en Vercel */
+#educacion,
+#habilidades,
+#competencias,
+#equipamiento,
+#referencias,
+#contacto {
+  padding-block: 3.2rem;
+}
+
+#educacion .section-wrapper,
+#competencias .section-wrapper {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+#educacion .section-title,
+#competencias .section-title,
+#competencias .section-intro {
+  grid-column: 1 / -1;
+}
+
+#educacion .edu-item,
+#competencias .comp-item,
+#equipamiento .equipo-item,
+#referencias .ref-item,
+#habilidades .skill-category,
+#contacto .contact-item {
+  border-radius: 8px;
+  margin-bottom: 0;
+  padding: 0.95rem 1rem;
+}
+
+#educacion .edu-item,
+#competencias .comp-item {
+  display: block;
+}
+
+#educacion .edu-item:last-child,
+#competencias .comp-item:last-child,
+#habilidades .skill-category:last-child,
+#referencias .ref-item:last-child {
+  grid-column: 1 / -1;
+}
+
+#habilidades .habilidades-wrapper,
+#equipamiento .equipamiento-wrapper {
+  grid-template-columns: 1fr;
+}
+
+#habilidades .skill-text,
+#equipamiento .equip-text {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+#habilidades .section-title,
+#equipamiento .section-title,
+#equipamiento .section-intro {
+  grid-column: 1 / -1;
+}
+
+#referencias .section-content,
+#contacto .contact-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.contact-item-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.contact-item-inline .contact-label,
+.contact-location {
+  margin: 0;
+}
+
+.contact-location {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.experience-media[data-image-file="EXPERIENCIA-1.png"] img,
+.experience-media[data-image-file="EXPERIENCIA-3.png"] img {
+  object-position: calc(50% + 3cm) calc(50% - 1cm);
+}
+
+.experience-media[data-image-file="EXPERIENCIA-2.png"] img {
+  object-position: calc(50% - 0.5cm) calc(50% - 0.5cm);
+}
+
+@media (max-width: 840px) {
+  #educacion .section-wrapper,
+  #competencias .section-wrapper,
+  #habilidades .skill-text,
+  #equipamiento .equip-text,
+  #referencias .section-content,
+  #contacto .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-item-inline {
+    justify-content: flex-start;
+  }
+}
