@@ -1,24 +1,69 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.body.classList.add("has-js");
+
   const nav = document.querySelector(".navbar");
+  const navContainer = document.querySelector(".navbar-container");
   const navLinks = Array.from(document.querySelectorAll(".nav-link"));
   const sections = Array.from(document.querySelectorAll("main section[id]"));
   const navToggle = document.querySelector(".navbar-toggle");
   const navMenu = document.querySelector(".nav-menu");
+  const mediaResizeObservers = new WeakMap();
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const getNavOffset = () => (nav ? nav.offsetHeight + 14 : 90);
+  const closeMenu = ({ focusToggle = false } = {}) => {
+    if (!navMenu || !navToggle) return;
+    navMenu.classList.remove("open");
+    navToggle.setAttribute("aria-expanded", "false");
+    if (focusToggle) navToggle.focus();
+  };
+
+  const setMenuOpen = (isOpen) => {
+    if (!navMenu || !navToggle) return;
+    navMenu.classList.toggle("open", isOpen);
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  };
+
+  const isInsideToggleHitArea = (event) => {
+    if (!navToggle || typeof event.clientX !== "number" || typeof event.clientY !== "number") return false;
+    const rect = navToggle.getBoundingClientRect();
+    return (
+      event.clientX >= rect.left &&
+      event.clientX <= rect.right &&
+      event.clientY >= rect.top &&
+      event.clientY <= rect.bottom
+    );
+  };
 
   if (navToggle && navMenu) {
-    navToggle.addEventListener("click", () => {
-      const isOpen = navMenu.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setMenuOpen(!navMenu.classList.contains("open"));
+    });
+
+    if (navContainer) {
+      navContainer.addEventListener("click", (event) => {
+        if (event.target.closest(".navbar-toggle")) return;
+        if (!isInsideToggleHitArea(event)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        setMenuOpen(!navMenu.classList.contains("open"));
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      if (!navMenu.classList.contains("open")) return;
+      if (nav.contains(event.target)) return;
+      closeMenu();
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape" || !navMenu.classList.contains("open")) return;
-      navMenu.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
-      navToggle.focus();
+      closeMenu({ focusToggle: true });
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 840) closeMenu();
     });
   }
 
@@ -33,12 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const top = target.getBoundingClientRect().top + window.scrollY - getNavOffset();
       window.scrollTo({ top: Math.max(top, 0), behavior: prefersReducedMotion ? "auto" : "smooth" });
+
+      if (!target.hasAttribute("tabindex")) {
+        target.setAttribute("tabindex", "-1");
+      }
       target.focus({ preventScroll: true });
 
-      if (navMenu && navMenu.classList.contains("open")) {
-        navMenu.classList.remove("open");
-        if (navToggle) navToggle.setAttribute("aria-expanded", "false");
-      }
+      closeMenu();
     });
   });
 
@@ -86,11 +132,124 @@ document.addEventListener("DOMContentLoaded", () => {
     revealTargets.forEach((el) => revealObserver.observe(el));
   }
 
+  function updateMediaSlot(slot) {
+    const img = slot.querySelector("img");
+    if (!img) {
+      slot.classList.add("is-empty");
+      slot.classList.remove("has-image");
+      return;
+    }
+
+    if (!img.naturalWidth || !img.naturalHeight) return;
+
+    const slotW = slot.clientWidth;
+    const slotH = slot.clientHeight;
+    if (!slotW || !slotH) return;
+
+    const ir = img.naturalWidth / img.naturalHeight;
+    const sr = slotW / slotH;
+    const mismatch = Math.max(ir / sr, sr / ir);
+
+    slot.style.setProperty("--fx", (slot.dataset.fx || 50) + "%");
+    slot.style.setProperty("--fy", (slot.dataset.fy || 50) + "%");
+
+    if (mismatch > 1.8) {
+      slot.dataset.mode = "padded";
+      slot.style.setProperty("--bg-image", `url("${img.currentSrc || img.src}")`);
+    } else {
+      slot.dataset.mode = "cover";
+      slot.style.setProperty("--bg-image", "none");
+    }
+
+    slot.classList.add("has-image");
+    slot.classList.remove("is-empty");
+  }
+
+  function initMediaSlots() {
+    document.querySelectorAll(".media-slot").forEach((slot) => {
+      const img = slot.querySelector("img");
+
+      if (!img) {
+        slot.classList.add("is-empty");
+        slot.classList.remove("has-image");
+        return;
+      }
+
+      const run = () => updateMediaSlot(slot);
+
+      if (img.complete && img.naturalWidth) {
+        run();
+      } else {
+        img.addEventListener("load", run, { once: true });
+        img.addEventListener(
+          "error",
+          () => {
+            slot.classList.add("is-empty");
+            slot.classList.remove("has-image");
+          },
+          { once: true }
+        );
+      }
+
+      if ("ResizeObserver" in window) {
+        const ro = new ResizeObserver(run);
+        ro.observe(slot);
+      } else {
+        window.addEventListener("resize", run);
+      }
+    });
+  }
+
+  initMediaSlots();
+
+  const ensureMediaSlotObserver = (slot, run) => {
+    if (mediaResizeObservers.has(slot)) return;
+
+    if ("ResizeObserver" in window) {
+      const ro = new ResizeObserver(run);
+      ro.observe(slot);
+      mediaResizeObservers.set(slot, ro);
+    } else {
+      window.addEventListener("resize", run);
+      mediaResizeObservers.set(slot, true);
+    }
+  };
+
+  const bindImageToSlot = (slot, img) => {
+    const run = () => updateMediaSlot(slot);
+
+    img.addEventListener(
+      "load",
+      () => {
+        slot.classList.add("has-image");
+        slot.classList.remove("is-empty");
+        run();
+      },
+      { once: true }
+    );
+
+    img.addEventListener(
+      "error",
+      () => {
+        slot.classList.add("is-empty");
+        slot.classList.remove("has-image");
+      },
+      { once: true }
+    );
+
+    if (img.complete && img.naturalWidth) {
+      slot.classList.add("has-image");
+      slot.classList.remove("is-empty");
+      run();
+    }
+
+    ensureMediaSlotObserver(slot, run);
+  };
+
   const loadImageIfExists = (slot) => {
     const existingImage = slot.querySelector("img");
     if (existingImage) {
-      slot.classList.add("has-image");
-      slot.classList.remove("is-empty");
+      bindImageToSlot(slot, existingImage);
       return;
     }
 
@@ -100,43 +259,51 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const baseName = fileName.replace(/\.[^.]+$/, "");
+    const dotIndex = fileName.lastIndexOf(".");
+    const rawBaseName = dotIndex >= 0 ? fileName.slice(0, dotIndex) : fileName;
+    const fileBaseName = rawBaseName.split("/").pop() || rawBaseName;
     const extensions = ["png", "jpg", "jpeg", "webp", "svg"];
     const folders = ["", "images", "img"];
-
     const candidates = [];
-    // Exact file first
-    folders.forEach((f) => candidates.push(f ? `${f}/${fileName}` : fileName));
-    // Case variations with all extensions
-    folders.forEach((f) => {
-      extensions.forEach((ext) => {
-        candidates.push(f ? `${f}/${baseName}.${ext}` : `${baseName}.${ext}`);
-        candidates.push(f ? `${f}/${baseName.toLowerCase()}.${ext}` : `${baseName.toLowerCase()}.${ext}`);
-        candidates.push(f ? `${f}/${baseName.toUpperCase()}.${ext}` : `${baseName.toUpperCase()}.${ext}`);
+
+    folders.forEach((folder) => {
+      const prefix = folder ? `${folder}/` : "";
+      candidates.push(`${prefix}${fileName}`);
+      extensions.forEach((extension) => {
+        candidates.push(`${prefix}${rawBaseName}.${extension}`);
+        candidates.push(`${prefix}${rawBaseName.toLowerCase()}.${extension}`);
+        candidates.push(`${prefix}${rawBaseName.toUpperCase()}.${extension}`);
       });
     });
-    // Deduplicate
-    const unique = [...new Set(candidates)];
+
+    const uniqueCandidates = [...new Set(candidates)];
 
     const testNext = (index) => {
-      if (index >= unique.length) return; // No image found, placeholder stays
-      const src = unique[index];
-      const test = new Image();
-      test.onload = () => {
+      if (index >= uniqueCandidates.length) {
+        slot.classList.add("is-empty");
+        slot.classList.remove("has-image");
+        slot.setAttribute("data-error", "Image failed to load");
+        return;
+      }
+
+      const source = uniqueCandidates[index];
+      const probe = new Image();
+
+      probe.onload = () => {
         const realImg = document.createElement("img");
-        realImg.src = src;
-        realImg.alt = baseName;
+        realImg.src = source;
+        realImg.alt = fileBaseName;
         realImg.loading = "lazy";
         realImg.decoding = "async";
-        slot.classList.add("has-image");
-        slot.classList.remove("is-empty");
+        bindImageToSlot(slot, realImg);
         slot.appendChild(realImg);
       };
-      test.onerror = () => {
-        if (index === unique.length - 1) slot.classList.add("is-empty");
+
+      probe.onerror = () => {
         testNext(index + 1);
       };
-      test.src = src;
+
+      probe.src = source;
     };
 
     testNext(0);
@@ -160,7 +327,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (btnShowMore) {
       btnShowMore.style.display = remaining > 0 ? "inline-flex" : "none";
-      btnShowMore.setAttribute("aria-label", remaining > 0 ? `Mostrar ${Math.min(remaining, 1)} experiencia adicional` : "No hay más experiencias para mostrar");
+      btnShowMore.setAttribute(
+        "aria-label",
+        remaining > 0 ? "Mostrar una experiencia adicional" : "No hay más experiencias para mostrar"
+      );
     }
   };
 
