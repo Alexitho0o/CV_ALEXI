@@ -10,4 +10,5 @@ Validaciones ejecutadas en esta resolución:
 * Compilación React/Vite mediante npm run build.
 
 Observación:
-El PDF será auditado visualmente en una fase posterior. Durante esta resolución se priorizó cerrar el rebase sin pérdida de archivos fuente.
+El PDF será auditado visualmente en una fase posterior. Durante esta resolución
+se priorizó cerrar el rebase sin pérdida de archivos fuente.
