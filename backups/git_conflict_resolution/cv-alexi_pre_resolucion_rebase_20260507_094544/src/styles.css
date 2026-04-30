@@ -1,0 +1,1082 @@
+/* ═══════════════════════════════════════════════════════════
+   CV ALEXI BURGOS — Executive A4 Design
+   Paleta: navy #08284d · blue #1f67c8 · orange #f58220
+   Base: 1120px screen → A4 via zoom: var(--print-scale)
+   Escala default 0.709 → 793.7px ancho A4 exacto
+═══════════════════════════════════════════════════════════ */
+
+/* ─── Variables ─────────────────────────────────────────── */
+:root {
+  --navy:     #08284d;
+  --blue:     #1f67c8;
+  --orange:   #f58220;
+<<<<<<< HEAD
+  --navy2:    #0d3a6e;
+=======
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  --bglight:  #f0f4f8;
+  --bglighter:#f8fafc;
+  --border:   #dde3ec;
+  --text:     #1a2a3a;
+  --textm:    #3d5166;
+  --textl:    #6b7f96;
+<<<<<<< HEAD
+=======
+  --textd:    #4b5563;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  --white:    #ffffff;
+  --font:     'Inter', system-ui, -apple-system, sans-serif;
+  --r:        5px;
+  --print-scale: 0.709;
+}
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+
+/* ─── Body / page wrapper ───────────────────────────────── */
+html, body {
+  background: #c8d0da;
+  font-family: var(--font);
+  color: var(--text);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 24px 20px;
+}
+
+/* ─── CV container ──────────────────────────────────────── */
+.cv {
+  width: 1120px;
+  min-width: 1120px;
+  background: var(--white);
+  box-shadow: 0 4px 40px rgba(0,0,0,.18);
+  display: flex;
+  flex-direction: column;
+  min-height: 1410px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════════════ */
+.cv-hero {
+  background: var(--navy);
+  display: grid;
+<<<<<<< HEAD
+  grid-template-columns: 175px 1fr 208px;
+  min-height: 185px;
+=======
+  grid-template-columns: 195px 1fr 215px;
+  min-height: 210px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  align-items: stretch;
+}
+
+.hero-photo {
+  overflow: hidden;
+  display: flex;
+  align-self: stretch;
+}
+.photo {
+<<<<<<< HEAD
+  width: 175px;
+  min-height: 185px;
+=======
+  width: 195px;
+  min-height: 210px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  flex-shrink: 0;
+}
+
+.hero-body {
+<<<<<<< HEAD
+  padding: 18px 20px 16px 28px;
+=======
+  padding: 20px 22px 18px 30px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(255,255,255,.1);
+}
+
+.hero-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  margin-bottom: 5px;
+  color: var(--white);
+}
+.hero-name span {
+  font-size: 2.15rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1.08;
+}
+.hero-name span:last-child { color: #a8c4e6; }
+
+.hero-title {
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--orange);
+  margin-bottom: 7px;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.hero-kws {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 8px;
+}
+.kw {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,.55);
+}
+.kw-sep { color: var(--orange); margin: 0 4px; font-weight: 300; }
+
+.hero-summary {
+  font-size: 0.68rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.8);
+  max-width: 560px;
+}
+
+/* Sidebar */
+.hero-side {
+  padding: 14px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+<<<<<<< HEAD
+=======
+  overflow: hidden;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+}
+
+.qf-list { display: flex; flex-direction: column; gap: 5px; }
+.qf { display: flex; align-items: center; gap: 6px; }
+.ic {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.qf-text { display: flex; flex-direction: column; }
+.qf-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+}
+.qf-sub {
+  font-size: 0.56rem;
+  color: rgba(255,255,255,.52);
+  line-height: 1.2;
+}
+
+.contact-box {
+  display: flex;
+<<<<<<< HEAD
+  gap: 8px;
+  align-items: flex-start;
+=======
+  flex-direction: column;
+  gap: 6px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  margin-top: 2px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  flex: 1;
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cl {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.64rem;
+  color: rgba(255,255,255,.72);
+}
+.contact-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+<<<<<<< HEAD
+  gap: 2px;
+}
+.qr-lbl {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,.45);
+}
+.qr-img {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  background: white;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255,255,255,.15);
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  padding-top: 4px;
+}
+.cl {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.59rem;
+  color: rgba(255,255,255,.72);
+}
+=======
+  gap: 3px;
+  flex: 1;
+}
+.qr-lbl {
+  font-size: 0.50rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,.4);
+  text-transform: uppercase;
+}
+.qr-img {
+  width: 100%;
+  max-width: 144px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(255,255,255,.18);
+}
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+
+/* ══════════════════════════════════════════════════════════
+   KPI STRIP
+══════════════════════════════════════════════════════════ */
+.cv-kpi {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--bglighter);
+  border-top: 3px solid var(--navy);
+}
+
+.kpi {
+<<<<<<< HEAD
+  padding: 10px 16px 9px;
+=======
+  padding: 8px 14px 7px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.kpi:nth-child(4n)  { border-right: none; }
+.kpi:nth-child(n+5) { border-bottom: none; }
+.kpi::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+<<<<<<< HEAD
+  height: 2.5px;
+=======
+  height: 2px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  background: var(--kc);
+}
+
+.kpi-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.kpi-num {
+<<<<<<< HEAD
+  font-size: 2.0rem;
+=======
+  font-size: 1.65rem;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  font-weight: 900;
+  color: var(--kc);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.kpi-icon {
+<<<<<<< HEAD
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+=======
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  background: color-mix(in srgb, var(--kc) 12%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kpi-label {
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--navy);
+  margin-bottom: 1px;
+  text-transform: uppercase;
+}
+.kpi-text {
+  font-size: 0.58rem;
+  color: var(--textl);
+  line-height: 1.35;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BODY 2-COL
+══════════════════════════════════════════════════════════ */
+.cv-body {
+  display: grid;
+  grid-template-columns: 1fr 356px;
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+
+.col-left  { display: flex; flex-direction: column; }
+.col-right { border-left: 1px solid var(--border); display: flex; flex-direction: column; }
+
+/* Generic section */
+.cv-sec {
+<<<<<<< HEAD
+  padding: 11px 16px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.col-right .cv-sec {
+  padding: 9px 13px 8px;
+=======
+  padding: 13px 18px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.col-right .cv-sec {
+  padding: 11px 14px 10px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+}
+.cv-sec:last-child { border-bottom: none; }
+
+.sec-title {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid var(--orange);
+}
+.sec-title--blue   { border-bottom-color: var(--blue); }
+.sec-title--orange { border-bottom-color: var(--orange); }
+.sec-title span {
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  color: var(--navy);
+  text-transform: uppercase;
+}
+
+/* ── Áreas clave ─────────────────────────────────────────── */
+.areas-row {
+  display: grid;
+  grid-template-columns: 1fr 142px;
+  gap: 10px;
+  align-items: start;
+}
+
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+
+.area-card {
+  border: 1px solid var(--border);
+  border-top: 2.5px solid var(--ac);
+  border-radius: var(--r);
+  padding: 9px 10px 8px;
+  background: var(--white);
+}
+.area-hd {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+.area-hd h4 {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+  line-height: 1.3;
+}
+.area-card ul { display: flex; flex-direction: column; gap: 3px; }
+.area-card ul li {
+  font-size: 0.61rem;
+  color: var(--textm);
+  padding-left: 9px;
+  position: relative;
+  line-height: 1.35;
+}
+.area-card ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--ac);
+}
+
+/* ── Venn ────────────────────────────────────────────────── */
+.venn { display: flex; align-items: center; justify-content: center; }
+.venn-wrap {
+  position: relative;
+  width: 134px;
+  height: 132px;
+}
+.venn-c {
+  position: absolute;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+<<<<<<< HEAD
+=======
+  align-items: center;
+  justify-content: center;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  gap: 2px;
+  opacity: 0.84;
+}
+.venn-c span {
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-align: center;
+  line-height: 1.2;
+}
+.venn-op {
+  background: var(--navy);
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+<<<<<<< HEAD
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 9px;
+=======
+  padding-bottom: 28px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  z-index: 3;
+}
+.venn-doc {
+  background: var(--orange);
+  bottom: 0; left: 0;
+<<<<<<< HEAD
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 0 8px 9px;
+=======
+  padding-top: 22px;
+  padding-right: 18px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  z-index: 4;
+}
+.venn-dat {
+  background: var(--blue);
+  bottom: 0; right: 0;
+<<<<<<< HEAD
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 9px 8px 0;
+=======
+  padding-top: 22px;
+  padding-left: 18px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  z-index: 2;
+}
+.venn-center {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+.venn-center strong {
+  font-size: 0.42rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  line-height: 1.35;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+/* ── Trayectoria hito list ───────────────────────────────── */
+.hito-list { display: flex; flex-direction: column; gap: 0; }
+
+.hito {
+  display: grid;
+<<<<<<< HEAD
+  grid-template-columns: 68px 6px 24px 1fr;
+  gap: 0 5px;
+  padding: 4px 0;
+=======
+  grid-template-columns: 100px 8px 40px 1fr;
+  gap: 0 6px;
+  padding: 5px 0;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  align-items: start;
+  border-bottom: 1px solid var(--bglight);
+}
+.hito:last-child { border-bottom: none; }
+
+.hito-period {
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: var(--textl);
+  text-align: right;
+  padding-top: 2px;
+  line-height: 1.3;
+  white-space: nowrap;
+<<<<<<< HEAD
+}
+.hito-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+  justify-self: center;
+}
+.hito-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hito-img {
+  width: 22px;
+  height: 22px;
+=======
+}
+.hito-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 16px;
+  flex-shrink: 0;
+  justify-self: center;
+}
+.hito-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hito-img {
+  width: 36px;
+  height: 36px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  object-fit: contain;
+}
+.img-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--textl);
+  background: var(--bglight);
+}
+.hito-text { display: flex; flex-direction: column; gap: 0; padding-bottom: 2px; }
+<<<<<<< HEAD
+=======
+.hito-top-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.hito-cats {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.hito-cat {
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+.hito-role {
+  font-size: 0.61rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+}
+.hito-inst {
+  font-size: 0.57rem;
+  color: var(--blue);
+  line-height: 1.3;
+<<<<<<< HEAD
+}
+.hito-sub {
+  font-size: 0.54rem;
+  color: var(--textl);
+  line-height: 1.3;
+}
+
+/* ── Instituciones logos (right col) ─────────────────────── */
+.logo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.logo-chip {
+  width: 60px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  overflow: hidden;
+}
+.logo-chip-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ── Formación (right col, 2×2 grid) ────────────────────── */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.edu-item {
+  display: flex;
+  gap: 5px;
+  align-items: flex-start;
+}
+.edu-title {
+  font-size: 0.59rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 1px;
+}
+.edu-inst {
+  font-size: 0.55rem;
+  color: var(--blue);
+  line-height: 1.25;
+}
+.edu-detail {
+  font-size: 0.53rem;
+  color: var(--textl);
+  line-height: 1.2;
+}
+
+/* ── Herramientas (right col) ───────────────────────────── */
+.tool-groups { display: flex; flex-direction: column; gap: 5px; }
+.tool-group  { display: flex; flex-direction: column; gap: 3px; }
+.tool-group-lbl {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--navy);
+  text-transform: uppercase;
+}
+=======
+}
+.hito-sub {
+  font-size: 0.54rem;
+  color: var(--textl);
+  line-height: 1.3;
+}
+.hito-desc {
+  display: block;
+  font-size: 0.57rem;
+  line-height: 1.25;
+  color: var(--textd);
+  margin-top: 2px;
+}
+
+/* ── Instituciones logos (right col) — grilla 2×2 ──────── */
+.logo-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.logo-chip {
+  width: 100%;
+  height: 60px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  overflow: hidden;
+}
+.logo-chip-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ── Formación (right col, 2×2 grid) ────────────────────── */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.edu-item {
+  display: flex;
+  gap: 5px;
+  align-items: flex-start;
+}
+.edu-title {
+  font-size: 0.59rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 1px;
+}
+.edu-inst {
+  font-size: 0.55rem;
+  color: var(--blue);
+  line-height: 1.25;
+}
+.edu-detail {
+  font-size: 0.53rem;
+  color: var(--textl);
+  line-height: 1.2;
+}
+
+/* ── Herramientas (right col) ───────────────────────────── */
+.tool-groups { display: flex; flex-direction: column; gap: 5px; }
+.tool-group  { display: flex; flex-direction: column; gap: 3px; }
+.tool-group-lbl {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--navy);
+  text-transform: uppercase;
+}
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+.tool-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+.tool-tag {
+  background: var(--bglight);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 7px;
+  font-size: 0.57rem;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* ── Propuesta de valor (right col) ─────────────────────── */
+.val-list { display: flex; flex-direction: column; gap: 5px; }
+.val-item  { display: flex; gap: 6px; align-items: flex-start; }
+.val-title {
+  font-size: 0.60rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 1px;
+  line-height: 1.3;
+}
+.val-text {
+  font-size: 0.57rem;
+  color: var(--textm);
+  line-height: 1.35;
+}
+
+/* ══════════════════════════════════════════════════════════
+<<<<<<< HEAD
+   MODELO DE IMPACTO + QUOTE
+══════════════════════════════════════════════════════════ */
+.cv-impact {
+  display: grid;
+  grid-template-columns: 1fr 210px;
+=======
+   MODELO DE IMPACTO
+══════════════════════════════════════════════════════════ */
+.cv-impact {
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  border-top: 1px solid var(--border);
+  padding: 14px 18px 12px;
+}
+
+<<<<<<< HEAD
+.impact-sec {
+  padding: 10px 16px 9px;
+  border-right: 1px solid var(--border);
+}
+
+=======
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+.impact-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+.impact-step-wrap {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+.imp-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+}
+.imp-icon {
+<<<<<<< HEAD
+  width: 36px;
+  height: 36px;
+=======
+  width: 50px;
+  height: 50px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  border-radius: 50%;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+<<<<<<< HEAD
+  margin-bottom: 4px;
+=======
+  margin-bottom: 6px;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  flex-shrink: 0;
+}
+.imp-num {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 14px;
+  height: 14px;
+  background: var(--orange);
+  border-radius: 50%;
+<<<<<<< HEAD
+  font-size: 0.45rem;
+=======
+  font-size: 0.48rem;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  font-weight: 800;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid white;
+}
+.imp-title {
+<<<<<<< HEAD
+  font-size: 0.60rem;
+=======
+  font-size: 0.63rem;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+.imp-sub {
+<<<<<<< HEAD
+  font-size: 0.54rem;
+=======
+  font-size: 0.57rem;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  color: var(--textl);
+  line-height: 1.4;
+}
+.imp-arrow {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  flex-shrink: 0;
+}
+
+<<<<<<< HEAD
+/* Quote */
+.quote {
+  padding: 14px 16px;
+=======
+/* ── Frase de cierre (banner full-width) ─────────────────── */
+.cv-quote-bar {
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  background: var(--navy);
+  border-top: 3px solid var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+<<<<<<< HEAD
+  gap: 4px;
+}
+.q-open {
+  font-size: 2.8rem;
+=======
+  gap: 10px;
+  padding: 10px 30px;
+}
+.qb-open {
+  font-size: 2.2rem;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  line-height: 0.6;
+  color: var(--orange);
+  opacity: 0.75;
+  font-family: Georgia, serif;
+  flex-shrink: 0;
+}
+<<<<<<< HEAD
+.quote p {
+  font-size: 0.66rem;
+  font-style: italic;
+  color: rgba(255,255,255,.88);
+  line-height: 1.6;
+}
+.quote cite {
+  font-size: 0.56rem;
+=======
+.qb-text {
+  font-size: 0.68rem;
+  font-style: italic;
+  color: rgba(255,255,255,.88);
+  line-height: 1.55;
+}
+.qb-cite {
+  font-size: 0.60rem;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  font-style: normal;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════════════ */
+.cv-footer {
+  background: var(--bglight);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 20px;
+}
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+<<<<<<< HEAD
+  font-size: 0.58rem;
+=======
+  font-size: 0.64rem;
+>>>>>>> 9042829 (privacy: remove phone and email from public site, keep only LinkedIn)
+  color: var(--textm);
+}
+.sep { color: var(--textl); font-size: 0.65rem; }
+
+/* ══════════════════════════════════════════════════════════
+   PRINT / PDF EXPORT
+   zoom afecta el layout (transform: scale no lo hace),
+   evitando que Chromium pagine por el tamaño pre-escala.
+   Default 0.709 → 1120px × 0.709 = 793.7px (A4 exacto)
+══════════════════════════════════════════════════════════ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html, body {
+    background: white;
+    padding: 0;
+  }
+
+  .page-wrap {
+    padding: 0;
+    background: white;
+    min-height: unset;
+    display: block;
+  }
+
+  .cv {
+    width: 1120px;
+    min-width: 1120px;
+    zoom: var(--print-scale);
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "meta": {
+    "version": "1.0",
+    "fecha_extraccion": "2026-04-30",
+    "fuente": "PDF adjunto en FASE 12 — 4 páginas",
+    "notas": "Datos extraídos visualmente del PDF fuente. No inventar. Si un dato no aparece en el PDF queda vacío o 'por validar'."
+  },
+  "persona": {
+    "nombre": "Alexi Marcelo Burgos Flores",
+    "titular": "Docente UC | Ingeniero y Técnico en Gestión de Operaciones Logísticas",
+    "telefono": "+569 4513 0486",
+    "email": "alexi.fs341@gmail.com",
+    "linkedin": "linkedin.com/in/alexiburgos"
+  },
+  "perfil_profesional": {
+    "texto_fuente": "Soy un profesional con 13 años de experiencia en logística y 7 en gestión educativa, especializado en coordinación académica y administración de procesos educativos. Me destaco por mi capacidad para optimizar operaciones académicas, mejorar la calidad educativa y fortalecer la vinculación con el sector laboral. Poseo habilidades en liderazgo, resolución de conflictos, análisis de datos y toma de decisiones estratégicas. Puedo crear paneles de KPI y OKR en Power BI, incluyendo paneles de progreso académico, seguimiento de desempeño estudiantil y análisis de deserción académica. Además, manejo Python básico-intermedio para el análisis de bases de datos y Excel avanzado para la gestión y visualización de información.",
+    "experiencia_logistica_anios": "13",
+    "experiencia_gestion_educativa_anios": "7",
+    "herramientas_destacadas": ["Power BI", "KPI", "OKR", "Python básico-intermedio", "Excel avanzado"]
+  },
+  "experiencia": [
+    {
+      "id": "exp_001",
+      "institucion": "Pontificia Universidad Católica de Chile",
+      "cargo_fuente": "Docente UC",
+      "cargo_cv_visual_recomendado": "Docente Educación Continua",
+      "periodo_fuente": "Julio 2025 – Actualidad",
+      "fecha_inicio": "2025-07",
+      "fecha_fin": "actualidad",
+      "modalidad": "Freelance",
+      "nivel": "Senior",
+      "jornada": "Remoto",
+      "categoria": ["DOCENCIA"],
+      "funciones_fuente": [
+        "Imparte los cursos 'Gestión Eficiente de Bodegas y Control de Inventario' y 'Gestión en Compras y Adquisiciones' dentro de programas de Capacitación y Desarrollo UC – Educación Continua",
+        "Diseña y facilita contenidos sobre almacenamiento, inventarios, compras estratégicas, indicadores de gestión (KPI y OKR), TCO y evaluación de proveedores, integrando metodologías activas y casos reales",
+        "Enfoque en reducción de costos, optimización de procesos y mejora de tiempos de respuesta"
+      ],
+      "descripcion_breve_validada": "Diseño e imparto cursos de bodega, inventario, compras y adquisiciones para profesionales del área logística.",
+      "observaciones": ""
+    },
+    {
+      "id": "exp_002",
+      "institucion": "Instituto Profesional San Sebastián",
+      "cargo_fuente": "Analista de Datos Institucional - Docente",
+      "cargo_cv_visual_recomendado": "Analista de Datos Institucional · Docente",
+      "periodo_fuente": "Mayo 2025 – actualidad",
+      "fecha_inicio": "2025-05",
+      "fecha_fin": "actualidad",
+      "modalidad": "Full Time",
+      "nivel": "Junior",
+      "jornada": "Híbrido",
+      "categoria": ["ANALÍTICA", "DOCENCIA"],
+      "funciones_fuente": [
+        "Recopilación, procesamiento y análisis de datos institucionales para apoyar la gestión, la mejora continua y los procesos de acreditación",
+        "Elabora y presenta indicadores clave (retención, aprobación, titulación, empleabilidad, satisfacción estudiantil)",
+        "Coordina y apoya procesos de acreditación institucional y de carreras, auditorías y autoevaluaciones",
+        "Propone y desarrolla automatizaciones, tableros en Power BI y herramientas de consulta",
+        "Genera informes a SIES y estudios académicos",
+        "En rol docente imparte asignaturas online en la carrera de Ing. en logística"
+      ],
+      "descripcion_breve_validada": "Levanto, proceso y analizo indicadores institucionales de retención, aprobación, titulación y acreditación; también imparto asignaturas online en logística.",
+      "observaciones": "El cargo en la fuente es explícitamente dual: 'Analista de Datos Institucional - Docente'. Categoría debe incluir ambas: ANALÍTICA + DOCENCIA."
+    },
+    {
+      "id": "exp_003",
+      "institucion": "CFT PUCV",
+      "cargo_fuente": "Asistente Académico de Carreras Virtuales",
+      "cargo_cv_visual_recomendado": "Asistente Académico — Carreras Virtuales",
+      "periodo_fuente": "Marzo 2024 – Enero 2025",
+      "fecha_inicio": "2024-03",
+      "fecha_fin": "2025-01",
+      "modalidad": "Full Time",
+      "nivel": "Senior",
+      "jornada": "Viña del Mar",
+      "categoria": ["COORDINACIÓN"],
+      "funciones_fuente": [
+        "Supervisó y coordinó programas académicos de Administración de Empresas, Contabilidad General, Administración Pública, Logística y Prevención de Riesgos Industriales",
+        "Gestionó la captación y retención de estudiantes, aumentando la permanencia académica",
+        "Seleccionó y evaluó al personal docente, garantizando estándares de calidad educativa",
+        "Fomentó la vinculación con el sector público y privado para fortalecer la empleabilidad de los egresados"
+      ],
+      "descripcion_breve_validada": "Coordiné programas virtuales: planificación, seguimiento docente, gestión estudiantil y mejora continua.",
+      "observaciones": ""
+    },
+    {
+      "id": "exp_004",
+      "institucion": "CFT ENAC",
+      "cargo_fuente": "Docente Diurno | Técnico en Administración de Empresas – Técnico en Logística",
+      "cargo_cv_visual_recomendado": "Docente y QA",
+      "periodo_fuente": "Marzo 2022 – Marzo 2024",
+      "fecha_inicio": "2022-03",
+      "fecha_fin": "2024-03",
+      "modalidad": "Freelance",
+      "nivel": "Senior",
+      "jornada": "Part Time — Sede los Héroes, Santiago Centro",
+      "categoria": ["DOCENCIA"],
+      "funciones_fuente": [
+        "Docente en Sede los Héroes para las Asignaturas Gestión de Bodega e Inventario, Gestión de Adquisiciones y Administración de Post-Venta para la carrera de Técnico en Administración de Empresas",
+        "QA para la asignatura online Gestión de almacenes online"
+      ],
+      "descripcion_breve_validada": "Impartí asignaturas de bodega, inventario, adquisiciones y postventa, y apoyé revisión de calidad online.",
+      "observaciones": ""
+    },
+    {
+      "id": "exp_005",
+      "institucion": "IP-CFT Escuela de Comercio de Santiago",
+      "cargo_fuente": "Docente Online — Carreras Técnico en Comercio Exterior – Ingeniería en Comercio Internacional",
+      "cargo_cv_visual_recomendado": "Docente Online",
+      "periodo_fuente": "Marzo 2023 – Mayo 2024",
+      "fecha_inicio": "2023-03",
+      "fecha_fin": "2024-05",
+      "modalidad": "Freelance",
+      "nivel": "Senior",
+      "jornada": "Part Time — Online",
+      "categoria": ["DOCENCIA"],
+      "funciones_fuente": [
+        "Docente en Sede Online para las Asignaturas de Taller de Aplicación de Comercio Exterior y Tramitación y Valoración Aduanera"
+      ],
+      "descripcion_breve_validada": "Impartí comercio exterior, tramitación y valoración aduanera en programas técnicos y profesionales online.",
+      "observaciones": "En el CV fuente aparece antes de ENAC en la página 2, pero su período es posterior. El orden cronológico inverso en el CV visual es correcto."
+    },
+    {
+      "id": "exp_006",
+      "institucion": "IP-CFT Santo Tomás",
+      "cargo_fuente": "Coordinador de Carrera área Administración y Docente",
+      "cargo_cv_visual_recomendado": "Coordinador Académico y Docente",
+      "periodo_fuente": "Sede Estación Central: 08/2019 – 01/2021 | Sede Santiago Centro: 06/2021 – 03/2024",
+      "fecha_inicio": "2019-08",
+      "fecha_fin": "2024-03",
+      "modalidad": "Freelance",
+      "nivel": "Senior",
+      "jornada": "Part Time (Estación Central) / Full Time (Santiago Centro)",
+      "categoria": ["COORDINACIÓN", "DOCENCIA"],
+      "funciones_fuente": [
+        "Coordinador de Carrera y Docente en el área de Administración y Logística (Sedes Estación Central y Santiago Centro, 2019–2024), gestionando la planificación académica, asignación de carga horaria, inscripciones y registro de calificaciones",
+        "Supervisó procesos académicos clave, asegurando estándares de calidad y satisfacción estudiantil",
+        "Impartió asignaturas en Logística, Comercio Exterior y Supply Chain Management en programas técnicos y profesionales, integrando metodologías activas y contenidos actualizados",
+        "Actuó como docente guía y miembro de comisiones de práctica y titulación, apoyando a estudiantes en proyectos de título y portafolios de evidencias"
+      ],
+      "descripcion_breve_validada": "Coordiné carga horaria, inscripciones, calificaciones y acompañamiento estudiantil; impartí asignaturas técnicas.",
+      "observaciones": "El CV fuente distingue dos sedes y dos períodos. El CV visual los agrupa en un solo hito 'Ago. 2019 – Mar. 2024' — agrupamiento válido por espacio."
+    },
+    {
+      "id": "exp_007",
+      "institucion": "Hotel Plaza San Francisco",
+      "cargo_fuente": "Control de Costos | Asistente de Bodega",
+      "cargo_cv_visual_recomendado": "Asistente de Bodega y Control de Costos",
+      "periodo_fuente": "Agosto 2018 – Abril 2019",
+      "fecha_inicio": "2018-08",
+      "fecha_fin": "2019-04",
+      "modalidad": "Full Time",
+      "nivel": "SemiSenior",
+      "jornada": "Santiago Centro",
+      "categoria": ["LOGÍSTICA"],
+      "funciones_fuente": [
+        "Gestionó la facturación e inventario en múltiples áreas del hotel: Ama de llaves, recepción, bar, cocina, casino del personal, restaurante, marketing, terraza, room service, mantención y bodega",
+        "Contribuyó en la valorización, codificación de productos y control de costos del menú del Restaurante Bristol durante el año 2019"
+      ],
+      "descripcion_breve_validada": "Gestioné inventario, facturación, codificación de productos y abastecimiento interno para áreas del hotel.",
+      "observaciones": ""
+    },
+    {
+      "id": "exp_008",
+      "institucion": "Sociedad Importadora y Comercializadora GK",
+      "cargo_fuente": "Asistente contable | Analista de control de Inventario | Responsable de Garantías | Encargado de Bodega",
+      "cargo_cv_visual_recomendado": "Analista de Inventario y Encargado de Bodega",
+      "periodo_fuente": "Julio 2015 – Enero 2018",
+      "fecha_inicio": "2015-07",
+      "fecha_fin": "2018-01",
+      "modalidad": "Full Time",
+      "nivel": "SemiSenior",
+      "jornada": "Providencia",
+      "categoria": ["LOGÍSTICA"],
+      "funciones_fuente": [
+        "Asistente Contable, Analista de Control de Inventario, Responsable de Garantías y Encargado de Bodega",
+        "Gestionó cuentas corrientes, facturación y pagos, manteniendo relación directa con la Gerencia",
+        "Controló inventarios periódicos y selectivos, generando reportes de pérdidas y ajustes contables",
+        "Administró procesos de garantías con proveedores nacionales e internacionales",
+        "Lideró recepción, almacenamiento y despacho de productos, implementando control RFID"
+      ],
+      "descripcion_breve_validada": "Controlé inventarios, recepción, almacenamiento y despacho de productos, incorporando control RFID.",
+      "observaciones": ""
+    },
+    {
+      "id": "exp_009",
+      "institucion": "La Polar · Amphora Beauty Shop · Computación Integral S.A · Casa Ximena",
+      "cargo_fuente": "Asistente de Bodega / Encargado de Bodega Tienda Manuel Montt",
+      "cargo_cv_visual_recomendado": "Asistente y Encargado de Bodega",
+      "periodo_fuente": "Mayo 2012 – Junio 2015 (múltiples empleadores, períodos parcialmente consecutivos)",
+      "fecha_inicio": "2012-05",
+      "fecha_fin": "2015-06",
+      "modalidad": "Full Time",
+      "nivel": "Junior / SemiSenior",
+      "jornada": "Valparaíso",
+      "categoria": ["LOGÍSTICA"],
+      "funciones_fuente": [
+        "Recibir, almacenar y despachar los productos que ingresan a bodega",
+        "Efectuar el control por medio de RFID de los productos recepcionados",
+        "Efectuar labores de valor agregado (censado y etiquetado de productos)",
+        "Preparación y acondicionamiento de pedidos nacionales e internacionales",
+        "Casa Ximena: Supervisó procesos logísticos clave, conteos cíclicos y criterios merciológicos",
+        "Casa Ximena: Gestionó documentación operativa (boletas, facturas, guías)"
+      ],
+      "descripcion_breve_validada": "Realicé recepción, almacenamiento, despacho, reposición y documentación operativa de pedidos.",
+      "observaciones": "Son cuatro empleadores distintos agrupados en un solo hito visual por economía de espacio. Períodos individuales: La Polar/Amphora/Computación Integral: mar.2013–jun.2015; Casa Ximena: may.2012–mar.2013. Agrupamiento válido."
+    }
+  ],
+  "formacion": [
+    {
+      "id": "edu_001",
+      "programa": "Ingeniería en Gestión de Operaciones Logísticas",
+      "institucion": "Instituto Profesional AIEP",
+      "sede": "Sede Online",
+      "periodo": "2023–2025",
+      "estado": "Titulado",
+      "horas": "",
+      "observaciones": ""
+    },
+    {
+      "id": "edu_002",
+      "programa": "Diplomado en Medición y Evaluación de Aprendizajes",
+      "institucion": "Escuela de Psicología de la Pontificia Universidad Católica de Santiago de Chile",
+      "institucion_abreviada_visual": "Pontificia Universidad Católica de Chile",
+      "sede": "Sede Online",
+      "periodo": "Octubre 2022 – Mayo 2023",
+      "estado": "Completado",
+      "horas": "160 horas pedagógicas",
+      "observaciones": "La institución completa incluye 'Escuela de Psicología'. El CV visual abrevia por espacio — válido."
+    },
+    {
+      "id": "edu_003",
+      "programa": "Técnico de Nivel Superior en Logística",
+      "institucion": "CFT PUCV",
+      "sede": "Valparaíso",
+      "periodo": "2013–2015",
+      "estado": "Titulado",
+      "horas": "",
+      "observaciones": ""
+    }
+  ],
+  "herramientas": {
+    "educacion_plataformas": ["Banner", "Bettersoft U+", "Moodle", "Blackboard", "Syllabus"],
+    "datos_analitica": ["Excel Avanzado", "Power BI", "Python"],
+    "ofimatica_productividad": ["MS Office 365", "GSuite"],
+    "sistemas_os": ["MacOS", "Windows", "iOS", "Android"],
+    "ensenanza_activa": ["Kahoot", "Mentimeter"],
+    "idiomas": ["Inglés Nivel Técnico"],
+    "notas": "Syllabus, Kahoot y Mentimeter aparecen en el PDF fuente pero no en la versión visual del CV. Omisión intencional por curaduría de espacio."
+  },
+  "equipamiento": {
+    "computador": "MacBook Pro 13\" M1 2020 SSD 512 GB",
+    "monitor": "Monitor Samsung de 24\" A600UCL",
+    "movil": "iPhone 15 Pro Max 256 GB",
+    "audio": "AirPods Pro (3.ª generación)",
+    "conectividad": "Internet fibra óptica VTR 900 Mbps (wifi y cable de red)",
+    "movilidad": "Kia Niro 2023 y Scooter Eléctrico Mantis 8 plus"
+  },
+  "referencias": [
+    {
+      "institucion": "IP-CFT Santo Tomás Sede Vergara",
+      "cargo": "Jefe de Carreras Comercio Exterior y Logística",
+      "nombre": "Roberto Zúñiga Ruminot",
+      "telefono": "+56 9 3940 1836",
+      "email": "rzuniga9@santotomas.cl"
+    },
+    {
+      "institucion": "ENAC",
+      "cargo": "Jefe de Carreras Administración - Comercio Exterior y Mercados Digitales",
+      "nombre": "Francisco Gajardo Peñaloza",
+      "telefono": "+56 978312130",
+      "email": "fgajardop@enac.cl"
+    },
+    {
+      "institucion": "Hotel Plaza San Francisco",
+      "cargo": "Gerente de Administración y Finanzas",
+      "nombre": "Ximena Pinto Soto",
+      "telefono": "+56 9 6496 5540",
+      "email": "xpinto@plazasanfrancisco.cl"
+    },
+    {
+      "institucion": "Importadora y Comercializadora GK",
+      "cargo": "Gerente General",
+      "nombre": "Tomás Kusianovich",
+      "telefono": "+56 9 5405 1783",
+      "email": "tomas.kusianovich@importadoragk.cl"
+    }
+  ],
+  "datos_no_validados_o_por_revisar": [
+    {
+      "item": "KPI: 7+ años gestión educativa",
+      "estado": "corregido en FASE 14",
+      "nota": "Corregido de '6+' a '7+' para alinear con la fuente gobernada ('7 en gestión educativa') y el profile.summary. Título actualizado a 'AÑOS GESTIÓN EDUCATIVA'."
+    },
+    {
+      "item": "KPI: 1.300+ estudiantes",
+      "estado": "validado por usuario en FASE 14",
+      "nota": "Dato interno confirmado por el usuario para el CV visual ejecutivo. No aparece en el PDF fuente."
+    },
+    {
+      "item": "KPI: 55+ imparticiones",
+      "estado": "validado por usuario en FASE 14",
+      "nota": "Dato interno confirmado por el usuario para el CV visual ejecutivo. No aparece en el PDF fuente."
+    },
+    {
+      "item": "KPI: +216 capacitados UC / 12 imparticiones UC",
+      "estado": "validado por usuario en FASE 14",
+      "nota": "Cálculo interno confirmado por el usuario: 12 imparticiones UC = 8 Bodega + 4 Compras; 12 × 18 estudiantes promedio = 216 capacitados UC."
+    },
+    {
+      "item": "Herramientas: Syllabus, Kahoot, Mentimeter",
+      "estado": "presente en fuente, omitido en visual",
+      "nota": "Aparecen en el PDF fuente pero no en el CV visual. Omisión intencional por curaduría de espacio."
+    }
+  ]
+}
