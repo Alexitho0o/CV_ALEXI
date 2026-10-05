@@ -43,7 +43,7 @@
       "id": "exp_002",
       "institucion": "Instituto Profesional San Sebastián",
       "cargo_fuente": "Analista de Datos Institucional - Docente",
-      "cargo_cv_visual_recomendado": "Analista de Datos Institucional · Docente",
+      "cargo_cv_visual_recomendado": "Analista de Datos Institucionales · Docente",
       "periodo_fuente": "Mayo 2025 – actualidad",
       "fecha_inicio": "2025-05",
       "fecha_fin": "actualidad",
@@ -303,9 +303,14 @@
       "nota": "Dato interno confirmado por el usuario para el CV visual ejecutivo. No aparece en el PDF fuente."
     },
     {
-      "item": "KPI: +216 capacitados UC / 12 imparticiones UC",
-      "estado": "validado por usuario en FASE 14",
-      "nota": "Cálculo interno confirmado por el usuario: 12 imparticiones UC = 8 Bodega + 4 Compras; 12 × 18 estudiantes promedio = 216 capacitados UC."
+      "item": "KPI: 396 capacitados UC / 22 imparticiones UC",
+      "estado": "validado por usuario en actualización 2026-10-05",
+      "nota": "Cálculo proporcional confirmado por el usuario: 22 imparticiones UC = 13 Bodega + 9 Compras; manteniendo 18 estudiantes promedio por impartición (252/14), 22 × 18 = 396 capacitados UC."
+    },
+    {
+      "item": "KPI: 2+ años analítica",
+      "estado": "validado por usuario en actualización 2026-10-05",
+      "nota": "El usuario confirmó que actualmente lleva más de dos años en analítica institucional; el CV visual debe mostrar 2+ años."
     },
     {
       "item": "Herramientas: Syllabus, Kahoot, Mentimeter",
