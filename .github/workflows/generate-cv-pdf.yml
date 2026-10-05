@@ -21,41 +21,6 @@ jobs:
         run: |
           find public -maxdepth 1 -type l -name 'img *' -print -delete
 
-      - name: Prepare full CV application for PDF
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          src_path = Path("../backups/git_conflict_resolution/cv-alexi_pre_resolucion_rebase_20260507_094544/src/App.jsx")
-          text = src_path.read_text(encoding="utf-8").splitlines()
-
-          out = []
-          mode = "normal"
-          for line in text:
-              if line.startswith("<<<<<<< "):
-                  mode = "left"
-                  continue
-              if mode == "left" and line == "=======":
-                  mode = "right"
-                  continue
-              if mode == "right" and line.startswith(">>>>>>> "):
-                  mode = "normal"
-                  continue
-              if mode in ("normal", "right"):
-                  out.append(line)
-
-          Path("src/App.jsx").write_text("\n".join(out) + "\n", encoding="utf-8")
-
-          css_path = Path("src/styles.css")
-          css = css_path.read_text(encoding="utf-8")
-          css = css.replace(
-              ".cv-impact {\n  display: grid;\n  grid-template-columns: 1fr 210px;",
-              ".cv-impact {\n  display: grid;\n  grid-template-columns: 1fr;",
-              1,
-          )
-          css_path.write_text(css, encoding="utf-8")
-          PY
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
