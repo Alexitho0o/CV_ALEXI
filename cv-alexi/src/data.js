@@ -15,7 +15,7 @@ export const quickFacts = [
   { icon: 'GraduationCap', label: 'Docente UC · Educación Continua',   sub: null },
   { icon: 'Truck',          label: 'Logística · Supply Chain',           sub: null },
   { icon: 'BarChart3',      label: 'Analítica de Datos',                 sub: 'Power BI · Excel Avanzado · Python' },
-  { icon: 'Building2',      label: 'Analista de Datos Institucional',    sub: null },
+  { icon: 'Building2',      label: 'Analista de Datos Institucionales',   sub: null },
 ];
 
 export const areas = [
@@ -43,11 +43,11 @@ export const kpis = [
   { number: '13+',    title: 'AÑOS LOGÍSTICA',   text: 'Operaciones · Supply Chain',             icon: 'Truck',        color: '#08284d' },
   { number: '7+',     title: 'AÑOS GESTIÓN EDUCATIVA', text: 'Docencia, coordinación y mejora formativa', icon: 'GraduationCap',color: '#f58220' },
   { number: '+1',     title: 'AÑO EN UC',        text: 'Educación Continua · 2025–Act.',         icon: 'Building2',    color: '#1f67c8' },
-  { number: '+1',     title: 'AÑO ANALÍTICA',    text: 'Indicadores institucionales · IPSS',     icon: 'BarChart3',    color: '#08284d' },
+  { number: '2+',     title: 'AÑOS ANALÍTICA',   text: 'Indicadores institucionales · IPSS',     icon: 'BarChart3',    color: '#08284d' },
   { number: '1.300+', title: 'ESTUDIANTES',       text: 'Logística · Comercio Exterior',          icon: 'Users',        color: '#f58220' },
   { number: '55+',    title: 'IMPARTICIONES',     text: 'Carreras técnicas y profesionales',      icon: 'CalendarDays', color: '#1f67c8' },
-  { number: '+216',   title: 'CAPACITADOS UC',    text: '18 est. promedio × 12 imparticiones',   icon: 'Award',        color: '#08284d' },
-  { number: '12',     title: 'IMPARTICIONES UC',  text: '8 Bodega · 4 Compras',                   icon: 'School',       color: '#f58220' },
+  { number: '396',    title: 'CAPACITADOS UC',    text: '18 est. promedio × 22 imparticiones',   icon: 'Award',        color: '#08284d' },
+  { number: '22',     title: 'IMPARTICIONES UC',  text: '13 Bodega · 9 Compras',                  icon: 'School',       color: '#f58220' },
 ];
 
 /* Logos instituciones donde ha realizado docencia — grilla 2×2 */
@@ -80,7 +80,7 @@ export const trayectoria = [
   {
     period: 'May. 2025 – Act.',
     cats: ['ANALÍTICA', 'DOCENCIA'],
-    role: 'Analista de Datos · Docente',
+    role: 'Analista de Datos Institucionales · Docente',
     institution: 'Instituto Profesional San Sebastián',
     sub: 'Retención · Titulación · Acreditación',
     desc: 'Levanto, proceso y analizo indicadores institucionales; también imparto asignaturas online en logística.',
