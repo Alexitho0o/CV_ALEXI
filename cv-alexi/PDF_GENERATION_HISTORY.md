@@ -85,3 +85,15 @@
 ### Nota sobre archivos backup en src/
 
 Se detectaron archivos backup: `src/App 2.jsx`, `src/data 2.js`, `src/data 3.js`, `src/styles 2.css`, `src/styles 3.css`. No se eliminaron (no solicitado en FASE 14). Vite no los incluye en el build. Pueden limpiarse en una fase posterior si se decide.
+
+
+## 2026-10-12 — Legibilidad, titular literal, QR y extracción de texto
+
+- La comparación de todos los exports de data.js detectó solo el cambio autorizado de profile.title. Se conservaron todos los demás datos, descripciones, KPIs y herramientas.
+- Trayectoria: se redistribuye la fecha en el encabezado de cada experiencia para recuperar ancho. Cuerpo de descripciones: 5,85 pt frente a ~4,16 pt de la versión recibida. Herramientas: 5,74 pt, sin eliminar ninguna.
+- Contacto: se corrige la estructura de LinkedIn en la vCard y se añade CONTACTO.png sin pérdidas. El JPG anterior no se destruye. Regeneración: scripts/generate_qr.py.
+- Tipografía estándar con fuentes incrustadas y sin espaciado artificial de letras; PDF etiquetado. Imágenes optimizadas solo en copias de impresión, sin rasterizar texto.
+- Se mantiene el CV visual en una hoja A4. Se añade vista lineal complementaria con todas las mismas descripciones y 40 herramientas, no un reemplazo del visual.
+- generate_pdf.py valida antes de publicar/copiar: A4, contenido, fuentes, caracteres, tamaño, orden y QR. --desktop copia únicamente PDFs validados; --with-ats añade la versión lineal.
+- Pruebas: npm run build y generación ejecutados. 174 frases controladas en PyMuPDF, pypdf y Poppler; 0 frases ausentes, 40/40 herramientas, 9 experiencias en orden y QR decodificado a 300 dpi. El informe automático identifica el entorno y método de cada ejecución.
+- No se afirma haber pasado un ATS comercial, un ranking de candidatos ni filtros de una vacante específica.
