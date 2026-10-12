@@ -1,0 +1,26 @@
+name: CV review workspace
+on:
+  push:
+    branches: [fix/cv-legibilidad-qr-ats]
+    paths: [.github/workflows/cv-review-workspace.yml]
+permissions:
+  contents: read
+jobs:
+  workspace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Prepare locked dependencies and sources
+        working-directory: cv-alexi
+        run: |
+          npm ci --no-audit --no-fund
+          tar -czf /tmp/cv-review-workspace.tar.gz src public/img package.json package-lock.json index.html vite.config.js generate_pdf.py docs PDF_GENERATION_HISTORY.md node_modules
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cv-review-workspace
+          path: /tmp/cv-review-workspace.tar.gz
+          retention-days: 1
+          if-no-files-found: error
