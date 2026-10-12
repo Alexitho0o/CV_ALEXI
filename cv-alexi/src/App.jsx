@@ -21,7 +21,7 @@ const IconMap = {
 function DynIcon({ name, size = 14, color = 'currentColor', strokeWidth = 2 }) {
   const Icon = IconMap[name];
   if (!Icon) return null;
-  return <Icon size={size} color={color} strokeWidth={strokeWidth} />;
+  return <Icon size={size} color={color} strokeWidth={strokeWidth} aria-hidden="true" focusable="false" />;
 }
 
 function SafeImage({ src, alt, className, style }) {
@@ -45,9 +45,9 @@ function IconCircle({ name, size = 13, bg = '#08284d', d = 28 }) {
 
 function SecTitle({ children, accent = 'orange' }) {
   return (
-    <div className={`sec-title sec-title--${accent}`}>
+    <h2 className={`sec-title sec-title--${accent}`}>
       <span>{children}</span>
-    </div>
+    </h2>
   );
 }
 
@@ -74,6 +74,13 @@ function Hero() {
           </div>
         )}
         <p className="hero-summary">{profile.summary}</p>
+        <div className="hero-contact">
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          <span aria-hidden="true"> · </span>
+          <a href={`tel:${profile.phone.replace(/\s/g, '')}`}>{profile.phone}</a>
+          <span aria-hidden="true"> · </span>
+          <a href={`https://${profile.linkedin}`}>{profile.linkedin}</a>
+        </div>
       </div>
 
       <aside className="hero-side">
@@ -91,7 +98,7 @@ function Hero() {
         <div className="contact-box">
           <div className="contact-qr">
             <span className="qr-lbl">CONTACTO</span>
-            <SafeImage src="/img/CONTACTO.jpg" alt="QR Contacto" className="qr-img" />
+            <SafeImage src="/img/CONTACTO.png" alt="QR Contacto" className="qr-img" />
           </div>
         </div>
       </aside>
@@ -150,7 +157,7 @@ function AreasSection() {
               <BarChart3 size={13} color="#fff" /><span>DATOS</span>
             </div>
             <div className="venn-center">
-              <strong>IMPACTO</strong><strong>APLICADO</strong>
+              <strong>IMPACTO<br />APLICADO</strong>
             </div>
           </div>
         </div>
@@ -169,9 +176,7 @@ function TrayectoriaSection() {
           const cats = h.cats ?? [h.cat].filter(Boolean);
           const dotColor = catColors[cats[0]] ?? '#08284d';
           return (
-            <div className="hito" key={i}>
-              <span className="hito-period">{h.period}</span>
-              <span className="hito-dot" style={{ background: dotColor }} />
+            <article className="hito" key={i}>
               <div className="hito-logo">
                 <SafeImage src={h.logo} alt={h.institution} className="hito-img" />
               </div>
@@ -186,12 +191,13 @@ function TrayectoriaSection() {
                       </span>
                     ))}
                   </div>
+                  <span className="hito-period">{h.period}</span>
                 </div>
                 <span className="hito-inst">{h.institution}</span>
                 {h.sub  && <span className="hito-sub">{h.sub}</span>}
                 {h.desc && <span className="hito-desc">{h.desc}</span>}
               </div>
-            </div>
+            </article>
           );
         })}
       </div>
@@ -321,7 +327,7 @@ function ImpactRow() {
 function QuoteBar() {
   return (
     <div className="cv-quote-bar">
-      <span className="qb-open">"</span>
+      <span className="qb-open" aria-hidden="true">"</span>
       <p className="qb-text">{quote}</p>
       <cite className="qb-cite">— Alexi Burgos</cite>
     </div>
@@ -350,10 +356,57 @@ function CvFooter() {
 /* ══════════════════════════════════════════════════════════
    APP ROOT
 ══════════════════════════════════════════════════════════ */
+
+/* Vista lineal complementaria. Usa TODOS los mismos datos; no sustituye el CV visual. */
+function AtsDocument() {
+  return (
+    <main className="cv cv-page ats-page" data-output-view="ats">
+      <h1>{profile.name.join(' ')}</h1>
+      <p className="ats-title">{profile.title}</p>
+      <p className="ats-contact">{profile.email} | {profile.phone} | {profile.linkedin}</p>
+      <section><h2>PERFIL PROFESIONAL</h2><p>{profile.summary}</p>
+        {quickFacts.map((f,i) => <p key={i}>{f.label}{f.sub ? ` — ${f.sub}` : ''}</p>)}
+      </section>
+      <section><h2>INDICADORES DE TRAYECTORIA</h2>
+        {kpis.map((k,i) => <p key={i}><strong>{k.number} {k.title}</strong> — {k.text}</p>)}
+      </section>
+      <section><h2>ÁREAS CLAVE</h2>
+        {areas.map((a,i) => <div key={i}><h3>{a.title}</h3><p>{a.bullets.join(' · ')}</p></div>)}
+        <p>OPERACIÓN · DOCENCIA · DATOS — IMPACTO APLICADO</p>
+      </section>
+      <section><h2>TRAYECTORIA PROFESIONAL</h2>
+        {trayectoria.map((h,i) => <article key={i}>
+          <h3>{h.role}</h3><p><strong>{h.institution}</strong></p>
+          <p>{h.period} | {h.cats.join(' · ')}</p><p>{h.sub}</p><p>{h.desc}</p>
+        </article>)}
+      </section>
+      <section><h2>FORMACIÓN</h2>{education.map((e,i) => <article key={i}>
+        <h3>{e.title}</h3><p>{e.institution}</p><p>{e.detail}</p>
+      </article>)}</section>
+      <section><h2>INSTITUCIONES</h2><p>{keyLogos.map(l => l.name).join(' · ')}</p></section>
+      <section><h2>HERRAMIENTAS Y TECNOLOGÍAS</h2>
+        {toolGroups.map((g,i) => <div className="ats-tools" key={i}>
+          <h3>{g.label}</h3><p>{g.items.join(' · ')}</p>
+        </div>)}
+      </section>
+      <section><h2>PROPUESTA DE VALOR</h2>{valueProps.map((v,i) => <p key={i}>
+        <strong>{v.title}</strong> {v.text}
+      </p>)}</section>
+      <section><h2>INTERESES</h2><p>{interests.join(' · ')}</p></section>
+      <section><h2>MODELO DE IMPACTO</h2>{impactModel.map((m,i) => <p key={i}>
+        <strong>{m.step}. {m.title}</strong> — {m.sub.replace(/\n/g,' ')}
+      </p>)}</section>
+      <p className="ats-quote">{quote} — Alexi Burgos</p>
+    </main>
+  );
+}
+
 export default function App() {
+  const view = window.__CV_OUTPUT_VIEW__ || new URLSearchParams(window.location.search).get('view');
+  if (view === 'ats') return <AtsDocument />;
   return (
     <div className="page-wrap">
-      <div className="cv">
+      <div className="cv cv-page">
         <Hero />
         <KpiStrip />
         <div className="cv-body">

@@ -3,20 +3,42 @@
     "version": "1.0",
     "fecha_extraccion": "2026-04-30",
     "fuente": "PDF adjunto en FASE 12 — 4 páginas",
-    "notas": "Datos extraídos visualmente del PDF fuente. No inventar. Si un dato no aparece en el PDF queda vacío o 'por validar'."
+    "notas": "Datos extraídos visualmente del PDF fuente. No inventar. Si un dato no aparece en el PDF queda vacío o 'por validar'.",
+    "revision_presentacion_2026_10_12": {
+      "fuente": "Instrucción explícita del usuario en esta conversación",
+      "conservar": [
+        "Cifras y años existentes",
+        "Todas las descripciones de experiencia",
+        "Las 40 herramientas en 7 grupos"
+      ],
+      "cambios_autorizados": [
+        "Mayor legibilidad sin recortar texto",
+        "Titular literal solicitado",
+        "QR de contacto con LinkedIn corregido",
+        "Verificación de extracción de texto para ATS"
+      ],
+      "alcance_ats": "Pruebas de extracción y estructura; no certificación ni evaluación en un ATS comercial."
+    }
   },
   "persona": {
     "nombre": "Alexi Marcelo Burgos Flores",
     "titular": "Docente UC | Ingeniero y Técnico en Gestión de Operaciones Logísticas",
     "telefono": "+569 4513 0486",
     "email": "alexi.fs341@gmail.com",
-    "linkedin": "linkedin.com/in/alexiburgos"
+    "linkedin": "linkedin.com/in/alexiburgos",
+    "titular_cv_visual": "Docente UC | Analista de Datos Institucionales | IA Aplicada  Gestión Educativa | Logística"
   },
   "perfil_profesional": {
     "texto_fuente": "Soy un profesional con 13 años de experiencia en logística y 7 en gestión educativa, especializado en coordinación académica y administración de procesos educativos. Me destaco por mi capacidad para optimizar operaciones académicas, mejorar la calidad educativa y fortalecer la vinculación con el sector laboral. Poseo habilidades en liderazgo, resolución de conflictos, análisis de datos y toma de decisiones estratégicas. Puedo crear paneles de KPI y OKR en Power BI, incluyendo paneles de progreso académico, seguimiento de desempeño estudiantil y análisis de deserción académica. Además, manejo Python básico-intermedio para el análisis de bases de datos y Excel avanzado para la gestión y visualización de información.",
     "experiencia_logistica_anios": "13",
     "experiencia_gestion_educativa_anios": "7",
-    "herramientas_destacadas": ["Power BI", "KPI", "OKR", "Python básico-intermedio", "Excel avanzado"]
+    "herramientas_destacadas": [
+      "Power BI",
+      "KPI",
+      "OKR",
+      "Python básico-intermedio",
+      "Excel avanzado"
+    ]
   },
   "experiencia": [
     {
@@ -30,7 +52,9 @@
       "modalidad": "Freelance",
       "nivel": "Senior",
       "jornada": "Remoto",
-      "categoria": ["DOCENCIA"],
+      "categoria": [
+        "DOCENCIA"
+      ],
       "funciones_fuente": [
         "Imparte los cursos 'Gestión Eficiente de Bodegas y Control de Inventario' y 'Gestión en Compras y Adquisiciones' dentro de programas de Capacitación y Desarrollo UC – Educación Continua",
         "Diseña y facilita contenidos sobre almacenamiento, inventarios, compras estratégicas, indicadores de gestión (KPI y OKR), TCO y evaluación de proveedores, integrando metodologías activas y casos reales",
@@ -50,7 +74,10 @@
       "modalidad": "Full Time",
       "nivel": "Junior",
       "jornada": "Híbrido",
-      "categoria": ["ANALÍTICA", "DOCENCIA"],
+      "categoria": [
+        "ANALÍTICA",
+        "DOCENCIA"
+      ],
       "funciones_fuente": [
         "Recopilación, procesamiento y análisis de datos institucionales para apoyar la gestión, la mejora continua y los procesos de acreditación",
         "Elabora y presenta indicadores clave (retención, aprobación, titulación, empleabilidad, satisfacción estudiantil)",
@@ -73,7 +100,9 @@
       "modalidad": "Full Time",
       "nivel": "Senior",
       "jornada": "Viña del Mar",
-      "categoria": ["COORDINACIÓN"],
+      "categoria": [
+        "COORDINACIÓN"
+      ],
       "funciones_fuente": [
         "Supervisó y coordinó programas académicos de Administración de Empresas, Contabilidad General, Administración Pública, Logística y Prevención de Riesgos Industriales",
         "Gestionó la captación y retención de estudiantes, aumentando la permanencia académica",
@@ -94,7 +123,9 @@
       "modalidad": "Freelance",
       "nivel": "Senior",
       "jornada": "Part Time — Sede los Héroes, Santiago Centro",
-      "categoria": ["DOCENCIA"],
+      "categoria": [
+        "DOCENCIA"
+      ],
       "funciones_fuente": [
         "Docente en Sede los Héroes para las Asignaturas Gestión de Bodega e Inventario, Gestión de Adquisiciones y Administración de Post-Venta para la carrera de Técnico en Administración de Empresas",
         "QA para la asignatura online Gestión de almacenes online"
@@ -113,7 +144,9 @@
       "modalidad": "Freelance",
       "nivel": "Senior",
       "jornada": "Part Time — Online",
-      "categoria": ["DOCENCIA"],
+      "categoria": [
+        "DOCENCIA"
+      ],
       "funciones_fuente": [
         "Docente en Sede Online para las Asignaturas de Taller de Aplicación de Comercio Exterior y Tramitación y Valoración Aduanera"
       ],
@@ -131,7 +164,10 @@
       "modalidad": "Freelance",
       "nivel": "Senior",
       "jornada": "Part Time (Estación Central) / Full Time (Santiago Centro)",
-      "categoria": ["COORDINACIÓN", "DOCENCIA"],
+      "categoria": [
+        "COORDINACIÓN",
+        "DOCENCIA"
+      ],
       "funciones_fuente": [
         "Coordinador de Carrera y Docente en el área de Administración y Logística (Sedes Estación Central y Santiago Centro, 2019–2024), gestionando la planificación académica, asignación de carga horaria, inscripciones y registro de calificaciones",
         "Supervisó procesos académicos clave, asegurando estándares de calidad y satisfacción estudiantil",
@@ -152,7 +188,9 @@
       "modalidad": "Full Time",
       "nivel": "SemiSenior",
       "jornada": "Santiago Centro",
-      "categoria": ["LOGÍSTICA"],
+      "categoria": [
+        "LOGÍSTICA"
+      ],
       "funciones_fuente": [
         "Gestionó la facturación e inventario en múltiples áreas del hotel: Ama de llaves, recepción, bar, cocina, casino del personal, restaurante, marketing, terraza, room service, mantención y bodega",
         "Contribuyó en la valorización, codificación de productos y control de costos del menú del Restaurante Bristol durante el año 2019"
@@ -171,7 +209,9 @@
       "modalidad": "Full Time",
       "nivel": "SemiSenior",
       "jornada": "Providencia",
-      "categoria": ["LOGÍSTICA"],
+      "categoria": [
+        "LOGÍSTICA"
+      ],
       "funciones_fuente": [
         "Asistente Contable, Analista de Control de Inventario, Responsable de Garantías y Encargado de Bodega",
         "Gestionó cuentas corrientes, facturación y pagos, manteniendo relación directa con la Gerencia",
@@ -193,7 +233,9 @@
       "modalidad": "Full Time",
       "nivel": "Junior / SemiSenior",
       "jornada": "Valparaíso",
-      "categoria": ["LOGÍSTICA"],
+      "categoria": [
+        "LOGÍSTICA"
+      ],
       "funciones_fuente": [
         "Recibir, almacenar y despachar los productos que ingresan a bodega",
         "Efectuar el control por medio de RFID de los productos recepcionados",
@@ -240,12 +282,35 @@
     }
   ],
   "herramientas": {
-    "educacion_plataformas": ["Banner", "Bettersoft U+", "Moodle", "Blackboard", "Syllabus"],
-    "datos_analitica": ["Excel Avanzado", "Power BI", "Python"],
-    "ofimatica_productividad": ["MS Office 365", "GSuite"],
-    "sistemas_os": ["MacOS", "Windows", "iOS", "Android"],
-    "ensenanza_activa": ["Kahoot", "Mentimeter"],
-    "idiomas": ["Inglés Nivel Técnico"],
+    "educacion_plataformas": [
+      "Banner",
+      "Bettersoft U+",
+      "Moodle",
+      "Blackboard",
+      "Syllabus"
+    ],
+    "datos_analitica": [
+      "Excel Avanzado",
+      "Power BI",
+      "Python"
+    ],
+    "ofimatica_productividad": [
+      "MS Office 365",
+      "GSuite"
+    ],
+    "sistemas_os": [
+      "MacOS",
+      "Windows",
+      "iOS",
+      "Android"
+    ],
+    "ensenanza_activa": [
+      "Kahoot",
+      "Mentimeter"
+    ],
+    "idiomas": [
+      "Inglés Nivel Técnico"
+    ],
     "notas": "Syllabus, Kahoot y Mentimeter aparecen en el PDF fuente pero no en la versión visual del CV. Omisión intencional por curaduría de espacio."
   },
   "equipamiento": {

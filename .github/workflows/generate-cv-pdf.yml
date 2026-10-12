@@ -1,12 +1,9 @@
 name: Generate CV PDF
-
 on:
   push:
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -14,43 +11,35 @@ jobs:
       run:
         working-directory: cv-alexi
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Remove broken duplicate public symlinks
-        run: |
-          find public -maxdepth 1 -type l -name 'img *' -print -delete
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - name: Remove duplicate public symlinks in isolated runner
+        run: find public -maxdepth 1 -type l -name 'img *' -print -delete
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: cv-alexi/package-lock.json
-
-      - name: Install Node dependencies
-        run: npm ci
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - run: npm ci
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-
-      - name: Install PDF dependencies
+          python-version: '3.12'
+      - name: Install PDF and text extraction dependencies
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install playwright pypdf
+          python -m pip install -r requirements-pdf.txt
           python -m playwright install --with-deps chromium
-
-      - name: Generate and validate PDF
-        run: python generate_pdf.py --preview
-
-      - name: Upload CV PDF
-        uses: actions/upload-artifact@v4
+          sudo apt-get update -qq
+          sudo apt-get install -y poppler-utils
+      - name: Generate and verify both PDFs from governed source
+        run: python generate_pdf.py --preview --with-ats --no-open
+      - uses: actions/upload-artifact@v4
         with:
           name: CV_Alexi_Marcelo_Burgos_Flores_visual
           path: |
             cv-alexi/CV_Alexi_Marcelo_Burgos_Flores_visual.pdf
+            cv-alexi/CV_Alexi_Marcelo_Burgos_Flores_LECTURA_ATS.pdf
             cv-alexi/PDF_GENERATION_REPORT.md
+            cv-alexi/dist/*_pymupdf.txt
+            cv-alexi/dist/*_pypdf.txt
+            cv-alexi/dist/*_poppler.txt
           if-no-files-found: error
           retention-days: 7

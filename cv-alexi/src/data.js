@@ -1,6 +1,6 @@
 export const profile = {
   name: ['ALEXI MARCELO', 'BURGOS FLORES'],
-  title: 'Docente UC | Analítica de Datos | IA Aplicada | Gestión Educativa | Logística',
+  title: 'Docente UC | Analista de Datos Institucionales | IA Aplicada  Gestión Educativa | Logística',
   keywords: [],
   summary:
     'Profesional con 14 años de trayectoria total integrando logística, gestión educativa, docencia y analítica institucional. ' +
