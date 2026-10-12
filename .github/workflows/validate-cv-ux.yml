@@ -1,0 +1,68 @@
+name: Validate CV web UX
+on:
+  push:
+    branches: [main, feat/cv-web-ux-cursos]
+    paths: ['cv-alexi/src/web/**', 'cv-alexi/scripts/build_web.mjs', 'cv-alexi/scripts/check_web_ux.py', '.github/workflows/validate-cv-ux.yml']
+  pull_request:
+    paths: ['cv-alexi/src/web/**', 'cv-alexi/scripts/build_web.mjs', 'cv-alexi/scripts/check_web_ux.py', '.github/workflows/validate-cv-ux.yml']
+permissions:
+  contents: read
+concurrency:
+  group: cv-web-ux-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: cv-alexi
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: cv-alexi/package-lock.json
+      - run: npm ci
+      - run: node scripts/build_web.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.56.0
+      - run: python -m playwright install --with-deps chromium
+      - name: Verify interaction and complete content
+        run: python -u scripts/check_web_ux.py
+      - name: Wait for the exact production assets
+        if: github.ref == 'refs/heads/main'
+        run: |
+          python - <<'PY'
+          import hashlib, os, time, urllib.request
+          from pathlib import Path
+          base = 'https://cv-alexi.vercel.app/assets/'
+          targets = {'enhance.js': Path('src/web/enhance.js'), 'ux.css': Path('src/web/ux.css')}
+          for attempt in range(18):
+              try:
+                  for remote, local in targets.items():
+                      request = urllib.request.Request(base + remote + '?verify=' + os.environ['GITHUB_SHA'], headers={'Cache-Control': 'no-cache'})
+                      with urllib.request.urlopen(request, timeout=20) as response:
+                          assert hashlib.sha256(response.read()).digest() == hashlib.sha256(local.read_bytes()).digest()
+                  print('Producción sirve los assets exactos del commit.'); break
+              except Exception as error:
+                  print('Esperando Vercel:', type(error).__name__)
+                  time.sleep(10)
+          else:
+              raise SystemExit('No se verificó el despliegue esperado.')
+          PY
+      - name: Verify the live domain
+        if: github.ref == 'refs/heads/main'
+        run: python -u scripts/check_web_ux.py --url https://cv-alexi.vercel.app --out web-review/ux-production
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: CV_WEB_UX
+          path: |
+            cv-alexi/WEB_BUILD_REPORT.json
+            cv-alexi/web-review/ux/
+            cv-alexi/web-review/ux-production/
+          retention-days: 7
