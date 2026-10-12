@@ -83,16 +83,17 @@ try:
                 check(page.locator('.menu-toggle').evaluate('(e)=>e===document.activeElement'),f'Foco de menú {width}')
                 page.locator('.menu-toggle').click()
             page.locator('[data-nav="cursos-uc"]').click()
-            page.wait_for_timeout(500)
+            page.wait_for_timeout(1200)
             check(page.locator('#cursos-uc').evaluate('(e)=>e===document.activeElement'),f'Foco ancla cursos {width}')
             check(page.locator('.menu-toggle').get_attribute('aria-expanded')=='false',f'Cerrar menú al navegar {width}')
             y=page.locator('#cursos-uc').bounding_box()['y']
-            check(y>=page.locator('.site-header').bounding_box()['height']-2, f'Ancla tapada {width}: {y}')
+            header_height=page.locator('.site-header').bounding_box()['height']
+            check(header_height-2<=y<=header_height+42, f'Posición de ancla {width}: {y}')
             check(page.locator('[data-nav="cursos-uc"]').get_attribute('aria-current')=='location',f'Sección activa {width}')
             if width in (390,1440):
                 page.screenshot(path=str(out/f'ux-{width}-cursos.png'))
                 page.locator('.back-to-top').click()
-                page.wait_for_timeout(700)
+                page.wait_for_timeout(1200)
                 page.screenshot(path=str(out/f'ux-{width}-inicio.png'))
                 check(page.locator('#inicio').evaluate('(e)=>e===document.activeElement'),f'Regreso inicio {width}')
             results.append(data);page.close()
