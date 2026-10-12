@@ -1,0 +1,36 @@
+name: Validate CV web preview
+on:
+  push:
+    branches: ['feat/cv-web-ejecutivo']
+  pull_request:
+    paths: ['cv-alexi/src/web/**', 'cv-alexi/scripts/build_web.mjs', 'cv-alexi/scripts/check_web.py', 'vercel.json']
+permissions:
+  contents: read
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cv-alexi
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: node scripts/build_web.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.56.0
+      - run: python -m playwright install --with-deps chromium
+      - run: python scripts/check_web.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: CV_WEB_PREVIEW
+          path: |
+            cv-alexi/web-review/
+            cv-alexi/WEB_BUILD_REPORT.json
+            cv-alexi/web-dist/
+          retention-days: 7
