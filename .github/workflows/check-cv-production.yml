@@ -1,0 +1,102 @@
+name: Verify published CV
+on:
+  push:
+    branches: [qa/cv-publicado-20261012]
+    paths: ['.github/workflows/check-cv-production.yml']
+permissions:
+  contents: read
+jobs:
+  production-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.56.0
+      - run: python -m playwright install --with-deps chromium
+      - name: Check live domain and responsive content
+        run: |
+          python - <<'PY'
+          import json, re, subprocess, time, urllib.request, urllib.error
+          from pathlib import Path
+          from datetime import datetime, timezone
+          from playwright.sync_api import sync_playwright
+          out = Path('production-review')
+          out.mkdir(exist_ok=True)
+          source = json.loads(subprocess.check_output(['node','--input-type=module','-e',"import * as d from './cv-alexi/src/data.js'; console.log(JSON.stringify(d))"], text=True))
+          report = {'checkedAt': datetime.now(timezone.utc).isoformat(), 'publishedCommit':'de2f5939145f27184dbb5834503c077d693b2be4', 'target':'https://cv-alexi.vercel.app/', 'probes':[], 'viewports':[], 'errors':[]}
+          for base in ['https://cv-alexi.vercel.app/', 'https://cvalexi.vercel.app/']:
+              try:
+                  req = urllib.request.Request(base+'?verify=de2f593', headers={'User-Agent':'CV-Publication-Check/1.0','Cache-Control':'no-cache'})
+                  with urllib.request.urlopen(req,timeout=25) as r:
+                      body = r.read().decode('utf-8',errors='replace')
+                      title = re.search(r'<title>(.*?)</title>',body,re.S)
+                      report['probes'].append({'url':base,'finalUrl':r.url,'status':r.status,'title':title.group(1) if title else None,'newTemplate': 'data-tool' in body and 'assets/web.css' in body})
+              except Exception as e:
+                  report['probes'].append({'url':base,'error':str(e)})
+          try:
+              with sync_playwright() as pw:
+                  browser = pw.chromium.launch(headless=True)
+                  for width in [320,375,390,650,768,1024,1440,1920]:
+                      page = browser.new_page(viewport={'width':width,'height':1000},device_scale_factor=1)
+                      js_errors=[]
+                      page.on('pageerror',lambda e: js_errors.append(str(e)))
+                      response=page.goto(report['target']+'?verify=de2f593#inicio',wait_until='networkidle',timeout=45000)
+                      page.evaluate('document.querySelectorAll("img").forEach(i=>i.loading="eager")')
+                      page.evaluate('async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})))}')
+                      check=page.evaluate('''() => {
+                          const fields=[...document.querySelectorAll('h1,h2,h3,p,[data-tool],.hero-title,.experience-date')];
+                          return {width:innerWidth,scrollWidth:document.documentElement.scrollWidth,
+                              kpis:document.querySelectorAll('.kpi').length,experiences:document.querySelectorAll('.experience').length,
+                              tools:document.querySelectorAll('[data-tool]').length,images:document.images.length,
+                              failedImages:[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),
+                              clipped:fields.filter(e=>e.scrollWidth>e.clientWidth+2).map(e=>e.textContent),
+                              invalidLinks:[...document.querySelectorAll('a[href^="#"]')].filter(a=>!document.getElementById(a.hash.slice(1))).map(a=>a.hash),
+                              title:document.title,robots:document.querySelector('meta[name="robots"]')?.content,
+                              text:document.body.innerText};
+                      }''')
+                      text=check.pop('text')
+                      norm=lambda s:' '.join(s.split())
+                      expected=[source['profile']['title'],source['profile']['summary'],*[s for h in source['trayectoria'] for s in [h['role'],h['institution'],h['sub'],h['desc']]],*[s for g in source['toolGroups'] for s in g['items']]]
+                      check['missingPhrases']=[s for s in expected if norm(s) not in norm(text)]
+                      check['privateContactAbsent']=all(s not in text for s in [source['profile']['phone'],source['profile']['email']])
+                      check['status']=response.status if response else None
+                      check['jsErrors']=js_errors
+                      if width in [390,1440]:
+                          page.screenshot(path=str(out/f'production-{width}-inicio.png'))
+                          page.screenshot(path=str(out/f'production-{width}-full.png'),full_page=True)
+                      if (check['kpis'],check['experiences'],check['tools'])!=(8,9,40):
+                          report['errors'].append('El dominio no sirve la maqueta aprobada: '+str(width))
+                          report['viewports'].append(check)
+                          break
+                      if width<=650:
+                          page.locator('.menu-toggle').click()
+                          opened=page.locator('.menu-toggle').get_attribute('aria-expanded')=='true'
+                          page.keyboard.press('Escape')
+                          closed=page.locator('.menu-toggle').get_attribute('aria-expanded')=='false'
+                          check['menuOK']=opened and closed
+                          if not check['menuOK']:report['errors'].append('Menú móvil: '+str(width))
+                      if check['scrollWidth']>width+1 or check['failedImages'] or check['clipped'] or check['invalidLinks'] or check['missingPhrases'] or js_errors or not check['privateContactAbsent']:
+                          report['errors'].append('Comprobación de contenido/layout: '+str(width))
+                      report['viewports'].append(check)
+                      page.close()
+                  if not report['errors']:
+                      page=browser.new_page(viewport={'width':390,'height':900},java_script_enabled=False)
+                      page.goto(report['target'],wait_until='networkidle',timeout=45000)
+                      report['withoutJS']={'tools':page.locator('[data-tool]').count(),'experiences':page.locator('.experience').count()}
+                      if report['withoutJS']!={'tools':40,'experiences':9}:report['errors'].append('Contenido sin JavaScript')
+                  browser.close()
+          except Exception as e:
+              report['errors'].append(str(e))
+          (out/'PRODUCTION_QA_REPORT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          if report['errors']:raise SystemExit(1)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: CV_PRODUCTION_VERIFIED
+          path: production-review/
+          retention-days: 7
