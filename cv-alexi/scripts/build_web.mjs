@@ -36,6 +36,7 @@ try {
   await writeFile(join(staging,'index.html'),html,'utf8');
   await copyFile(join(project,'src/web/styles.css'),join(staging,'assets/web.css'));
   await copyFile(join(project,'src/web/enhance.js'),join(staging,'assets/enhance.js'));
+  await copyFile(join(project,'src/web/ux.css'),join(staging,'assets/ux.css'));
   const assets = [...new Set([...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map(m=>m[1]))];
   for (const asset of assets) {
     if (!asset.startsWith('/img/') || asset.includes('..')) throw new Error(`Ruta no autorizada: ${asset}`);

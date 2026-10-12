@@ -1,4 +1,5 @@
 import React from 'react';
+import Courses from './courses.jsx';
 import { renderToStaticMarkup } from 'react-dom/server';
 import {
   GraduationCap, Users, Truck, Building2, LineChart, BarChart3, Database,
@@ -38,7 +39,7 @@ function Heading({ id, eyebrow, children }) {
 }
 const linkedin = `https://${profile.linkedin}`;
 const nav = [
-  ['inicio', 'Inicio'], ['experiencia', 'Trayectoria'], ['educacion', 'Formación'],
+  ['inicio', 'Inicio'], ['experiencia', 'Trayectoria'], ['cursos-uc', 'Cursos UC'], ['educacion', 'Formación'],
   ['habilidades', 'Herramientas'], ['contacto', 'Contacto'],
 ];
 function Navigation() {
@@ -58,6 +59,7 @@ function Navigation() {
           aria-label="Perfil de LinkedIn (abre una pestaña nueva)"><Icon name="Linkedin" size={19} /><span>LinkedIn</span></a>
       </nav>
     </div>
+    <div className="reading-progress" aria-hidden="true"><span /></div>
   </header>;
 }
 function Hero() {
@@ -128,6 +130,7 @@ function Experience() {
           </div>
           <h3>{h.role}</h3><p className="institution">{h.institution}</p>
           <p className="experience-sub">{h.sub}</p><p className="experience-desc" data-source={`trayectoria.${i}.desc`}>{h.desc}</p>
+          {h.institution.startsWith('Pontificia Universidad Católica de Chile') && <Courses />}
         </article>
       </li>)}
     </ol>
@@ -210,7 +213,11 @@ export default function App() {
     <footer className="site-footer"><span>Alexi Marcelo Burgos Flores</span>
       <a href={linkedin} target="_blank" rel="noopener noreferrer">{profile.linkedin}<Icon name="ArrowUpRight" size={16} /></a>
       <a href="#inicio">Volver al inicio<Icon name="ArrowDown" size={16} className="rotate" /></a>
+      <button type="button" className="motion-toggle" data-motion-toggle aria-pressed="false" hidden>Reducir animaciones</button>
     </footer>
+    <a className="back-to-top" href="#inicio" aria-label="Volver al inicio" title="Volver al inicio" hidden>
+      <Icon name="ArrowDown" size={21} className="rotate" />
+    </a>
   </>;
 }
 export function renderDocument({ preview = true } = {}) {
@@ -227,6 +234,7 @@ export function renderDocument({ preview = true } = {}) {
     <meta property="og:type" content="profile" /><meta property="og:locale" content="es_CL" />
     <meta property="og:title" content="Alexi Burgos | CV profesional" /><meta property="og:description" content={profile.title} />
     <link rel="stylesheet" href="/assets/web.css" />
+    <link rel="stylesheet" href="/assets/ux.css" />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schema }} />
     <script src="/assets/enhance.js" defer />
   </head><body dangerouslySetInnerHTML={{ __html: content }} /></html>);
