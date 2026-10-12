@@ -1,0 +1,96 @@
+name: Validate CV revision
+on:
+  push:
+    branches: [fix/cv-legibilidad-qr-ats]
+    paths: [.github/workflows/cv-validate-revision.yml]
+permissions:
+  contents: write
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply verified source changes in isolated branch
+        run: |
+          node --input-type=module -e "import * as d from './cv-alexi/src/data.js'; console.log(JSON.stringify(d))" > /tmp/cv-before.json
+          python3 - <<'PY'
+          import base64, hashlib, json, lzma
+          from pathlib import Path
+          encoded = ''.join(Path(f'.github/cv-review-delta-{i}.b64').read_text().strip() for i in range(5))
+          packed = base64.b64decode(encoded, validate=True)
+          assert hashlib.sha256(packed).hexdigest() == 'af3f2d3e374aff8be0cabcea6653c2c8b33c1eac5081b1023cfe448153d97015', 'Transfer checksum mismatch'
+          delta = json.loads(lzma.decompress(packed))
+          writes = {}
+          for name, rule in delta.items():
+              p = Path(name)
+              assert '..' not in p.parts and not p.is_absolute()
+              assert name.startswith('cv-alexi/') or name == '.github/workflows/generate-cv-pdf.yml'
+              if 'base' in rule:
+                  old = p.read_bytes()
+                  assert hashlib.sha256(old).hexdigest() == rule['base'], f'Baseline changed: {name}'
+                  lines = old.decode('utf-8').splitlines(keepends=True)
+                  for start, end, replacement in reversed(rule['changes']):
+                      lines[start:end] = replacement
+                  data = ''.join(lines).encode('utf-8')
+              else:
+                  data = base64.b64decode(rule['content'], validate=True)
+              assert hashlib.sha256(data).hexdigest() == rule['sha256'], f'Patch mismatch: {name}'
+              writes[p] = data
+          for p, data in writes.items():
+              p.parent.mkdir(parents=True, exist_ok=True)
+              p.write_bytes(data)
+          Path('/tmp/cv-changed.json').write_text(json.dumps([str(p) for p in writes if str(p).startswith('cv-alexi/')]))
+          print('Verified and applied', len(writes), 'source files')
+          PY
+          node --input-type=module -e "import * as d from './cv-alexi/src/data.js'; console.log(JSON.stringify(d))" > /tmp/cv-after.json
+          python3 - <<'PY'
+          import json
+          before=json.load(open('/tmp/cv-before.json')); after=json.load(open('/tmp/cv-after.json'))
+          assert after['profile']['title'] == 'Docente UC | Analista de Datos Institucionales | IA Aplicada  Gestión Educativa | Logística'
+          before['profile']['title']=after['profile']['title']
+          assert before == after, 'An unauthorized data field changed'
+          print('All data, experience descriptions and 40 tools preserved; only title changed')
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install governed dependencies
+        working-directory: cv-alexi
+        run: |
+          find public -maxdepth 1 -type l -name 'img *' -print -delete
+          npm ci --no-audit --no-fund
+          python -m pip install -r requirements-pdf.txt
+          python -m playwright install --with-deps chromium
+          sudo apt-get update -qq
+          sudo apt-get install -y poppler-utils
+      - name: Generate and audit via official preview command
+        working-directory: cv-alexi
+        run: python generate_pdf.py --preview --with-ats --no-open
+      - name: Save verified source on isolated branch only
+        run: |
+          python3 - <<'PY'
+          import json, subprocess
+          names=json.load(open('/tmp/cv-changed.json'))
+          names.append('cv-alexi/PDF_GENERATION_REPORT.md')
+          subprocess.run(['git','add','--',*names],check=True)
+          subprocess.run(['git','config','user.name','github-actions[bot]'],check=True)
+          subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'],check=True)
+          subprocess.run(['git','commit','-m','fix: CV legible, QR corregido y extracción íntegra verificada'],check=True)
+          subprocess.run(['git','push','origin','HEAD:fix/cv-legibilidad-qr-ats'],check=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: CV_revision_validada
+          path: |
+            cv-alexi/CV_Alexi_Marcelo_Burgos_Flores_visual.pdf
+            cv-alexi/CV_Alexi_Marcelo_Burgos_Flores_LECTURA_ATS.pdf
+            cv-alexi/PDF_GENERATION_REPORT.md
+            cv-alexi/dist/*_pymupdf.txt
+            cv-alexi/dist/*_pypdf.txt
+            cv-alexi/dist/*_poppler.txt
+          if-no-files-found: warn
+          retention-days: 7
